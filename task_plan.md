@@ -11,3 +11,4 @@
 6. Implement Google Workspace/Drive/Photos integrations. (DONE)
 7. Implement Analytics/Learning Engine. (DONE)
 8. Integrate Antigravity Infrastructure & Terraform deployments (`infrastructure/antigravity.py`, `infrastructure/main.tf`). (DONE)
+9. Ingest Cloud Run Flask App and IAM deployment script (`infrastructure/app.py`, `infrastructure/deploy.sh`). (DONE)

@@ -12,3 +12,4 @@
   * Implemented `backend/guce/integrations/workspace.py` (Google Calendar, Photos, Drive hooks).
   * Implemented `backend/guce/learning/analytics.py` (Automated Analytics ML tuning via YouTube Data).
   * Ingested user's `infrastructure/antigravity.py` and `infrastructure/main.tf` to host the Cloud Run & Scheduler architecture.
+  * Ingested Flask App for Cloud Run (`infrastructure/app.py`) and IAM/Deployment automation bash script (`infrastructure/deploy.sh`), confirming the `guce-sa` roles (Vertex User, Drive Editor, Sheets Editor, Run Invoker).
