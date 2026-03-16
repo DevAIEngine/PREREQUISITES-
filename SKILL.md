@@ -44,6 +44,11 @@ To drastically cut enterprise data costs, GUCE operates on a decentralized array
 *   **Action:** When agents build new API connectors for Google Drive (heavy MP4 storage), Google Sheets (epistemic logging), YouTube Data, or Forms, they must implement **API Key Round-Robining**.
 *   **Result:** By distributing massive write/read loads across multiple independent accounts, the platform natively circumvents 2TB storage caps and multiplies the daily API free-tier quotas by 5x+, avoiding exorbitant Network Connectivity Center and CDN egress fees.
 
+### Data Locality: "Notebook Islands" (Thematic Caching)
+To eliminate latency and international data transfer costs when the Scene Decomposer needs stock footage or specific audio libraries (e.g., beaches, deserts, wildlife):
+*   **Action:** Pre-cache thematic B-roll, TTS voice models, and prompt libraries locally inside GitHub repositories, Hugging Face datasets, or localized Notebook LMs (dubbed "Notebook Islands").
+*   **Result:** The engine must ALWAYS pull assets locally from its co-located `us-west2` Notebook Islands. It is strictly forbidden from querying global CDNs (e.g., pulling a desert library from an Asian or Middle Eastern server) if the asset can be served from a local island, drastically reducing runtime and Cloud Egress costs.
+
 ---
 
 ## 🔴 Level 3: Resources (Execution Scripts)
