@@ -39,6 +39,11 @@ When designing new modules or expanding the GUCE engine, you must adhere to the 
 3. **Containerized Datasets:** Implement SQLite for datasets exceeding 1 million files to mitigate filesystem metadata bottlenecks.
 4. **Static Logic Paradigms:** Separate math logic and frontend rendering via static manifests (Stake SDK model) to ensure high-stakes applications are audit-ready and secure from client tampering.
 
+### Cost Savings: The Distributed "Mini-Me" Network (API Round-Robin)
+To drastically cut enterprise data costs, GUCE operates on a decentralized array of 5+ separate Google Workspace accounts (the "Mini-Me" Network).
+*   **Action:** When agents build new API connectors for Google Drive (heavy MP4 storage), Google Sheets (epistemic logging), YouTube Data, or Forms, they must implement **API Key Round-Robining**.
+*   **Result:** By distributing massive write/read loads across multiple independent accounts, the platform natively circumvents 2TB storage caps and multiplies the daily API free-tier quotas by 5x+, avoiding exorbitant Network Connectivity Center and CDN egress fees.
+
 ---
 
 ## 🔴 Level 3: Resources (Execution Scripts)
