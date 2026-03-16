@@ -10,3 +10,4 @@
 * **Cost Optimizations:**
     1. **Data Egress:** To avoid Advanced Data Networking (ADN) costs from Network Connectivity Center and CDN interconnect egress fees, Compute, Storage, and Vertex resources are strictly co-located in `us-west2` (Los Angeles).
     2. **Multi-Account Quota Expansion:** The user dictates a strategy of "cutting corners" by intentionally decentralizing operations across multiple Google free-tier accounts. Drive, Sheets, Forms, and Calendar libraries will be handled by entirely separate depositories and service accounts to stack free limits instead of centralizing billing.
+    3. **The Concurrent Factory (Zero-Cost Shorts):** Leveraging Google Docs and Google Photos native AI to generate unlimited 1-minute to 3-minute video montages entirely for free ($0.00 cost) before triggering expensive Vertex AI / Antigravity pipelines for the 30-minute long-form chaining.

@@ -17,64 +17,60 @@ class OrchestrationAssemblyLine:
         self.ffmpeg = fallback_assembler
         self.workspace = workspace_integrator
 
-    def execute_multi_format_pipeline(self, project_id: str, script_url: str) -> Dict[str, Any]:
+    def generate_zero_cost_shorts(self, project_id: str, script_url: str) -> Dict[str, Any]:
         """
-        Orchestrates the entire cascade from a single Google Doc script:
-        1. Pre-Gen Slides (Storyboard)
-        2. Base 5-Minute Core Render (Google Vids)
-        3. 30-Minute Expansion (VeoChainer)
-        4. YouTube Shorts Extraction (3x 1-minute vertical cuts)
-        5. Multilingual Audio Podcast Extraction
+        Branch A: 1-Minute "Zero-Cost Native Shorts".
+        Leverages Workspace ecosystem (Docs -> Workspace Gemini Images -> Google Photos -> TTS Overlay)
+        to output free Shorts without pinging the expensive Vertex heavy-compute pipeline.
         """
-        logger.info(f"[{project_id}] Starting Assembly Line. Source Script: {script_url}")
+        logger.info(f"[{project_id}] Branch A: Generating Zero-Cost Native Short from {script_url}")
 
-        # Step 1: Pre-Generate Visual Placeholders (Google Slides)
-        logger.info(f"[{project_id}] Generating 1,000 free placeholder images from 'Social EngineEra Bible'...")
-        mock_scenes = [{"visual_prompt": "Cinematic establishing shot"} for _ in range(15)]
-        placeholders = self.img_factory.generate_episode_batch(mock_scenes)
+        # Step 1: Pre-Gen Images native to Docs/Workspace into Google Photos
+        logger.info(f"[{project_id}] Pre-generating images natively via Workspace and saving to Google Photos...")
+        photos_url = f"https://photos.google.com/album/mock_{project_id}"
 
-        logger.info(f"[{project_id}] Pushing images into Google Slides Storyboard...")
-        slides_url = f"https://docs.google.com/presentation/d/mock_{project_id}"
+        # Step 2: Auto-Video Assembly via Google Photos
+        logger.info(f"[{project_id}] Triggering Google Photos Auto-Video Generator for free 1-min montage...")
+        montage_video = f"gdrive://guce_renders/photos_montage_1m_{project_id}.mp4"
 
-        # Step 2: Voice Cloning & Audio Synthesis
-        logger.info(f"[{project_id}] Synthesizing Master Audio Track (English)...")
-        master_audio_en = self.voice_cloner.synthesize_script(text="Mocked Full Script", profile_id="Jules_Clone_01")
+        # Step 3: High-Quality TTS Overlay
+        logger.info(f"[{project_id}] Synthesizing TTS Audio Overlay...")
+        master_audio_en = self.voice_cloner.synthesize_script(text="Mocked Short Script", profile_id="Jules_Clone_01")
 
-        # Step 3: The 5-Minute Core Render (Google Vids)
-        logger.info(f"[{project_id}] Rendering Base 5-Minute Video via Google Vids (using Slides + Audio)...")
-        core_video_5m = f"gdrive://guce_renders/core_5m_{project_id}.mp4"
+        # Step 4: Combine via FFmpeg
+        logger.info(f"[{project_id}] Overlaying audio onto Auto-Video montage...")
+        zero_cost_short = f"gdrive://guce_renders/zero_cost_short_{project_id}.mp4"
 
-        # Step 4: The 30-Minute Expansion (VeoChainer / Deep Dive)
-        logger.info(f"[{project_id}] Expanding Core Video to 30-Minute Documentary via VeoChainer...")
-        # Self.veo_chainer.generate_scene_sequence(...)
+        return {"project_id": project_id, "branch": "A", "short_url": zero_cost_short}
+
+    def execute_heavy_chaining(self, project_id: str, zero_cost_short_url: str) -> Dict[str, Any]:
+        """
+        Branch B: Heavy AI Long-Form Chaining (30-min).
+        Pulls the base 1m/5m asset into Vertex AI / Antigravity / Flow and loops 18x-20x.
+        """
+        logger.info(f"[{project_id}] Branch B: Triggering Heavy Long-Form Chaining via Vertex AI.")
+
+        # 30-Minute Expansion (Looping VeoChainer 18x)
+        logger.info(f"[{project_id}] Expanding Base Video via 18x VeoChainer Iteration...")
+        # Self.veo_chainer.generate_scene_sequence(loop=18)
         extended_video_30m = f"gdrive://guce_renders/doc_30m_{project_id}.mp4"
 
-        # Step 5: YouTube Shorts Extraction
-        logger.info(f"[{project_id}] Extracting 3x 1-Minute Vertical YouTube Shorts...")
-        # self.ffmpeg._extract_shorts(core_video_5m, aspect_ratio="9:16", count=3)
-        shorts = [
-            f"gdrive://guce_renders/short_{i}_{project_id}.mp4" for i in range(3)
-        ]
-
-        # Step 6: Multilingual Podcast Extraction
+        # Multilingual Podcast Extraction
         logger.info(f"[{project_id}] Translating and extracting high-quality Audio Podcasts...")
         languages = ["es-ES", "vi-VN", "ar-SA", "zh-CN"]
-        podcasts = {"en-US": master_audio_en}
+        podcasts = {"en-US": "gdrive://guce_audio/master_audio.mp3"}
 
         for lang in languages:
             logger.info(f"[{project_id}] Synthesizing {lang} Podcast Track...")
-            # text_translated = translate(script, lang)
             podcasts[lang] = self.voice_cloner.synthesize_script(text=f"Mock translated script for {lang}", profile_id="Jules_Clone_01", language=lang)
 
         # Final Delivery Manifest
         delivery_manifest = {
             "project_id": project_id,
-            "storyboard_slides": slides_url,
-            "core_5m_video": core_video_5m,
+            "branch": "B",
             "documentary_30m": extended_video_30m,
-            "youtube_shorts": shorts,
             "audio_podcasts": podcasts
         }
 
-        logger.info(f"[{project_id}] Multi-Format Assembly Line Complete. Assets ready for 7-Layer Guardian Pre-Flight.")
+        logger.info(f"[{project_id}] Heavy Chaining Complete. Assets ready for 7-Layer Guardian Pre-Flight.")
         return delivery_manifest

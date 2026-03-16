@@ -15,16 +15,23 @@ The platform is engineered to circumvent enterprise pricing tiers by exploiting 
 *   **Data Locality & "Notebook Islands":** The Scene Decomposer is strictly forbidden from querying global CDNs (e.g., Asian or Middle Eastern servers). B-roll (deserts, beaches, wildlife) and TTS voice models are pre-cached locally inside GitHub repositories, Hugging Face datasets, and localized Notebook LMs (dubbed "Notebook Islands") to guarantee zero-latency, zero-cost retrieval.
 *   **Workload Identity Federation (WIF):** External agents (like Manus) are granted authority via an OIDC bridge. They assume a local service account identity to execute tasks *in-place* within Google Cloud, maintaining a secure perimeter without exporting data.
 
-## 3. The Core Pipeline: Orchestration & Generation
-The backend logic operates via a stateful JSON Project Manifest orchestrating the following sequence:
+## 3. The Core Pipeline: The Concurrent Factory
+The backend logic operates via a stateful JSON Project Manifest orchestrating 34+ independent channels, scheduled by Google Calendar and triggered by Google Forms. This ensures the massive factory never bottlenecks itself. The architecture is split into two distinct execution branches:
 
-1.  **Capture (The A-Roll):** High-contrast, accessibility-first React UI (`SeniorFriendlyGeminiUI.tsx`) captures WebRTC video/mic and streams directly to Gemini Live via WebSockets.
-2.  **Scene Decomposer (Gemini 3.1 Pro):** Breaks down the testimony into structured scenes (1-minute Shorts or 5-30 minute Documentaries).
-3.  **The VeoChainer:** Sequentially calls the Google Veo 3.1 API. The output context of Scene `N` is passed as the input seed for Scene `N+1` to guarantee narrative continuity.
-4.  **Audio Synthesis:** Google Cloud TTS synthesizes localized narration (Spanish, Vietnamese, Mandarin, Arabic) and exports standalone MP3 podcasts.
-5.  **Assembly (FFmpeg):** Merges the raw A-roll, generated B-roll, subtitles, and TTS tracks.
-6.  **Sovereign Mode Pre-Flight:** Before any database write or YouTube publish, the 7-Layer Guardian Wrapper evaluates the output.
-7.  **Publishing:** Distributes across four segmented channels (Master English, Multilingual, Audio Podcast, Institutional APIs).
+### Branch A: "Zero-Cost Native Shorts" (Unlimited, Free 1-Minute Videos)
+To maximize the free-tier limits, we let the Google Workspace ecosystem do the heavy lifting natively before ever pinging an expensive API.
+1.  **The Pre-Gen Script:** A user writes or uploads a script into a Google Doc.
+2.  **Native Workspace Gen:** The Google Doc itself generates the 1,000 free Gemini placeholder images natively and saves them directly to Google Photos.
+3.  **Auto-Video Assembly:** Google Photos auto-generates high-quality 1-minute to 3-minute video montages natively from those saved placeholders—costing exactly $0.00.
+4.  **Audio Overlay:** The engine extracts the high-quality Google Cloud TTS audio in multiple languages and overlays it onto the Photos export to finalize the YouTube Short.
+
+### Branch B: "Heavy AI Long-Form Chaining" (30-Minute Documentaries)
+Only when extending the content to 30 minutes does the pipeline trigger the heavy-compute APIs.
+1.  **The Expansion Trigger:** The Google Form / Calendar schedule hands the Base Video off to Vertex AI / Antigravity / Flow.
+2.  **The VeoChainer:** Sequentially calls the Veo 3.1 API (looping 18x to 20x to reach maximum length). The output context of Scene `N` is passed as the input seed for Scene `N+1` to guarantee narrative continuity.
+3.  **Assembly (FFmpeg):** Merges the raw A-roll, the Veo-generated B-roll, subtitles, and TTS tracks into the final documentary.
+4.  **Sovereign Mode Pre-Flight:** Before any database write or YouTube publish, the 7-Layer Guardian Wrapper evaluates the output.
+5.  **Publishing:** Distributes across four segmented channels (Master English, Multilingual, Audio Podcast, Institutional APIs).
 
 ## 4. Safety & The 7-Layer Guardian Wrapper
 Because autonomous agents inherit strict Principal-Agent liability, the platform is governed by a pre-flight circuit breaker:
