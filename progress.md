@@ -17,4 +17,6 @@
   * Implemented `backend/guce/video/voice_clone.py` integrating Google Cloud TTS for multilingual podcast synthesis.
   * Implemented `backend/guce/integrations/assembly_line.py` connecting Google Docs scripts -> Google Slides storyboards -> 5m Google Vids -> 30m VeoChainer extensions -> Multilingual Podcast extractions.
   * Created the `make_episode.sh` mobile-native execution script to trigger the full assembly line via a single bash command.
-  * **[NEW]** Restructured `GUCE_MASTER_BLUEPRINT_v5.md` and `assembly_line.py` to establish the 34-Channel Concurrent Factory, specifically splitting out the "Zero-Cost Native Shorts" (Workspace native auto-generation) from the "Heavy AI Long-Form Chaining" (18x-20x Vertex AI loops).
+  * Restructured `GUCE_MASTER_BLUEPRINT_v5.md` and `assembly_line.py` to establish the 34-Channel Concurrent Factory, specifically splitting out the "Zero-Cost Native Shorts" (Workspace native auto-generation) from the "Heavy AI Long-Form Chaining" (18x-20x Vertex AI loops).
+  * **[NEW]** Fully refactored backend directory structure into multi-channel fallback pipelines (`pre_production`, `channel_1_google_photos`, `channel_2_google_sheets`, `channel_3_google_vids`, `channel_4_vertex_veo`, `channel_5_google_flow`, `post_production`).
+  * **[NEW]** Built the Proactive News Engine (`pre_production/gmail_alert_trigger.py`), which monitors Gmail for Google Alerts (e.g., breaking news) to autonomously initiate scripts in Google Docs, log to Sheets, and schedule HITL review slots in Calendar.

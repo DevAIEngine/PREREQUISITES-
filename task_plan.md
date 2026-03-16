@@ -23,3 +23,5 @@
 19. Implement the Voice Cloning Module (`voice_clone.py`). (DONE)
 20. Implement the Assembly Line Orchestrator (`assembly_line.py`). (DONE)
 21. Create Mobile Execution Scripts (`make_episode.sh`). (DONE)
+22. **[NEW]** Restructure Repository to 34-Channel Studio Pipeline (Moving to `channel_X` directories). (DONE)
+23. **[NEW]** Implement Proactive News/Alert Trigger (`pre_production/gmail_alert_trigger.py`). (DONE)
