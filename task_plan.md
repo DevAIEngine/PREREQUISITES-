@@ -15,3 +15,6 @@
 10. Ingest Advanced Analytics & SEO Rules (`analytics.py`). (DONE)
 11. Ingest Sovereign Mode Pre-Flight & State Machine (`infrastructure/app.py`). (DONE)
 12. Ingest Converged Infrastructure & WIF (`infrastructure/main.tf`). (DONE)
+13. Ingest Senior-Friendly UI (Cell Phone First frontend). (DONE)
+14. Apply Cost-Saving Regional Architecture (`us-west2` pinning for NCC egress savings). (DONE)
+15. *NEW:* Document the Decentralized Multi-Account Cost-Cutting Strategy.

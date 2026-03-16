@@ -12,9 +12,9 @@ variable "project_id" {
 }
 
 variable "region" {
-  description = "The Google Cloud Region"
+  description = "The Google Cloud Region (Strictly co-located for ADN egress cost savings)"
   type        = string
-  default     = "us-central1"
+  default     = "us-west2"
 }
 
 # --- 1. API Provisioning (The Keys) ---

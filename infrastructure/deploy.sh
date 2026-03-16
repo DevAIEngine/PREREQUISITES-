@@ -38,7 +38,7 @@ gcloud builds submit --tag gcr.io/$PROJECT/guce-engine .
 
 gcloud run deploy guce-engine \
   --image gcr.io/$PROJECT/guce-engine \
-  --region us-central1 \
+  --region us-west2 \
   --service-account $SA \
   --allow-unauthenticated \
   --set-env-vars GOOGLE_CLOUD_PROJECT=$PROJECT

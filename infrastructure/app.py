@@ -8,7 +8,7 @@ import datetime
 app = Flask(__name__)
 
 # Vertex AI init (uses default ADC from Cloud Run SA)
-aiplatform.init(project=os.environ.get('GOOGLE_CLOUD_PROJECT'), location='us-central1')
+aiplatform.init(project=os.environ.get('GOOGLE_CLOUD_PROJECT'), location='us-west2') # Co-located to save Network Connectivity Center (ADN) egress costs
 
 def get_drive_service():
     return build('drive', 'v3')
