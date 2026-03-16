@@ -1,6 +1,7 @@
 import logging
 import time
 from typing import Dict, Any
+from googleapiclient.discovery import build
 
 logger = logging.getLogger("guce_learning_engine")
 
@@ -9,11 +10,34 @@ class AutomatedAnalyticsAgent:
     Automated Analytics Agent: The Iterative Learning Engine.
     Triggered 48 hours post-publish to mathematically evaluate
     viewer drop-off via YouTube Data API and tune VeoChainer prompts.
+    Integrates TubeBuddy/TubeRanker SEO logic from Google Drive.
     """
 
-    def __init__(self, youtube_data_client):
+    def __init__(self, youtube_data_client=None, drive_client=None, gmail_client=None, sheets_client=None):
         self.yt_client = youtube_data_client
+        self.drive_client = drive_client
+        self.gmail_client = gmail_client
+        self.sheets_client = sheets_client
         self.version = "4.0"
+        self.seo_rules = ""
+
+    def ingest_seo_rules(self, folder_id: str):
+        """
+        Reads TubeBuddy and TubeRanker SEO guides from Google Drive to set as
+        system instructions for Gemini metadata generation.
+        """
+        logger.info("Ingesting TubeBuddy/TubeRanker SEO rules from Drive...")
+        # Mock fetching the SEO txt files from drive
+        self.seo_rules = "SEO_RULE: Front-load keywords in first 50 chars of description."
+        return self.seo_rules
+
+    def email_optimization_report(self, admin_email: str, report_text: str):
+        """
+        Uses Gmail API to email an automated prompt optimization report.
+        """
+        logger.info(f"Sending Automated Optimization Report to {admin_email} via Gmail API...")
+        # Mock Gmail API send
+        return True
 
     def fetch_retention_metrics(self, video_id: str) -> Dict[str, Any]:
         """
