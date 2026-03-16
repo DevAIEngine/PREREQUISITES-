@@ -7,14 +7,13 @@ logger = logging.getLogger("guce_google_flow")
 class GoogleFlowOrchestrator:
     """
     Channel 5: Google Flow Integration Layer.
-    Acts as the load balancer and secondary heavy-compute orchestrator for the 34-Channel Concurrent Factory.
+    Acts as the load balancer and secondary heavy-compute orchestrator for the Multi-Channel Concurrent Factory.
     If Vertex AI (VeoChainer) is congested or rate-limited, the Assembly Line automatically
     routes the 30-minute documentary expansion to Google Flow to guarantee 100% production uptime.
     """
     def __init__(self, workspace_integrator=None):
         self.workspace = workspace_integrator
         self.version = "4.0"
-        self.max_flow_nodes = 34  # Orchestrating 34 concurrent channels
 
     def route_to_flow_network(self, project_id: str, base_video_url: str, scene_list: List[Dict]) -> str:
         """

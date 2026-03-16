@@ -16,7 +16,7 @@ The platform is engineered to circumvent enterprise pricing tiers by exploiting 
 *   **Workload Identity Federation (WIF):** External agents (like Manus) are granted authority via an OIDC bridge. They assume a local service account identity to execute tasks *in-place* within Google Cloud, maintaining a secure perimeter without exporting data.
 
 ## 3. The Core Pipeline: The Concurrent Factory
-The backend logic operates via a stateful JSON Project Manifest orchestrating 34+ independent channels, scheduled by Google Calendar and triggered by Google Forms. This ensures the massive factory never bottlenecks itself. The architecture is split into two distinct execution branches:
+The backend logic operates via a stateful JSON Project Manifest orchestrating multiple independent channels (e.g., Sheets, Photos, Flow, Vertex), scheduled by Google Calendar and triggered by Google Forms. This Multi-Channel Concurrent Factory ensures the pipeline never bottlenecks itself. The architecture is split into two distinct execution branches:
 
 ### Branch A: "Zero-Cost Native Shorts" (Unlimited, Free 1-Minute Videos)
 To maximize the free-tier limits, we let the Google Workspace ecosystem do the heavy lifting natively before ever pinging an expensive API.

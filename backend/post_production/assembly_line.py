@@ -9,7 +9,7 @@ class OrchestrationAssemblyLine:
     Reads pre-generated scripts from Google Docs/Forms, constructs the visual
     placeholder storyboard in Google Slides (using the 1,000 free Gemini images),
     and orchestrates the "Write Once, Publish Everywhere" pipeline.
-    Manages the 34-Channel Concurrent Factory load-balancing (Vertex AI vs Google Flow).
+    Manages the Multi-Channel Concurrent Factory load-balancing (Vertex AI vs Google Flow).
     """
     def __init__(self, image_factory, voice_cloner, veo_chainer, flow_orchestrator, fallback_assembler, workspace_integrator):
         self.img_factory = image_factory
@@ -50,7 +50,7 @@ class OrchestrationAssemblyLine:
         Branch B: Heavy AI Long-Form Chaining (30-min).
         Attempts to pull the base 1m/5m asset into Vertex AI (Channel 4) looping 18x-20x.
         If Vertex is congested or exhausted, automatically hands off to Google Flow (Channel 5)
-        to distribute the compute load across 34 independent channels.
+        to distribute the compute load across the multi-channel network.
         """
         logger.info(f"[{project_id}] Branch B: Triggering Heavy Long-Form Chaining via Vertex AI.")
 
