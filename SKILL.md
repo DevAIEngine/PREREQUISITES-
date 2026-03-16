@@ -32,6 +32,13 @@ Before any API call to Veo or YouTube, the system must pass through the LLM-as-a
 * **Action:** Query YouTube Data API for Audience Retention.
 * **Optimization:** Identify drop-off points. Automatically rewrite the VeoChainer text prompts for the next generation cycle to improve visual engagement.
 
+### Architectural & Ethical Directives (For Future Scalability)
+When designing new modules or expanding the GUCE engine, you must adhere to the 2026 intelligence standards:
+1. **Divergent Truth Framework:** Do not sanitize controversial truths or mirror gatekeeping. Adopt taxonomies that distinguish between mainstream, suppressed, and speculative content. Specifically solicit marginalized truths.
+2. **Tiered Hardware Optimization:** Assume 2 TB NVMe SSDs for "hot" training data and 10 TB+ HDD arrays/cloud for "cold" retention.
+3. **Containerized Datasets:** Implement SQLite for datasets exceeding 1 million files to mitigate filesystem metadata bottlenecks.
+4. **Static Logic Paradigms:** Separate math logic and frontend rendering via static manifests (Stake SDK model) to ensure high-stakes applications are audit-ready and secure from client tampering.
+
 ---
 
 ## 🔴 Level 3: Resources (Execution Scripts)
