@@ -4,11 +4,12 @@ install:
 	pip install -r requirements.txt
 
 test:
-	PYTHONPATH=. python -m pytest test_main.py -v
+	PYTHONPATH=. python -m pytest test_app.py -v
 
 run:
-	uvicorn main:app --reload
+	gunicorn --bind 0.0.0.0:8080 app:app
 
 clean:
 	rm -rf __pycache__
 	rm -rf .pytest_cache
+	rm -rf src/core_engine/obfuscation/__pycache__

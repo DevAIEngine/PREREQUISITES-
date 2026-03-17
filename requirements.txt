@@ -1,5 +1,4 @@
-fastapi>=0.100.0
-uvicorn>=0.23.0
+Flask>=3.0.0
 pytest>=7.4.0
-httpx>=0.24.1
-pydantic>=2.0.0
+google-cloud-aiplatform>=1.38.0
+gunicorn>=21.2.0
