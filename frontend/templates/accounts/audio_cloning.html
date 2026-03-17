@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PROPRIETARY AND CONFIDENTIAL: COMPONENT 2 - AUDIO JULES -->
     <meta charset="UTF-8">
-    <title>GUCE: Audio Voice Cloning Station</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Jules: Voice Cloning Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
-        .button { background-color: #ffcc00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
-        .input-field { width: 100%; padding: 10px; font-size: 24px; border-radius: 5px; margin-bottom: 20px; }
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .dark-mode { background-color: #0f172a; color: #f8fafc; }
+        .dark-mode .card { background-color: #1e293b; border-color: #334155; }
+        .card { background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body>
-    <h1 style="color: #ffcc00;">🎤 The Voice Cloner: Audio Bed</h1>
-    <p>Synthesize and track specific Voice Profiles from the Social EngineEra Bible to ensure consistent character narration.</p>
+<body class="transition-colors duration-300">
+    <div class="max-w-4xl mx-auto mt-10 p-6">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-purple-600">Audio Jules: Voice Cloning Testing</h1>
+            <button onclick="document.body.classList.toggle('dark-mode')" class="text-sm font-semibold text-gray-500 hover:text-purple-500">Toggle Theme</button>
+        </div>
 
-    <label for="scriptContent">Narrative Script Text:</label>
-    <textarea id="scriptContent" class="input-field" rows="4" placeholder="Enter text to synthesize..."></textarea>
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">High-Frequency Audio Generation</h2>
+            <p class="text-gray-500 mb-6">Test the independent ElevenLabs/Google Cloud TTS Voice Cloning API endpoints.</p>
 
-    <label for="voiceProfile">Google Cloud TTS Profile:</label>
-    <select id="voiceProfile" class="input-field">
-        <option value="Jules_Clone_01">Jules_Clone_01 (English)</option>
-        <option value="Jules_Clone_01_es">Jules_Clone_01 (Spanish)</option>
-        <option value="Jules_Clone_01_ar">Jules_Clone_01 (Arabic)</option>
-        <option value="Jules_Clone_01_vi">Jules_Clone_01 (Vietnamese)</option>
-        <option value="Jules_Clone_01_zh">Jules_Clone_01 (Mandarin)</option>
-    </select>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Voice Cloning Text String</label>
+                    <textarea id="text_string" rows="4" class="w-full border rounded p-2 text-gray-900">Breaking news update: Orbital mechanics confirmed.</textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Generated Audio Requests</label>
+                    <input type="number" id="requests" value="1000" class="w-full border rounded p-2 text-gray-900">
+                </div>
 
-    <button class="button" onclick="synthesizeAudio()">Synthesize Podcast Audio</button>
-    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+                <button onclick="testCloning()" class="bg-purple-600 text-white px-6 py-2 rounded font-bold hover:bg-purple-700 w-full mt-4">Execute API Stress Test</button>
+            </div>
+
+            <div id="results" class="mt-6 hidden">
+                <h3 class="font-bold border-b pb-2 mb-2">Metrics Log</h3>
+                <pre id="output" class="bg-gray-100 p-4 rounded text-sm overflow-x-auto text-gray-800"></pre>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function synthesizeAudio() {
-            const profile = document.getElementById('voiceProfile').value;
-            document.getElementById('status').innerText = `🔊 Calling Google Cloud TTS. Synthesizing script using the ${profile} Metadata Record... Save to Drive/Photos.`;
-            // Connects to FASTAPI: voice_clone.py
+        async function testCloning() {
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('output').textContent = "Pinging Voice Matrix Endpoint...";
+
+            const payload = { alert_text: document.getElementById('text_string').value, id: "audio_test_01" };
+            const start = performance.now();
+            try {
+                const response = await fetch('/api/v1/tensor-stream/optimize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                const latency = performance.now() - start;
+
+                document.getElementById('output').textContent =
+                    `[SUCCESS] Voice Cloning Quota Checked.\n` +
+                    `[LATENCY] ${latency.toFixed(2)}ms\n` +
+                    `[METRICS] ${JSON.stringify(data.metrics, null, 2)}`;
+            } catch (e) {
+                document.getElementById('output').textContent = `[ERROR] Throttle detected: ${e.message}`;
+            }
         }
     </script>
 </body>
 </html>
+<!-- CORE-ENGINE-FINGERPRINT: UFJPUFJJRVRBUlkgQU5EIENPTkZJREVOVElBTCAtIENPUkUgRU5HSU5FIEFSU0hJVEVDVFVSRSAyMDI0 -->

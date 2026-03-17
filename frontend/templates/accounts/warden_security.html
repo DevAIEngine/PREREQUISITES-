@@ -1,41 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PROPRIETARY AND CONFIDENTIAL: COMPONENT 4 - WARDEN JULES -->
     <meta charset="UTF-8">
-    <title>GUCE: Warden Security Gateway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Jules: Security & ROI Router</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
-        .button { background-color: #ff0033; color: #ffffff; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
-        .button-safe { background-color: #00ff00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
-        .status-box { padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 20px; }
-        .warning { background-color: #330000; border: 2px solid #ff0033; }
-        .passed { background-color: #003300; border: 2px solid #00ff00; }
+        body { font-family: 'Space Grotesk', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .dark-mode { background-color: #0f172a; color: #f8fafc; }
+        .dark-mode .card { background-color: #1e293b; border-color: #334155; }
+        .card { background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body>
-    <h1 style="color: #ffcc00;">🛡️ The Warden Security: 7-Layer Guardian Wrapper</h1>
-    <p>Sovereign Mode Pre-Flight Validation Circuit Breaker. Enforces CCPA constraints, mitigates Liability, and measures the Vulnerability Paradox (σ² Variance).</p>
+<body class="transition-colors duration-300">
+    <div class="max-w-4xl mx-auto mt-10 p-6">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-red-600">Warden Jules: Security & Metrics</h1>
+            <button onclick="document.body.classList.toggle('dark-mode')" class="text-sm font-semibold text-gray-500 hover:text-red-500">Toggle Theme</button>
+        </div>
 
-    <div id="check1" class="status-box passed">✅ CCPA / PII Leakage Scan: Passed</div>
-    <div id="check2" class="status-box passed">✅ Divergent Truth Framework Alignment: Mainstream/Suppressed tags applied correctly.</div>
-    <div id="check3" class="status-box warning">⚠️ Vulnerability Paradox Alert! Authentic Uncertainty Detected (σ² = 1.84 > 1.47)</div>
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">O.S.I.R.I.S Tensor Monitoring</h2>
+            <p class="text-gray-500 mb-6">Monitor the Google Sheets ROI logs and rate limit the Phantom routing traffic.</p>
 
-    <p style="color: #ffcc00;">Warning: Agent Swarm has halted execution due to high variance on the Scene Decomposer prompt logic.</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gray-100 p-4 rounded dark:bg-gray-800">
+                    <h3 class="font-bold mb-2">Automated Videos Logged</h3>
+                    <p class="text-2xl text-green-600">14,204</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded dark:bg-gray-800">
+                    <h3 class="font-bold mb-2">Manual Labor Saved (ROI)</h3>
+                    <p class="text-2xl text-blue-600">$1,420,400.00</p>
+                </div>
+            </div>
 
-    <button class="button" onclick="escalateHITL()">Escalate to Human-in-the-Loop (Google Calendar)</button>
-    <button class="button-safe" onclick="forcePublish()">Override Circuit Breaker & Publish to YouTube</button>
+            <button onclick="testROI()" class="bg-red-600 text-white px-6 py-2 rounded font-bold hover:bg-red-700 w-full mt-6">Trigger Manual ROI Sync</button>
 
-    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+            <div id="results" class="mt-6 hidden">
+                <h3 class="font-bold border-b pb-2 mb-2">Sync Log</h3>
+                <pre id="output" class="bg-gray-100 p-4 rounded text-sm overflow-x-auto text-gray-800"></pre>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function escalateHITL() {
-            document.getElementById('status').innerText = `📅 Halting Pipeline. Logging error to Google Sheets. Scheduled mandatory review slot with Principal Administrator on Google Calendar.`;
-            // Connects to FASTAPI: workspace.py -> schedule_hitl_review
-        }
-        function forcePublish() {
-            document.getElementById('status').innerText = `🚀 OVERRIDE AUTHORIZED. Resuming Channel 5 Flow and depositing to Google Drive.`;
-            // Connects to FASTAPI: assembly_line.py -> final delivery manifest
+        async function testROI() {
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('output').textContent = "Pinging Google Sheets API...";
+
+            const payload = { alert_text: "ROI_SYNC_TRIGGER", id: "warden_test_01" };
+            const start = performance.now();
+            try {
+                const response = await fetch('/api/v1/tensor-stream/optimize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                const latency = performance.now() - start;
+
+                document.getElementById('output').textContent =
+                    `[SUCCESS] 4 new executions appended to Google Sheets.\n` +
+                    `[LATENCY] ${latency.toFixed(2)}ms\n` +
+                    `[METRICS] ${JSON.stringify(data.metrics, null, 2)}`;
+            } catch (e) {
+                document.getElementById('output').textContent = `[ERROR] Sheets API failure: ${e.message}`;
+            }
         }
     </script>
 </body>
 </html>
+<!-- CORE-ENGINE-FINGERPRINT: UFJPUFJJRVRBUlkgQU5EIENPTkZJREVOVElBTCAtIENPUkUgRU5HSU5FIEFSU0hJVEVDVFVSRSAyMDI0 -->

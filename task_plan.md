@@ -27,5 +27,5 @@
 23. Implement Proactive News/Alert Trigger (`pre_production/gmail_alert_trigger.py`). (DONE)
 24. Implement Google Flow Integration (`channel_5_google_flow/flow_orchestrator.py`). (DONE)
 25. Update the Assembly Line Conductor (`assembly_line.py`) with Channel 4 -> Channel 5 Vertex handoff. (DONE)
-26. **[NEW]** Reconstruct Frontend UI Templates from parallel chat (`frontend/templates/accounts/`). (DONE)
-27. **[NEW]** Reconstruct Security & Resilience Blueprints (`BROWSER_VAULT.md`, `GRID_DOWN_RESILIENCE.md`). (DONE)
+26. Reconstruct Frontend UI Templates from parallel chat (`frontend/templates/accounts/`). (DONE)
+27. Reconstruct Security & Resilience Blueprints (`BROWSER_VAULT.md`, `GRID_DOWN_RESILIENCE.md`). (DONE)

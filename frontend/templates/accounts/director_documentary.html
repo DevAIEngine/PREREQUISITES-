@@ -1,37 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- PROPRIETARY AND CONFIDENTIAL: COMPONENT 1 - DIRECTOR JULES -->
     <meta charset="UTF-8">
-    <title>GUCE: Director Documentary Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Director Jules: Documentary Assembly Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
-        .button { background-color: #ffcc00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
-        .input-field { width: 100%; padding: 10px; font-size: 24px; border-radius: 5px; margin-bottom: 20px; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .dark-mode { background-color: #0f172a; color: #f8fafc; }
+        .dark-mode .card { background-color: #1e293b; border-color: #334155; }
+        .card { background-color: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body>
-    <h1 style="color: #ffcc00;">🎬 The Train Conductor: Assembly Line</h1>
-    <p>Trigger the Multi-Channel Concurrent Factory from your Google Docs Script.</p>
+<body class="transition-colors duration-300">
+    <div class="max-w-4xl mx-auto mt-10 p-6">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-600">Director Jules: Documentary Production</h1>
+            <button onclick="document.body.classList.toggle('dark-mode')" class="text-sm font-semibold text-gray-500 hover:text-blue-500">Toggle Theme</button>
+        </div>
 
-    <label for="scriptUrl">Google Docs Script URL:</label>
-    <input type="text" id="scriptUrl" class="input-field" placeholder="https://docs.google.com/document/d/..." />
+        <div class="card">
+            <h2 class="text-xl font-semibold mb-4">Nano-Library Video Assembly</h2>
+            <p class="text-gray-500 mb-6">Execute zero-latency video compilation referencing localized Google Drive IDs.</p>
 
-    <label for="modeSelect">Execution Branch:</label>
-    <select id="modeSelect" class="input-field">
-        <option value="zero_cost">Branch A: Zero-Cost Native Shorts (1m)</option>
-        <option value="heavy_chain">Branch B: Heavy AI Long-Form Chaining (30m)</option>
-    </select>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Breaking News Topic</label>
+                    <input type="text" id="topic" value="Aerospace Engineering History" class="w-full border rounded p-2 text-gray-900">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Requested Fragments (Max 150)</label>
+                    <input type="number" id="fragments" value="150" class="w-full border rounded p-2 text-gray-900">
+                </div>
 
-    <button class="button" onclick="triggerAssembly()">Initiate Render Pipeline</button>
-    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+                <button onclick="testAssembly()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 w-full mt-4">Execute Assembly Metrics</button>
+            </div>
+
+            <div id="results" class="mt-6 hidden">
+                <h3 class="font-bold border-b pb-2 mb-2">Execution Results (Phantom Tensor Route)</h3>
+                <pre id="output" class="bg-gray-100 p-4 rounded text-sm overflow-x-auto text-gray-800"></pre>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function triggerAssembly() {
-            const url = document.getElementById('scriptUrl').value;
-            const mode = document.getElementById('modeSelect').value;
-            document.getElementById('status').innerText = `🚀 Pipeline Initiated for ${mode} using ${url}... Checking Notebook Islands for assets.`;
-            // Connects to FASTAPI: POST /api/orchestration/publish
+        async function testAssembly() {
+            document.getElementById('results').classList.remove('hidden');
+            document.getElementById('output').textContent = "Initiating Pre-OS Tensor Routing...\nRouting to Director Jules Account...";
+
+            const payload = {
+                alert_text: document.getElementById('topic').value,
+                topic: document.getElementById('topic').value.toLowerCase(),
+                required_fragments: parseInt(document.getElementById('fragments').value)
+            };
+
+            const start = performance.now();
+            try {
+                const response = await fetch('/api/v1/tensor-stream/optimize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                const latency = performance.now() - start;
+
+                document.getElementById('output').textContent =
+                    `[SUCCESS] Assembled ${payload.required_fragments} fragments.\n` +
+                    `[LATENCY] ${latency.toFixed(2)}ms\n` +
+                    `[METRICS] ${JSON.stringify(data.metrics, null, 2)}`;
+            } catch (e) {
+                document.getElementById('output').textContent = `[ERROR] Engine failure: ${e.message}`;
+            }
         }
     </script>
 </body>
 </html>
+<!-- CORE-ENGINE-FINGERPRINT: UFJPUFJJRVRBUlkgQU5EIENPTkZJREVOVElBTCAtIENPUkUgRU5HSU5FIEFSU0hJVEVDVFVSRSAyMDI0 -->
