@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GUCE: Warden Security Gateway</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
+        .button { background-color: #ff0033; color: #ffffff; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .button-safe { background-color: #00ff00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .status-box { padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 20px; }
+        .warning { background-color: #330000; border: 2px solid #ff0033; }
+        .passed { background-color: #003300; border: 2px solid #00ff00; }
+    </style>
+</head>
+<body>
+    <h1 style="color: #ffcc00;">🛡️ The Warden Security: 7-Layer Guardian Wrapper</h1>
+    <p>Sovereign Mode Pre-Flight Validation Circuit Breaker. Enforces CCPA constraints, mitigates Liability, and measures the Vulnerability Paradox (σ² Variance).</p>
+
+    <div id="check1" class="status-box passed">✅ CCPA / PII Leakage Scan: Passed</div>
+    <div id="check2" class="status-box passed">✅ Divergent Truth Framework Alignment: Mainstream/Suppressed tags applied correctly.</div>
+    <div id="check3" class="status-box warning">⚠️ Vulnerability Paradox Alert! Authentic Uncertainty Detected (σ² = 1.84 > 1.47)</div>
+
+    <p style="color: #ffcc00;">Warning: Agent Swarm has halted execution due to high variance on the Scene Decomposer prompt logic.</p>
+
+    <button class="button" onclick="escalateHITL()">Escalate to Human-in-the-Loop (Google Calendar)</button>
+    <button class="button-safe" onclick="forcePublish()">Override Circuit Breaker & Publish to YouTube</button>
+
+    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+
+    <script>
+        function escalateHITL() {
+            document.getElementById('status').innerText = `📅 Halting Pipeline. Logging error to Google Sheets. Scheduled mandatory review slot with Principal Administrator on Google Calendar.`;
+            // Connects to FASTAPI: workspace.py -> schedule_hitl_review
+        }
+        function forcePublish() {
+            document.getElementById('status').innerText = `🚀 OVERRIDE AUTHORIZED. Resuming Channel 5 Flow and depositing to Google Drive.`;
+            // Connects to FASTAPI: assembly_line.py -> final delivery manifest
+        }
+    </script>
+</body>
+</html>

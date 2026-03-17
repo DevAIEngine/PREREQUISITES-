@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GUCE: Audio Voice Cloning Station</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
+        .button { background-color: #ffcc00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .input-field { width: 100%; padding: 10px; font-size: 24px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1 style="color: #ffcc00;">🎤 The Voice Cloner: Audio Bed</h1>
+    <p>Synthesize and track specific Voice Profiles from the Social EngineEra Bible to ensure consistent character narration.</p>
+
+    <label for="scriptContent">Narrative Script Text:</label>
+    <textarea id="scriptContent" class="input-field" rows="4" placeholder="Enter text to synthesize..."></textarea>
+
+    <label for="voiceProfile">Google Cloud TTS Profile:</label>
+    <select id="voiceProfile" class="input-field">
+        <option value="Jules_Clone_01">Jules_Clone_01 (English)</option>
+        <option value="Jules_Clone_01_es">Jules_Clone_01 (Spanish)</option>
+        <option value="Jules_Clone_01_ar">Jules_Clone_01 (Arabic)</option>
+        <option value="Jules_Clone_01_vi">Jules_Clone_01 (Vietnamese)</option>
+        <option value="Jules_Clone_01_zh">Jules_Clone_01 (Mandarin)</option>
+    </select>
+
+    <button class="button" onclick="synthesizeAudio()">Synthesize Podcast Audio</button>
+    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+
+    <script>
+        function synthesizeAudio() {
+            const profile = document.getElementById('voiceProfile').value;
+            document.getElementById('status').innerText = `🔊 Calling Google Cloud TTS. Synthesizing script using the ${profile} Metadata Record... Save to Drive/Photos.`;
+            // Connects to FASTAPI: voice_clone.py
+        }
+    </script>
+</body>
+</html>

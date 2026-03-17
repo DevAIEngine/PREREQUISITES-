@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GUCE: Scholar Compactor (Analytics & SEO)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
+        .button { background-color: #ffcc00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .input-field { width: 100%; padding: 10px; font-size: 24px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1 style="color: #ffcc00;">📚 The Scholar Compactor: Automated Analytics</h1>
+    <p>Ingests the TubeBuddy SEO guidelines from Drive and evaluates audience retention via YouTube Data API.</p>
+
+    <label for="videoId">YouTube Video ID to Analyze (48 hours post-publish):</label>
+    <input type="text" id="videoId" class="input-field" placeholder="e.g. dQw4w9WgXcQ" />
+
+    <button class="button" onclick="runAnalytics()">Execute Prompt Optimization Loop</button>
+    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+
+    <script>
+        function runAnalytics() {
+            const vid = document.getElementById('videoId').value;
+            document.getElementById('status').innerText = `📊 Analyzing drops-offs for ${vid}. Injecting TubeBuddy SEO rules from Drive. Emailing Optimization Report to Admin via Gmail API...`;
+            // Connects to FASTAPI: analytics.py
+        }
+    </script>
+</body>
+</html>

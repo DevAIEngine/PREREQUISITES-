@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GUCE: Director Documentary Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #ffffff; padding: 20px; font-size: 24px; }
+        .button { background-color: #ffcc00; color: #1a1a1a; padding: 15px 30px; font-size: 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .input-field { width: 100%; padding: 10px; font-size: 24px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1 style="color: #ffcc00;">🎬 The Train Conductor: Assembly Line</h1>
+    <p>Trigger the Multi-Channel Concurrent Factory from your Google Docs Script.</p>
+
+    <label for="scriptUrl">Google Docs Script URL:</label>
+    <input type="text" id="scriptUrl" class="input-field" placeholder="https://docs.google.com/document/d/..." />
+
+    <label for="modeSelect">Execution Branch:</label>
+    <select id="modeSelect" class="input-field">
+        <option value="zero_cost">Branch A: Zero-Cost Native Shorts (1m)</option>
+        <option value="heavy_chain">Branch B: Heavy AI Long-Form Chaining (30m)</option>
+    </select>
+
+    <button class="button" onclick="triggerAssembly()">Initiate Render Pipeline</button>
+    <div id="status" style="margin-top: 20px; color: #00ccff;"></div>
+
+    <script>
+        function triggerAssembly() {
+            const url = document.getElementById('scriptUrl').value;
+            const mode = document.getElementById('modeSelect').value;
+            document.getElementById('status').innerText = `🚀 Pipeline Initiated for ${mode} using ${url}... Checking Notebook Islands for assets.`;
+            // Connects to FASTAPI: POST /api/orchestration/publish
+        }
+    </script>
+</body>
+</html>
