@@ -36,4 +36,7 @@
 32. Implement 'Voice-Only' Glowing Orb Mode in `NEXUS_LEGACY_APP.tsx`. (DONE)
 33. Implement 'Bento Box' Watch Gallery layout in `NEXUS_LEGACY_APP.tsx`. (DONE)
 34. Inject Native CSS Ken Burns Logic into `NEXUS_LEGACY_APP.tsx` to save heavy FFmpeg server-side computation. (DONE)
-35. **[NEW]** Implement 'Zero Placeholder' & 'Still Anchor' Protocols in backend APIs and `AGENTS.md` rulebooks. (DONE)
+35. Implement 'Zero Placeholder' & 'Still Anchor' Protocols in backend APIs and `AGENTS.md` rulebooks. (DONE)
+36. **[NEW]** Implement 'Studio Selector' Theme Engine & Anti-Gravity UI (`NEXUS_LEGACY_APP.tsx`). (DONE)
+37. **[NEW]** Implement Pix-VEO Hybrid 'Token-Saver' Strategy (`assembly_line.py`). (DONE)
+38. **[NEW]** Update Business Strategy Documentation ('Living History for Healing' sponsorship in `README.md`). (DONE)

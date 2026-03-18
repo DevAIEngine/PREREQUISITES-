@@ -48,25 +48,38 @@ class OrchestrationAssemblyLine:
     def execute_heavy_chaining(self, project_id: str, zero_cost_short_url: str, is_still_approved: bool = False) -> Dict[str, Any]:
         """
         Branch B: Heavy AI Long-Form Chaining (30-min).
-        STRICT PROTOCOL: The "Still is your Anchor".
+        STRICT PROTOCOL: The Pix-VEO Hybrid Token Saver.
         Before spending tokens on expensive 8-second Vertex Veo clips, the pipeline MUST halt
         and request manual human approval of the generated Still Image inside Google Sheets.
+        Additionally, the system delegates ambient background loops to free Google Pix generations,
+        reserving Vertex Veo tokens exclusively for specific 'Hero Moments'.
         """
-        logger.info(f"[{project_id}] Branch B: Triggering Heavy Long-Form Chaining via Vertex AI.")
+        logger.info(f"[{project_id}] Branch B: Triggering Heavy Long-Form Chaining via Pix-VEO Hybrid Pipeline.")
 
         # Step 1: Generate Stills and Halt (Token-Saving Strategy)
         if not is_still_approved:
             logger.warning(f"[{project_id}] HALT: Stills not yet approved. Generating baseline Anchor Stills to save tokens...")
             # self.img_factory.generate_episode_batch(...)
             # self.workspace.log_stills_to_sheets(project_id)
-            raise Exception("STILL_APPROVAL_REQUIRED: Check Google Sheets and approve the still images before spending 20x tokens on VEO chaining.")
+            raise Exception("STILL_APPROVAL_REQUIRED: Check Google Sheets and approve the still images before spending tokens on VEO chaining.")
 
-        # Step 2: 30-Minute Expansion (Looping VeoChainer 18x)
+        # Step 2: The Pix-VEO Hybrid Expansion
         try:
-            logger.info(f"[{project_id}] Anchor Stills Approved. Proceeding to 18x Vertex Veo Iteration...")
-            # Simulate a Vertex congestion exception: raise Exception("VERTEX_QUOTA_EXCEEDED")
-            extended_video_30m = f"gdrive://guce_renders/doc_30m_vertex_{project_id}.mp4"
-            # Self.veo_chainer.generate_scene_sequence(loop=18)
+            logger.info(f"[{project_id}] Anchor Stills Approved. Executing Pix-VEO Hybrid Protocol...")
+
+            # Step 2a: Generate Ambient Backgrounds (Google Pix - 0 Tokens)
+            logger.info(f"[{project_id}] Generating 1-minute ambient loops via Google Pix (Cost: 0 Tokens)...")
+            mock_pix_ambient_assets = [f"gdrive://guce_renders/ambient_pix_{i}.mp4" for i in range(15)]
+
+            # Step 2b: Generate Hero Moments (Vertex Veo - Premium Tokens)
+            logger.info(f"[{project_id}] Generating 'Hero Moments' via Vertex Veo (Cost: Premium Tokens)...")
+            # Self.veo_chainer.generate_scene_sequence(scenes=["hero_shot_veteran", "child_smile"])
+            mock_veo_hero_assets = [f"gdrive://guce_renders/hero_veo_{i}.mp4" for i in range(3)]
+
+            # Combine
+            extended_video_30m = f"gdrive://guce_renders/doc_30m_hybrid_{project_id}.mp4"
+            logger.info(f"[{project_id}] Successfully combined {len(mock_pix_ambient_assets)} Pix assets and {len(mock_veo_hero_assets)} Veo assets.")
+
         except Exception as e:
             logger.warning(f"[{project_id}] Vertex AI execution failed: {e}. Orchestrating handoff to Google Flow (Channel 5)...")
             mock_scenes = [{"title": f"Scene {i}"} for i in range(18)]

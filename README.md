@@ -9,6 +9,12 @@ Welcome to the **Google Universe Cinematic Engine (GUCE)**. Our core mission is 
 
 GUCE operates as a **"Cell Phone First"** platform via the "Voice-to-Docu" engine. Seniors interact with a friendly, incoming video call interface; the engine natively decomposes their stories, auto-generates B-Roll, synthesizes multilingual audio clones, and orchestrates broadcast-ready 30-minute documentaries entirely within the cloud.
 
+## 🏥 "Living History for Healing" (Sponsorship Use Cases)
+GUCE is uniquely engineered to provide no-cost, zero-hallucination documentary production for those who need their stories preserved most. The platform specifically targets three enterprise sectors:
+1. **Children’s Hospitals:** Creating "Time Capsules" for families, turning a child’s story into a premium "National Geographic" format.
+2. **Veterans Affairs (VA):** Transforming service records and oral histories into professional documentaries for the National Archives.
+3. **Museums:** Creating "Interactive Living Exhibits" allowing visitors to converse directly with historical documentaries via our "Voice Glow" living interface.
+
 ## 🗣️ Multilingual Architecture
 The platform acts as a "Universal Translator" for family history, instantly toggling UI and AI cultural personas across the Top 6 US languages:
 1.  **English** (Default)

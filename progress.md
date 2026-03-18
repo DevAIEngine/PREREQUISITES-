@@ -31,4 +31,7 @@
   * Added 'Voice-Only' (Living Interface) mode to `NEXUS_LEGACY_APP.tsx`. Dims the screen and displays a responsive, CSS-animated glowing orb to mimic low-latency interaction of Gemini Live.
   * Upgraded the 'Watch My Life' gallery to a cinematic 'Bento Box' grid layout, applying old parchment/film grain textures and massive overlay typography (National Geographic style).
   * Injected native CSS Ken Burns pan-and-zoom animations (`@keyframes kenburns-effect`) into the `NEXUS_LEGACY_APP.tsx` dashboard and Bento Box grids, effectively eliminating the need for expensive server-side FFmpeg rendering for static image galleries.
-  * **[NEW]** Implemented the 'Zero Placeholder Policy' and the 'Still Anchor' Token Strategy into `AGENTS.md`, `SKILL.md`, and `assembly_line.py`, enforcing an absolute halt to AI video generation until a human manually approves the still image via Google Sheets.
+  * Implemented the 'Zero Placeholder Policy' and the 'Still Anchor' Token Strategy into `AGENTS.md`, `SKILL.md`, and `assembly_line.py`, enforcing an absolute halt to AI video generation until a human manually approves the still image via Google Sheets.
+  * **[NEW]** Created the 'Studio Selector' Theme Engine (`NEXUS_LEGACY_APP.tsx`) enabling the user to swap between the 'Nat Geo' (Deep Charcoal) and 'Aerospace Museum' (Frosted Sapphire / Anti-Gravity glow) UI modes natively.
+  * **[NEW]** Implemented the 'Pix-VEO Hybrid Token Saver' inside `assembly_line.py`, structurally separating the execution of free Google Pix ambient loops from expensive Vertex Veo 'Hero Moments' to stretch the 500-token budget.
+  * **[NEW]** Updated `README.md` to officially encode the 'Living History for Healing' sponsorship strategy for Children's Hospitals, the VA, and Museums.

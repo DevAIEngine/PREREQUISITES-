@@ -4,7 +4,8 @@ import { SeniorFriendlyGeminiUI } from "./SeniorFriendlyGeminiUI";
 // ============================================================
 // Types
 // ============================================================
-type AppView = "DASHBOARD" | "INTERVIEW" | "WATCH" | "LIVE" | "CREATOR_MODE";
+type AppView = "STUDIO_SELECTOR" | "DASHBOARD" | "INTERVIEW" | "WATCH" | "LIVE" | "CREATOR_MODE";
+type Theme = "NAT_GEO" | "AEROSPACE" | "CREATOR";
 
 interface DocumentaryAsset {
   id: string;
@@ -18,7 +19,8 @@ interface DocumentaryAsset {
 // Main Application Container (NEXUS-LEGACY)
 // ============================================================
 export const NexusLegacyApp: React.FC = () => {
-  const [currentView, setCurrentView] = useState<AppView>("DASHBOARD");
+  const [currentView, setCurrentView] = useState<AppView>("STUDIO_SELECTOR");
+  const [activeTheme, setActiveTheme] = useState<Theme>("NAT_GEO");
   const [isCreatorMode, setIsCreatorMode] = useState(false);
   const [isVoiceOnlyMode, setIsVoiceOnlyMode] = useState(false);
 
@@ -34,28 +36,99 @@ export const NexusLegacyApp: React.FC = () => {
   // ============================================================
   const handleToggleMode = () => {
     setIsCreatorMode(!isCreatorMode);
+    setActiveTheme(isCreatorMode ? "NAT_GEO" : "CREATOR");
     setCurrentView(isCreatorMode ? "DASHBOARD" : "CREATOR_MODE");
   };
+
+  const handleSelectTheme = (theme: Theme) => {
+    setActiveTheme(theme);
+    setCurrentView("DASHBOARD");
+  };
+
+  // ============================================================
+  // Theme Engine Styling Handlers
+  // ============================================================
+  const getThemeStyles = () => {
+    switch(activeTheme) {
+      case "AEROSPACE":
+        return {
+          bgUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop", // Space/Earth view
+          panelBg: "rgba(15, 23, 42, 0.6)", // Frosted Sapphire
+          textColor: "#ffffff",
+          headerColor: "#38bdf8", // Neon Blue
+          fontFamily: "'Space Grotesk', sans-serif"
+        };
+      case "NAT_GEO":
+      default:
+        return {
+          bgUrl: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=2000&auto=format&fit=crop", // Golden Hour
+          panelBg: "rgba(26, 26, 26, 0.85)", // Deep Charcoal
+          textColor: "#e2e8f0",
+          headerColor: "#FFD700", // Rich Gold
+          fontFamily: "'Montserrat', sans-serif"
+        };
+    }
+  };
+
+  const themeStyles = getThemeStyles();
 
   // ============================================================
   // Views
   // ============================================================
 
+  // 0. The Studio Selector (Theme Engine Root)
+  const renderStudioSelector = () => (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", backgroundColor: "#000", color: "#fff", fontFamily: "'Montserrat', sans-serif" }}>
+      <h1 style={{ fontSize: "56px", fontWeight: "900", marginBottom: "60px", textShadow: "0 4px 20px rgba(255,255,255,0.2)" }}>Select Your Studio</h1>
+      <div style={{ display: "flex", gap: "40px" }}>
+        {/* Nat Geo Studio Button */}
+        <div
+          onClick={() => handleSelectTheme("NAT_GEO")}
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s" }}
+          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+        >
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
+            <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
+            <p style={{ fontSize: "20px", color: "#e2e8f0", marginTop: "10px" }}>Warm. Cinematic. Family History.</p>
+          </div>
+        </div>
+
+        {/* Aerospace Museum Studio Button */}
+        <div
+          onClick={() => handleSelectTheme("AEROSPACE")}
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s" }}
+          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+        >
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
+            <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
+            <p style={{ fontSize: "20px", color: "#e2e8f0", marginTop: "10px" }}>NASA-Grade Futurism. Veterans & Museums.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   // 1. The "Living History" Dashboard (Home)
   const renderDashboard = () => (
     <div style={{
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh",
-      position: "relative", overflow: "hidden"
+      position: "relative", overflow: "hidden", fontFamily: themeStyles.fontFamily
     }}>
       {/* Cinematic Ken Burns Background */}
-      <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=2000&auto=format&fit=crop"
+      <img src={themeStyles.bgUrl}
            className="documentary-image"
            style={{ position: "absolute", zIndex: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />
 
-      <div style={{ backgroundColor: "rgba(26,26,26,0.85)", backdropFilter: "blur(16px)", padding: "60px", borderRadius: "24px", textAlign: "center", maxWidth: "800px", zIndex: 1 }}>
-        <h1 style={{ fontSize: "64px", color: "#FFD700", margin: "0 0 20px 0", fontFamily: "'Montserrat', sans-serif", fontWeight: 800 }}>Welcome back, {userName}.</h1>
-        <p style={{ fontSize: "32px", color: "#e2e8f0", marginBottom: "60px" }}>What story shall we tell today?</p>
+      {/* Anti-Gravity Glow & Frosted Sapphire / Deep Charcoal Panels */}
+      <div style={{
+        backgroundColor: themeStyles.panelBg, backdropFilter: "blur(16px)", padding: "60px", borderRadius: "24px",
+        textAlign: "center", maxWidth: "800px", zIndex: 1, boxShadow: "0 50px 100px rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.1)"
+      }}>
+        <h1 style={{ fontSize: "64px", color: themeStyles.headerColor, margin: "0 0 20px 0", fontWeight: 800, textShadow: `0 0 20px ${themeStyles.headerColor}66` }}>Welcome back, {userName}.</h1>
+        <p style={{ fontSize: "32px", color: themeStyles.textColor, marginBottom: "60px" }}>What story shall we tell today?</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
           <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
@@ -240,6 +313,7 @@ export const NexusLegacyApp: React.FC = () => {
       {/* View Router */}
       {isVoiceOnlyMode ? renderVoiceOnlyMode() : (
         <>
+          {currentView === "STUDIO_SELECTOR" && renderStudioSelector()}
           {currentView === "DASHBOARD" && renderDashboard()}
           {currentView === "INTERVIEW" && <SeniorFriendlyGeminiUI userId="user_123" />}
           {currentView === "WATCH" && renderWatchGallery()}
