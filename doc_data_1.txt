@@ -1,0 +1,29 @@
+﻿## 🎨 UI/UX Design System: "Cinematic Accessibility"
+
+
+### A. The "Living History" Dashboard (Home)
+- **Hero Section:** A slow-motion, high-quality background video of *the user's own uploaded content* or generic "Americana/Nature" b-roll (Nat Geo style).
+- **The "Big Button" Interface:**
+    - **[ Tell a Story ]** (Triggers the Voice Interview Engine)
+    - **[ Watch My Life ]** (Plays the generated documentary)
+    - **[ Go Live ]** (Simple "On Air" button for family streaming)
+
+
+### B. The "Interview" Engine (Voice-to-Video)
+- **Concept:** "The AI Director." The user receives a simulated phone call.
+- **Visuals:**
+    - **Senior View:** Simple "In Call" screen. Large photos of the topic (e.g., if talking about 1960s, show 1960s photos).
+    - **Feedback:** "I can hear you perfectly" (Green waveform).
+- **Output:** The engine stitches the audio with stock footage (History Channel style) automatically.
+
+
+### C. The "Generational Bridge" (Youth View)
+- **Toggle:** "Family Mode" vs. "Creator Mode."
+- **Creator Mode:** Allows grandchildren to take the AI-generated documentary and apply "TikTok Style" edits (fast cuts, captions, trending music) to share the senior's wisdom with a younger audience.
+
+
+## 🛠️ Technical Specs for the Sandbox
+- **Frontend:** React/Next.js with Tailwind CSS (configured for `text-lg` base).
+- **Accessibility:** WCAG AAA Compliant (High contrast, screen reader ready).
+- **Voice API:** ElevenLabs (for high-quality, emotive AI interviewing in multiple languages).
+Use code with caution.
