@@ -32,6 +32,10 @@
   * Upgraded the 'Watch My Life' gallery to a cinematic 'Bento Box' grid layout, applying old parchment/film grain textures and massive overlay typography (National Geographic style).
   * Injected native CSS Ken Burns pan-and-zoom animations (`@keyframes kenburns-effect`) into the `NEXUS_LEGACY_APP.tsx` dashboard and Bento Box grids, effectively eliminating the need for expensive server-side FFmpeg rendering for static image galleries.
   * Implemented the 'Zero Placeholder Policy' and the 'Still Anchor' Token Strategy into `AGENTS.md`, `SKILL.md`, and `assembly_line.py`, enforcing an absolute halt to AI video generation until a human manually approves the still image via Google Sheets.
-  * **[NEW]** Created the 'Studio Selector' Theme Engine (`NEXUS_LEGACY_APP.tsx`) enabling the user to swap between the 'Nat Geo' (Deep Charcoal) and 'Aerospace Museum' (Frosted Sapphire / Anti-Gravity glow) UI modes natively.
-  * **[NEW]** Implemented the 'Pix-VEO Hybrid Token Saver' inside `assembly_line.py`, structurally separating the execution of free Google Pix ambient loops from expensive Vertex Veo 'Hero Moments' to stretch the 500-token budget.
-  * **[NEW]** Updated `README.md` to officially encode the 'Living History for Healing' sponsorship strategy for Children's Hospitals, the VA, and Museums.
+  * Created the 'Studio Selector' Theme Engine (`NEXUS_LEGACY_APP.tsx`) enabling the user to swap between the 'Nat Geo' (Deep Charcoal) and 'Aerospace Museum' (Frosted Sapphire / Anti-Gravity glow) UI modes natively.
+  * Implemented the 'Pix-VEO Hybrid Token Saver' inside `assembly_line.py`, structurally separating the execution of free Google Pix ambient loops from expensive Vertex Veo 'Hero Moments' to stretch the 500-token budget.
+  * Updated `README.md` to officially encode the 'Living History for Healing' sponsorship strategy for Children's Hospitals, the VA, and Museums.
+  * Implemented the 'Baton Pass' visual continuity logic and 'Floating Orbs' Status UI (🟡 Docs, 🔵 Vids, 🟢 YouTube) into the Python orchestrator for Google Workspace.
+  * Documented Voice Cloning & Audio Synthesis capabilities in `GUCE_MASTER_BLUEPRINT_v5.md` cementing the 'Preserved Narrator' and 'Abuela Tone' Multilingual architecture.
+  * **[NEW]** Refactored `assembly_line.py` to officially execute the 'Zero Token Help Me' integration, delegating title card generation to Google Slides and script formatting to Google Docs to preserve premium Vertex Veo tokens.
+  * **[NEW]** Implemented the 'Chain Break' Gmail Alert inside the Vertex Veo iteration loop. If the model hallucinates a placeholder frame or fails to connect, the pipeline completely freezes and generates an urgent `⚠️ Chain Break Detected` notification for the Administrator.

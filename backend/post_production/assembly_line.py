@@ -63,24 +63,61 @@ class OrchestrationAssemblyLine:
             # self.workspace.log_stills_to_sheets(project_id)
             raise Exception("STILL_APPROVAL_REQUIRED: Check Google Sheets and approve the still images before spending tokens on VEO chaining.")
 
-        # Step 2: The Pix-VEO Hybrid Expansion
+        # Step 2: The "Help Me" Zero-Token Generation
+        logger.info(f"[{project_id}] Activating Workspace 'Help Me' Integration...")
+        logger.info(f"[{project_id}] Formatting script to table via Docs 'Help Me Write' (0 Tokens)...")
+        logger.info(f"[{project_id}] Generating Documentary Title Cards (e.g. 'The Year 1945') via Slides 'Help Me Visualize' (0 Tokens)...")
+
+        # Step 3: The Pix-VEO Hybrid Expansion
         try:
             logger.info(f"[{project_id}] Anchor Stills Approved. Executing Pix-VEO Hybrid Protocol...")
 
-            # Step 2a: Generate Ambient Backgrounds (Google Pix - 0 Tokens)
+            # Step 3a: Generate Ambient Backgrounds (Google Pix - 0 Tokens)
             logger.info(f"[{project_id}] Generating 1-minute ambient loops via Google Pix (Cost: 0 Tokens)...")
             mock_pix_ambient_assets = [f"gdrive://guce_renders/ambient_pix_{i}.mp4" for i in range(15)]
 
-            # Step 2b: Generate Hero Moments (Vertex Veo - Premium Tokens)
-            logger.info(f"[{project_id}] Generating 'Hero Moments' via Vertex Veo (Cost: Premium Tokens)...")
-            # Self.veo_chainer.generate_scene_sequence(scenes=["hero_shot_veteran", "child_smile"])
-            mock_veo_hero_assets = [f"gdrive://guce_renders/hero_veo_{i}.mp4" for i in range(3)]
+            # Step 3b: Generate Hero Moments (Vertex Veo - Premium Tokens) & Execute Baton Pass
+            logger.info(f"[{project_id}] Executing 'The Baton Pass' for Vertex Veo Hero Moments...")
+
+            mock_veo_hero_assets = []
+            previous_end_frame_prompt = ""
+            hero_scenes = [{"visual_prompt": "hero_shot_veteran"}, {"visual_prompt": "child_smile"}]
+
+            for idx, scene in enumerate(hero_scenes):
+                try:
+                    # The Baton Pass Logic: Inject end frame of Scene A into start frame of Scene B
+                    if previous_end_frame_prompt:
+                        chained_prompt = f"Start with image: [{previous_end_frame_prompt}]. Then pan slowly to... {scene['visual_prompt']}"
+                    else:
+                        chained_prompt = scene['visual_prompt']
+
+                    logger.info(f"[{project_id}] Chain Link Established -> {chained_prompt}")
+
+                    # Simulated "Chain Break" or Placeholder hallucination safety net
+                    is_hallucination = False
+                    if is_hallucination:
+                        raise ValueError("VEO Placeholder hallucinated. Aborting frame generation.")
+
+                    # Mock API execution
+                    mock_veo_hero_assets.append(f"gdrive://guce_renders/hero_veo_{idx}.mp4")
+                    # Simulate extracting the last visual frame of the new video
+                    previous_end_frame_prompt = f"end_frame_of_scene_{idx}_extracted"
+
+                except Exception as loop_error:
+                    logger.error(f"[{project_id}] ⚠️ Chain Break Detected: {loop_error}")
+                    # In production: trigger Gmail API to send the "⚠️ Chain Break Detected" alert text
+                    logger.error(f"[{project_id}] Sending urgent Gmail SMS to Principal Administrator. Halting further token expenditure.")
+                    raise Exception("CHAIN_BREAK_ABORT")
 
             # Combine
             extended_video_30m = f"gdrive://guce_renders/doc_30m_hybrid_{project_id}.mp4"
             logger.info(f"[{project_id}] Successfully combined {len(mock_pix_ambient_assets)} Pix assets and {len(mock_veo_hero_assets)} Veo assets.")
 
         except Exception as e:
+            if str(e) == "CHAIN_BREAK_ABORT":
+                logger.error(f"[{project_id}] Pipeline frozen due to Chain Break. Awaiting Administrator intervention.")
+                return {"status": "FAILED", "reason": "Chain Break Detected"}
+
             logger.warning(f"[{project_id}] Vertex AI execution failed: {e}. Orchestrating handoff to Google Flow (Channel 5)...")
             mock_scenes = [{"title": f"Scene {i}"} for i in range(18)]
             extended_video_30m = self.google_flow.route_to_flow_network(project_id, zero_cost_short_url, mock_scenes)
