@@ -1,12 +1,22 @@
 # STRICTLY CONFIDENTIAL / PROPRIETARY / CLOSED-SOURCE
 **WARNING:** DO NOT DISTRIBUTE. This repository contains the proprietary architecture, API optimization strategies ("Mini-Me" API Round-Robining), and catastrophic fallback modes ("Browser Vault" offline extraction) of the Google Universe Cinematic Engine. Access is strictly limited to the Principal Administrator and authorized AI Agents.
 
-# Google Universe Cinematic Engine (GUCE)
+# 🌍 NEXUS-LEGACY: Google Universe Cinematic Engine (GUCE)
 **Status:** In Development (v5.0 Architecture) | **Primary Orchestrator:** Gemini 3.1 Pro
 
-Welcome to the **Google Universe Cinematic Engine (GUCE)**. This is a federal-scale, fully autonomous documentary production platform designed for civic institutions, historical preservation, and hyper-efficient storytelling.
+## 🎯 Core Mission
+Welcome to the **Google Universe Cinematic Engine (GUCE)**. Our core mission is to democratize high-end documentary production for seniors via voice-interactive AI, enabling "National Geographic" quality storytelling at zero cost.
 
-GUCE operates as a **"Cell Phone First"** platform. You dictate raw transcripts or stream live WebRTC audio; the engine natively decomposes scenes, auto-generates B-Roll, synthesizes multilingual audio clones, and orchestrates broadcast-ready 30-minute documentaries entirely within the cloud.
+GUCE operates as a **"Cell Phone First"** platform via the "Voice-to-Docu" engine. Seniors interact with a friendly, incoming video call interface; the engine natively decomposes their stories, auto-generates B-Roll, synthesizes multilingual audio clones, and orchestrates broadcast-ready 30-minute documentaries entirely within the cloud.
+
+## 🗣️ Multilingual Architecture
+The platform acts as a "Universal Translator" for family history, instantly toggling UI and AI cultural personas across the Top 6 US languages:
+1.  **English** (Default)
+2.  **Spanish** (Latin American/European toggle)
+3.  **Chinese** (Mandarin/Cantonese)
+4.  **Tagalog**
+5.  **Vietnamese**
+6.  **Arabic**
 
 ---
 
