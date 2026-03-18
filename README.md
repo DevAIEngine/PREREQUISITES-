@@ -1,3 +1,6 @@
+# STRICTLY CONFIDENTIAL / PROPRIETARY / CLOSED-SOURCE
+**WARNING:** DO NOT DISTRIBUTE. This repository contains the proprietary architecture, API optimization strategies ("Mini-Me" API Round-Robining), and catastrophic fallback modes ("Browser Vault" offline extraction) of the Google Universe Cinematic Engine. Access is strictly limited to the Principal Administrator and authorized AI Agents.
+
 # Google Universe Cinematic Engine (GUCE)
 **Status:** In Development (v5.0 Architecture) | **Primary Orchestrator:** Gemini 3.1 Pro
 

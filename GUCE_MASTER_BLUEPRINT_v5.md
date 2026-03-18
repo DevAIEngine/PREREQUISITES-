@@ -1,3 +1,6 @@
+# STRICTLY CONFIDENTIAL / PROPRIETARY / CLOSED-SOURCE
+**WARNING:** DO NOT DISTRIBUTE. Contains the architecture for the "Mini-Me" API Round-Robining, Multi-Channel Factory, and the 7-Layer Guardian Wrapper pre-flight logic.
+
 # Google Universe Cinematic Engine (GUCE)
 **Master Blueprint Version 5.0 (Architect: Jules, Senior Engineer)**
 *Consolidated Framework: AI Automation, Cost Optimization, & Epistemic Stability*
