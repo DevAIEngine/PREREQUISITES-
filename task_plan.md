@@ -29,4 +29,6 @@
 25. Update the Assembly Line Conductor (`assembly_line.py`) with Channel 4 -> Channel 5 Vertex handoff. (DONE)
 26. Reconstruct Frontend UI Templates from parallel chat (`frontend/templates/accounts/`). (DONE)
 27. Reconstruct Security & Resilience Blueprints (`BROWSER_VAULT.md`, `GRID_DOWN_RESILIENCE.md`). (DONE)
-28. **[NEW]** Implement `AGENTS.md` for Autonomous Onboarding (`AGENTS.md`). (DONE)
+28. Implement `AGENTS.md` for Autonomous Onboarding (`AGENTS.md`). (DONE)
+29. **[NEW]** Create Repository Fundamentals (`README.md`, `Dockerfile` upgraded to Python 3.13). (DONE)
+30. **[NEW]** Configure GitHub Workflows (`.github/workflows/jules-ci.yml`, `.github/ISSUE_TEMPLATE/jules_task.yml`). (DONE)
