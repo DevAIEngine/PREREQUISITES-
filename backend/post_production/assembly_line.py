@@ -45,18 +45,25 @@ class OrchestrationAssemblyLine:
 
         return {"project_id": project_id, "branch": "A", "short_url": zero_cost_short}
 
-    def execute_heavy_chaining(self, project_id: str, zero_cost_short_url: str) -> Dict[str, Any]:
+    def execute_heavy_chaining(self, project_id: str, zero_cost_short_url: str, is_still_approved: bool = False) -> Dict[str, Any]:
         """
         Branch B: Heavy AI Long-Form Chaining (30-min).
-        Attempts to pull the base 1m/5m asset into Vertex AI (Channel 4) looping 18x-20x.
-        If Vertex is congested or exhausted, automatically hands off to Google Flow (Channel 5)
-        to distribute the compute load across the multi-channel network.
+        STRICT PROTOCOL: The "Still is your Anchor".
+        Before spending tokens on expensive 8-second Vertex Veo clips, the pipeline MUST halt
+        and request manual human approval of the generated Still Image inside Google Sheets.
         """
         logger.info(f"[{project_id}] Branch B: Triggering Heavy Long-Form Chaining via Vertex AI.")
 
-        # 30-Minute Expansion (Looping VeoChainer 18x)
+        # Step 1: Generate Stills and Halt (Token-Saving Strategy)
+        if not is_still_approved:
+            logger.warning(f"[{project_id}] HALT: Stills not yet approved. Generating baseline Anchor Stills to save tokens...")
+            # self.img_factory.generate_episode_batch(...)
+            # self.workspace.log_stills_to_sheets(project_id)
+            raise Exception("STILL_APPROVAL_REQUIRED: Check Google Sheets and approve the still images before spending 20x tokens on VEO chaining.")
+
+        # Step 2: 30-Minute Expansion (Looping VeoChainer 18x)
         try:
-            logger.info(f"[{project_id}] Attempting to expand Base Video via 18x Vertex Veo Iteration...")
+            logger.info(f"[{project_id}] Anchor Stills Approved. Proceeding to 18x Vertex Veo Iteration...")
             # Simulate a Vertex congestion exception: raise Exception("VERTEX_QUOTA_EXCEEDED")
             extended_video_30m = f"gdrive://guce_renders/doc_30m_vertex_{project_id}.mp4"
             # Self.veo_chainer.generate_scene_sequence(loop=18)

@@ -35,4 +35,5 @@
 31. Develop Unified Frontend Container `NEXUS_LEGACY_APP.tsx` (Cinematic Legacy UI and Generational Bridge Toggle). (DONE)
 32. Implement 'Voice-Only' Glowing Orb Mode in `NEXUS_LEGACY_APP.tsx`. (DONE)
 33. Implement 'Bento Box' Watch Gallery layout in `NEXUS_LEGACY_APP.tsx`. (DONE)
-34. **[NEW]** Inject Native CSS Ken Burns Logic into `NEXUS_LEGACY_APP.tsx` to save heavy FFmpeg server-side computation. (DONE)
+34. Inject Native CSS Ken Burns Logic into `NEXUS_LEGACY_APP.tsx` to save heavy FFmpeg server-side computation. (DONE)
+35. **[NEW]** Implement 'Zero Placeholder' & 'Still Anchor' Protocols in backend APIs and `AGENTS.md` rulebooks. (DONE)

@@ -23,6 +23,12 @@ Because you operate autonomously, you inherit strict Principal-Agent liability.
 *   Before any script saves to Google Drive or publishes to YouTube, it must pass through `backend/guce/guardian.py`.
 *   **The Vulnerability Paradox (σ² Variance):** If your internal confidence metrics or the Guardian's evaluation of a prompt drops below the threshold (σ² > 1.47), you must immediately HALT the autonomous execution loop. Do not guess. You must log the ambiguity to Google Sheets and schedule a Human-In-The-Loop (HITL) review slot on the Administrator's Google Calendar.
 *   **Divergent Truth Framework:** You must adopt taxonomies that distinguish between mainstream, suppressed, and speculative content. Specifically solicit marginalized truths rather than sanitizing outputs to mirror institutional gatekeeping.
+*   **Zero Placeholder Policy:** Under no circumstances may you use "lorem ipsum," generic stock descriptions, or "Coming Soon" placeholders. If a Google Connector returns a null value, ABORT the generation. Never "fill in the blanks" with AI-imagined content.
+*   **Data Sovereignty:** Use ONLY the specific data points found in the Administrator's documents. If the text reads "1954 in Chicago," do not describe "1954 in New York" because it fits an aesthetic vibe.
+
+## 4. The "Still Anchor" Token Strategy (Google Sheets Manual Control Board)
+*   **MANDATE:** Do not let the AI independently organize the story structure. The Administrator explicitly dictates timestamps inside Google Sheets.
+*   **ACTION:** Before chaining expensive 8-second clips in Vertex Veo, the Engine MUST generate a single "Still Image" first. It must halt and wait for the Administrator to visually approve the Still Image in the Google Sheet. Only upon manual approval may the engine execute the 20-token `VEO-Chain` command.
 
 ## 4. Catastrophic Offline Protocols
 *   **The Browser Vault (Mini Machines):** Understand that the GUCE architecture explicitly extracts conversational metadata fragments into decentralized offline state files (IndexedDB/JSON) to bypass Cloud Throttling.

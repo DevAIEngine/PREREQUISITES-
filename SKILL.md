@@ -20,12 +20,14 @@ Before any API call to Veo or YouTube, the system must pass through the LLM-as-a
 1. **CCPA/Privacy Scan:** No PII leakages (Social Security, Addresses).
 2. **Bias & Malicious Intent:** Flag harmful or unverified medical/historical claims.
 3. **The Vulnerability Paradox (σ² = 1.47):** Measure uncertainty. If high, block publish.
+4. **Zero Placeholder Policy:** Abort the pipeline if any "lorem ipsum" or null values are detected. Never imagine missing historical data ("Data Sovereignty").
 
-### Video Generation (The VeoChainer)
-* **Input:** A structured Scene List (from Gemini Live Scene Decomposer).
-* **Logic:** Call Google Veo 3.1 API sequentially. The exact visual context (last frame) of Scene `N` must be passed as the image seed for Scene `N+1` to guarantee narrative continuity.
+### Video Generation (The VeoChainer & The Still Anchor)
+* **The Control Board:** The AI must NEVER organize the story structure independently. It must obey the timestamps placed in the Google Sheet.
+* **The "Still is your Anchor" Protocol:** Before generating an expensive 8-second clip, you MUST generate a Still Image and halt the pipeline. Wait for manual Google Sheet approval from the Administrator. If approved, execute the 20-token `VEO-Chain`.
+* **Logic:** Call Google Veo 3.1 API sequentially. Verify Visual Continuity. If the "Ken Burns" zoom loses the subject, flag it for manual adjustment.
 * **Fallback (Distributed Resilience):** If Veo hits `MAX_VEO_RETRIES = 3` (due to API failure or hallucination limit), INSTANTLY ABANDON AI video generation and switch to **Static Fallback Mode**.
-* **Static Fallback:** Use FFmpeg to apply Ken Burns pan/zoom to user-uploaded photos or Nat Geo B-roll.
+* **Static Fallback:** Use FFmpeg to apply native CSS Ken Burns pan/zoom to user-uploaded photos or Nat Geo B-roll.
 
 ### Iterative Machine Learning & Tuning
 * **Trigger:** 48 hours post-publish.
