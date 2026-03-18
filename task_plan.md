@@ -33,5 +33,6 @@
 29. Create Repository Fundamentals (`README.md`, `Dockerfile` upgraded to Python 3.13). (DONE)
 30. Configure GitHub Workflows (`.github/workflows/jules-ci.yml`, `.github/ISSUE_TEMPLATE/jules_task.yml`). (DONE)
 31. Develop Unified Frontend Container `NEXUS_LEGACY_APP.tsx` (Cinematic Legacy UI and Generational Bridge Toggle). (DONE)
-32. **[NEW]** Implement 'Voice-Only' Glowing Orb Mode in `NEXUS_LEGACY_APP.tsx`. (DONE)
-33. **[NEW]** Implement 'Bento Box' Watch Gallery layout in `NEXUS_LEGACY_APP.tsx`. (DONE)
+32. Implement 'Voice-Only' Glowing Orb Mode in `NEXUS_LEGACY_APP.tsx`. (DONE)
+33. Implement 'Bento Box' Watch Gallery layout in `NEXUS_LEGACY_APP.tsx`. (DONE)
+34. **[NEW]** Inject Native CSS Ken Burns Logic into `NEXUS_LEGACY_APP.tsx` to save heavy FFmpeg server-side computation. (DONE)

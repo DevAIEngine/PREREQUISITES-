@@ -45,10 +45,15 @@ export const NexusLegacyApp: React.FC = () => {
   const renderDashboard = () => (
     <div style={{
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh",
-      backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=2000&auto=format&fit=crop')", // Nat Geo Cinematic
-      backgroundSize: "cover", backgroundPosition: "center"
+      position: "relative", overflow: "hidden"
     }}>
-      <div style={{ backgroundColor: "rgba(26,26,26,0.85)", backdropFilter: "blur(16px)", padding: "60px", borderRadius: "24px", textAlign: "center", maxWidth: "800px" }}>
+      {/* Cinematic Ken Burns Background */}
+      <img src="https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=2000&auto=format&fit=crop"
+           className="documentary-image"
+           style={{ position: "absolute", zIndex: 0, width: "100%", height: "100%", objectFit: "cover" }}
+      />
+
+      <div style={{ backgroundColor: "rgba(26,26,26,0.85)", backdropFilter: "blur(16px)", padding: "60px", borderRadius: "24px", textAlign: "center", maxWidth: "800px", zIndex: 1 }}>
         <h1 style={{ fontSize: "64px", color: "#FFD700", margin: "0 0 20px 0", fontFamily: "'Montserrat', sans-serif", fontWeight: 800 }}>Welcome back, {userName}.</h1>
         <p style={{ fontSize: "32px", color: "#e2e8f0", marginBottom: "60px" }}>What story shall we tell today?</p>
 
@@ -185,7 +190,7 @@ export const NexusLegacyApp: React.FC = () => {
           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
           >
-            <img src={asset.thumbnail} alt={asset.title} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
+            <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
               <h2 style={{ fontSize: index === 0 ? "48px" : "32px", margin: "0 0 10px 0", fontWeight: "bold", textShadow: "0 2px 10px rgba(0,0,0,1)" }}>{asset.title}</h2>
               <p style={{ fontSize: "24px", color: "#FFD700", fontWeight: "bold", textShadow: "0 2px 10px rgba(0,0,0,1)" }}>{asset.date} • {asset.duration}</p>
@@ -206,6 +211,18 @@ export const NexusLegacyApp: React.FC = () => {
   // ============================================================
   return (
     <div style={{ position: "relative" }}>
+      <style>
+        {`
+          /* World-Class Ken Burns Animation for Documentaries */
+          @keyframes kenburns-effect {
+            0% { transform: scale(1.0) translate(0, 0); }
+            100% { transform: scale(1.2) translate(-20px, -10px); }
+          }
+          .documentary-image {
+            animation: kenburns-effect 12s ease-in-out infinite alternate;
+          }
+        `}
+      </style>
 
       {/* Global Mode Toggle (Hidden for Seniors, Visible for Youth) */}
       <button
