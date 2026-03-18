@@ -20,6 +20,7 @@ interface DocumentaryAsset {
 export const NexusLegacyApp: React.FC = () => {
   const [currentView, setCurrentView] = useState<AppView>("DASHBOARD");
   const [isCreatorMode, setIsCreatorMode] = useState(false);
+  const [isVoiceOnlyMode, setIsVoiceOnlyMode] = useState(false);
 
   // Simulated User Data
   const userName = "Grandpa Joe";
@@ -52,11 +53,52 @@ export const NexusLegacyApp: React.FC = () => {
         <p style={{ fontSize: "32px", color: "#e2e8f0", marginBottom: "60px" }}>What story shall we tell today?</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story</button>
+          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
+          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}>🔮 Tell a Story (Voice Only)</button>
           <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}>🍿 Watch My Life</button>
           <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}>📡 Go Live (Family Stream)</button>
         </div>
       </div>
+    </div>
+  );
+
+  // 1.5 The "Voice Glow" Mode (Living Interface)
+  const renderVoiceOnlyMode = () => (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh",
+      backgroundColor: "#0f172a", // Dimmed, deep-charcoal background
+    }}>
+      <style>
+        {`
+          @keyframes pulseGlow {
+            0% { box-shadow: 0 0 40px #FFD700, 0 0 80px #FFD700; transform: scale(1); }
+            50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFD700; transform: scale(1.05); }
+            100% { box-shadow: 0 0 40px #FFD700, 0 0 80px #FFD700; transform: scale(1); }
+          }
+          .glowing-orb {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0%, #FFD700 40%, #d97706 100%);
+            animation: pulseGlow 2s infinite ease-in-out;
+            margin-bottom: 80px;
+          }
+        `}
+      </style>
+
+      <div className="glowing-orb"></div>
+
+      <h2 style={{ color: "#FFD700", fontSize: "48px", fontWeight: "bold", fontFamily: "'Montserrat', sans-serif", textShadow: "0 4px 20px rgba(255, 215, 0, 0.5)", marginBottom: "20px" }}>I am listening, {userName}.</h2>
+      <p style={{ color: "#94a3b8", fontSize: "28px", fontStyle: "italic", marginBottom: "60px" }}>Tell me about your first car...</p>
+
+      <button
+        onClick={() => setIsVoiceOnlyMode(false)}
+        style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
+        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
+        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+      >
+        🛑 End Session
+      </button>
     </div>
   );
 
@@ -101,19 +143,57 @@ export const NexusLegacyApp: React.FC = () => {
     </div>
   );
 
-  // 3. Watch / Gallery View
+  // 3. Watch / Gallery View (The "Bento Box" Grid)
   const renderWatchGallery = () => (
-    <div style={{ backgroundColor: "#1a1a1a", minHeight: "100vh", padding: "40px", color: "white" }}>
-      <button onClick={() => setCurrentView("DASHBOARD")} style={{ fontSize: "24px", background: "none", border: "none", color: "#FFD700", cursor: "pointer", marginBottom: "40px" }}>← Back to Dashboard</button>
-      <h1 style={{ fontSize: "48px", color: "#FFD700", marginBottom: "40px" }}>Your Documentaries</h1>
+    <div style={{
+      backgroundColor: "#1a1a1a",
+      backgroundImage: "url('https://images.unsplash.com/photo-1493606278519-11aa9f86e40a?q=80&w=2000&auto=format&fit=crop')", // Film grain / old parchment texture
+      backgroundBlendMode: "overlay",
+      minHeight: "100vh",
+      padding: "60px",
+      color: "white"
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "60px" }}>
+        <button onClick={() => setCurrentView("DASHBOARD")} style={{ fontSize: "28px", background: "rgba(255,215,0,0.1)", border: "2px solid #FFD700", color: "#FFD700", borderRadius: "100px", padding: "10px 30px", cursor: "pointer", fontWeight: "bold" }}>
+          ← Return Home
+        </button>
+        <h1 style={{ fontSize: "64px", color: "#FFD700", margin: 0, fontFamily: "'Montserrat', sans-serif", fontWeight: "900", textShadow: "0 4px 20px rgba(0,0,0,0.8)" }}>Family Archive</h1>
+      </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))", gap: "40px" }}>
-        {userAssets.map(asset => (
-          <div key={asset.id} style={{ backgroundColor: "#262626", borderRadius: "16px", overflow: "hidden", cursor: "pointer", transition: "transform 0.2s" }}>
-            <img src={asset.thumbnail} alt={asset.title} style={{ width: "100%", height: "250px", objectFit: "cover" }} />
-            <div style={{ padding: "20px" }}>
-              <h2 style={{ fontSize: "28px", margin: "0 0 10px 0" }}>{asset.title}</h2>
-              <p style={{ fontSize: "18px", color: "#a3a3a3" }}>{asset.date} • {asset.duration}</p>
+      {/* Bento Box Layout */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gridAutoRows: "350px",
+        gap: "30px",
+        maxWidth: "1400px",
+        margin: "0 auto"
+      }}>
+        {userAssets.map((asset, index) => (
+          <div key={asset.id} style={{
+            backgroundColor: "rgba(26,26,26,0.6)",
+            backdropFilter: "blur(12px)",
+            borderRadius: "32px",
+            overflow: "hidden",
+            cursor: "pointer",
+            position: "relative",
+            border: "1px solid rgba(255,255,255,0.1)",
+            gridColumn: index === 0 ? "span 2" : "span 1", // First item spans 2 columns for the trendy Bento look
+            boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+            transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+          }}
+          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
+          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
+          >
+            <img src={asset.thumbnail} alt={asset.title} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
+              <h2 style={{ fontSize: index === 0 ? "48px" : "32px", margin: "0 0 10px 0", fontWeight: "bold", textShadow: "0 2px 10px rgba(0,0,0,1)" }}>{asset.title}</h2>
+              <p style={{ fontSize: "24px", color: "#FFD700", fontWeight: "bold", textShadow: "0 2px 10px rgba(0,0,0,1)" }}>{asset.date} • {asset.duration}</p>
+            </div>
+
+            {/* Play Button Icon overlay */}
+            <div style={{ position: "absolute", top: "40px", right: "40px", zIndex: 1, backgroundColor: "rgba(255,215,0,0.8)", borderRadius: "50%", width: "80px", height: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontSize: "36px", marginLeft: "10px" }}>▶</span>
             </div>
           </div>
         ))}
@@ -141,11 +221,15 @@ export const NexusLegacyApp: React.FC = () => {
       </button>
 
       {/* View Router */}
-      {currentView === "DASHBOARD" && renderDashboard()}
-      {currentView === "INTERVIEW" && <SeniorFriendlyGeminiUI userId="user_123" />}
-      {currentView === "WATCH" && renderWatchGallery()}
-      {currentView === "LIVE" && <div style={{ color: "white", padding: "100px", fontSize: "48px", textAlign: "center" }}>📡 Connecting to Family Livestream...</div>}
-      {currentView === "CREATOR_MODE" && renderCreatorMode()}
+      {isVoiceOnlyMode ? renderVoiceOnlyMode() : (
+        <>
+          {currentView === "DASHBOARD" && renderDashboard()}
+          {currentView === "INTERVIEW" && <SeniorFriendlyGeminiUI userId="user_123" />}
+          {currentView === "WATCH" && renderWatchGallery()}
+          {currentView === "LIVE" && <div style={{ color: "white", padding: "100px", fontSize: "48px", textAlign: "center" }}>📡 Connecting to Family Livestream...</div>}
+          {currentView === "CREATOR_MODE" && renderCreatorMode()}
+        </>
+      )}
 
     </div>
   );
