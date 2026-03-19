@@ -1,0 +1,34 @@
+﻿The "Cinematic Legacy" Engine
+1. The "National Geographic" Meets "Apple" Aesthetic
+Visual Vibe: "Golden Hour" Cinematic. Instead of just cold "Cyberpunk Black," use deep, warm charcoal (#1a1a1a) mixed with rich gold (#FFD700) and deep teal accents. This feels premium, historical, and trustworthy (like a high-end museum exhibit).
+Typography: Switch to a Geometric Sans-Serif (like Proxima Nova or Montserrat) which is trendy for youth but highly legible for seniors.
+Rule: No font smaller than 18px anywhere. Headers should be massive (48px+) and act as art.
+Imagery: Full-bleed, high-resolution backgrounds. The UI sits on top of the images like a "frosted glass" lens, ensuring the text is always readable against complex video backgrounds.
+2. The "Multilingual" Core (US Top 5 Focus)
+Dynamic Language Switching: The interface must instantly toggle between English, Spanish, Chinese (Simplified/Traditional), Tagalog, Vietnamese, and Arabic.
+Audio-First Navigation: When a user switches to "Español," the entire AI voice interface switches to a native Spanish accent (e.g., a warm, friendly "abuela" tone or a respectful narrator tone).
+Iconography: Use universally recognized symbols (a literal "Telephone" handset, a "Movie Camera") rather than abstract tech icons.
+3. The "Voice-to-Docu" Engine (The Killer Feature)
+The "Interview" Interface:
+Instead of a "Form," this screen looks like an incoming video call.
+Visual: A large, friendly AI Avatar (or a blank "Director's Chair" icon) that asks: "Tell me about your first car."
+Action: A massive, pulsing "Answer Call" button (Green) and "End Session" (Red).
+Youth Mode (The "Producer" View): If a younger user logs in, they see the same content but in a "Director's Cut" timeline where they can edit their grandparent's footage, add music, or share to TikTok/Instagram.
+Updated GitHub/Sandbox "README.md" Structure
+Use this structure to guide your developers (or AI agent) to build the specific "Documentary" features.
+markdown
+# 🌍 NEXUS-LEGACY: The Multilingual Documentary Engine
+
+
+## 🎯 Core Mission
+To democratize high-end documentary production for seniors via voice-interactive AI, enabling "National Geographic" quality storytelling at zero cost.
+
+
+## 🗣️ Multilingual Architecture (Top 6 US Languages)
+The platform effectively acts as a "Universal Translator" for family history.
+1.  **English** (Default)
+2.  **Spanish** (High Priority - distinct "Latin American" vs "European" toggle)
+3.  **Chinese** (Mandarin/Cantonese audio support)
+4.  **Tagalog**
+5.  **Vietnamese**
+6.  **Arabic**

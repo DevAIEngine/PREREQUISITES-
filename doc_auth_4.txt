@@ -1,0 +1,23 @@
+﻿Conversation" engine works:
+
+
+Jules, Implement a Multimodal Conversational AI layer that maintains state across sessions. The UI must feature a 'Voice-Only' mode where the screen dims to a simple glowing orb, allowing seniors to 'direct' their documentary creation purely through natural speech, mimicking the fluid, low-latency interaction of Gemini Live."
+A "Translation Mapping" table is available that shows how the key buttons (like "Start My Story") should look in all 5 languages.
+
+
+
+
+Conversation Style Like "Gemini Live"
+The UI should be a Living Interface instead of a static screen:
+The "Voice Glow": A central, pulsing light reacts to the user's voice, providing visual feedback that the user is being heard.
+Interruptible Dialogue: Users should be able to interrupt the AI to change the story or correct a detail mid-sentence, similar to Gemini Live.
+No-Cost "Documentary Bureau": Offer "National Geographic" style content as a Legacy Gift. Younger viewers will see it as a "Trendy Bio-Doc," while seniors will see it as a "Family Archive".
+
+
+
+
+Trendy & World-Class Layout (PBS/NatGeo Style)
+Use Cinematic Minimalism to appeal to both Gen Z and Seniors:
+Immersive Hero Backgrounds: Use high-definition, slow-motion footage of nature or historical textures (like old parchment or film grain) as the background.
+"Bento Box" Grid: A modern layout trend for 2025 that organizes content into clean, rounded tiles. It's visually trendy for youth and structurally simple for seniors.
+Large-Scale Metadata: When a documentary plays, the title and descriptions should be large and bold—National Geographic style—making them easy to read for seniors but looking "design-forward" for younger eyes.
