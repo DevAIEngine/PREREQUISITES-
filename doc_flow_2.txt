@@ -1,0 +1,41 @@
+﻿acts as the "Nervous System" of GUCE. You are connecting the "Office" brain (Docs/Sheets/Forms) to the "Creative" muscle (VEO/Vids), automating the heavy lifting so your 500 tokens are spent on creation, not administration.
+This system utilizes Google Workspace "Help Me" Features as the trigger mechanism.
+Here's how to integrate Google Docs, Gmail, Google Forms, Sheets, and Calendar to automate video chaining for the GUCE project, including automated image generation and notifications.
+System Protocol: GUCE Autopilot (The "Help Me" Protocol)
+1. The "Invisible Producer" Workflow (Apps Script + Gemini)
+Trigger: A Google Form submission (e.g., "Grandpa’s War Story") triggers a Google Sheet.
+Action A (The Script): The Sheet automatically triggers Gemini in Docs ("Help me write") to convert the form answers into a "Director's Treatment" (Scene 1, Scene 2, Scene 3).
+Action B (The Vision): The Sheet triggers Google Vids to generate the placeholder storyboard using the "Anti-Gravity" 1-minute loops (0 tokens).
+Action C (The Alert): Google Calendar auto-schedules a "Review Session" and sends a Gmail summary: "Story #42 Ready for VEO Injection."
+2. The "Anti-Gravity" Dashboard UI
+Visual: The Google Sheet is visualized as a "Mission Control" board.
+Status Columns: Instead of text ("In Progress"), use Floating Orbs:
+🟡 Yellow Orb: Script generating in Docs.
+🔵 Blue Orb: Video compiling in Vids.
+🟢 Green Orb: Ready for YouTube upload.
+⚙️ The "Video-Chaining" Code Logic (Copy to Sandbox)
+Use this logic to force the "Chain" so the videos don't look disjointed.
+javascript
+// GUCE Automation Logic: The "Baton Pass"
+// Goal: Ensure Scene B starts exactly where Scene A ended.
+
+
+function chainVideoSegments(docID, sheetID) {
+  const script = DocumentApp.openById(docID).getBody().getText();
+
+
+  // Step 1: Extract the "End Frame" description from Scene 1
+  const endFramePrompt = extractLastVisual(script, "Scene 1");
+
+
+  // Step 2: Inject this as the "Start Frame" for Scene 2 in VEO
+  // This forces the AI to maintain visual continuity (The "Chain")
+  const nextScenePrompt = `Start with image: [${endFramePrompt}]. Then pan slowly to...`;
+
+
+  Logger.log("Chain Link Established: " + nextScenePrompt);
+
+
+  // Step 3: Notify
+  CalendarApp.createEvent('GUCE: Verify Chain Link', new Date(), new Date());
+}

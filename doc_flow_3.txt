@@ -1,0 +1,8 @@
+﻿Optimizing the "Help Me" Features for Zero Tokens
+Docs "Help Me Write": Use this to format the interview transcript into a clean table before tokens are spent on video.
+Slides "Help Me Visualize": Use this to generate the Title Cards (e.g., "The Year 1945") for free. Do not use VEO for text; use Slides.
+The "Google Alert" Safety Net
+Set up a specific Gmail Filter for "GUCE System":
+Subject: "⚠️ Chain Break Detected"
+Action: If VEO fails to generate a clip or hallucinates a placeholder, the system pauses and sends a text immediately. It does not proceed to use more tokens on a bad video.
+Here are the specific "Google Form" questions that make the seniors give the best "Visual Prompts" automatically (e.g., Asking "What color was the car?" instead of "Tell me about the car.")

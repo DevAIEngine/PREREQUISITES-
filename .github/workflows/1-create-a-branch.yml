@@ -68,7 +68,15 @@ jobs:
 
       - name: Disable current workflow and enable next one
         run: |
-          gh workflow disable "${{github.workflow}}"
+          # 🛡️ Sentinel: Prevent command injection by using env var for workflow name
+          gh workflow disable "$WORKFLOW_NAME"
           gh workflow enable "Step 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: |
+          gh workflow disable "${WORKFLOW_NAME}"
+          gh workflow enable "Step 2"
