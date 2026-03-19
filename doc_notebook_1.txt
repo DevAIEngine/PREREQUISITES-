@@ -1,0 +1,82 @@
+﻿Best Practices
+7 Golden Rules for NotebookLM Prompts
+1. Quality over quantity — 5-15 high-quality sources beat 50 mediocre ones
+2. Always cite sources — Use format [Source, Page X]: "[quote]" for verifiable outputs
+3. Customize placeholders — Replace all [LIKE THIS] with your specific context
+4. Start with synthesis — Run a Global Synthesis first to understand your source landscape
+5. Iterate with variants — Test in experiments/ before promoting to main categories
+6. Track usage — Update tracking.yaml to identify underperforming prompts
+7. Match depth to need — Use Compact for quick scans, Full for major decisions
+Prompt Hygiene
+* Before deep analysis: Run Source Relevance Ranker to filter sources
+* For contradictory sources: Run Source Conflict Detector first
+* For Studio content: Generate a synthesis note first, then use it as the sole source for video/audio
+Structure
+├── templates/                    # 57 prompts
+│   ├── learning/                 # 4 — active learning, concept mapping
+│   ├── troubleshooting/          # 3 — debugging, gap analysis
+│   ├── productivity/             # 3 — study guides, meetings
+│   ├── advanced-techniques/      # 5 — multi-pass, comparisons
+│   ├── data-engineering-specific/# 5 — architecture, code review
+│   ├── critical-analysis/        # 4 — devil's advocate, dialectics
+│   ├── source-management/        # 11 — synthesis, topic extraction
+│   └── studio/                   # 22 prompts
+│       ├── audio/                # 4 — briefs, debates, deep dives
+│       ├── video/                # 9 — explainers, templates
+│       ├── infographic/          # 6 — architecture, KPIs, comparison
+│       └── slide-deck/           # 3 — presentations, RFCs
+├── docs/                         # Workflow documentation
+├── tracking.yaml                 # Usage metrics
+└── CHANGELOG.md
+
+
+Workflows
+Detailed processes for prompt development and multi-source synthesis:
+* Prompt Improvement Cycle — Design → Validate → Archive workflow with tracking thresholds
+* Synthesis to Video — Multi-source synthesis → Video Overview pipeline
+* Video Templates Guide — 6 ready-to-use Style + Focus templates for Video Overview
+* Infographic Guide — 6 tested templates with styling techniques and limitations
+File Format
+Each prompt file contains:
+---
+name: "Prompt Name"
+category: category-name
+difficulty: beginner|intermediate|advanced
+source: "Original Source"
+use_case: "Data Engineering use case"
+---
+Followed by the prompt template in a code block.
+Tracking Usage
+Update tracking.yaml after using prompts:
+prompt-name:
+  last_used: 2026-01-06
+  uses_count: 1
+  success_rate: 1.0
+  avg_quality: 4.5
+  notes: "Worked well for X"
+Thresholds:
+* success_rate < 70% → Revise prompt
+* avg_quality < 3.5 → Revise prompt
+* uses_count = 0 after 3 months → Archive
+Contributing
+1. Create prompt in experiments/ first
+2. Test 3+ times in NotebookLM with real sources
+3. Move to appropriate category
+4. Add entry to tracking.yaml
+5. Update CHANGELOG.md
+Optional: NotebookLM Prompts Userscript
+You can use this repository as an interactive prompt picker inside NotebookLM via a Tampermonkey userscript.
+Installation
+1. Install the Tampermonkey extension in your browser (Chrome/Edge/Brave, etc.).
+2. Open the raw version of the userscript:
+   * https://raw.githubusercontent.com/GMartin-Data/notebooklm-prompts/main/tools/notebooklm-prompts-userscript.user.js
+3. Tampermonkey should offer to create a new script → click Install.
+Usage
+* Open https://notebooklm.google.com/ and any Notebook.
+* A floating button “NotebookLM Prompts” appears in the bottom-right corner.
+* Click it to open a panel with all prompts from this repo (templates/**), fetched from GitHub.
+* Filter by name or category, then click a prompt:
+   * The userscript downloads the corresponding Markdown file
+   * Extracts the first fenced code block (the actual prompt template)
+   * Pastes it automatically into the NotebookLM input box
+* In NotebookLM, replace the [LIKE THIS] placeholders with your context, then run the prompt as usual.
