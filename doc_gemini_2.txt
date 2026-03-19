@@ -1,0 +1,569 @@
+﻿Dedicated Interconnect
+Google charges you on an hourly basis for both Cloud Interconnect connections and VLAN attachments. The hourly charge for each resource, either Cloud Interconnect connection or VLAN attachment, is charged to the project that owns the resource.
+Data transfer from your Virtual Private Cloud (VPC) networks through your Cloud Interconnect connections is discounted compared to general network pricing for Google Cloud. Data transfer out pricing depends on the number of gibibytes (GiB) transferred and the location of your Cloud Interconnect connection.
+This discounted pricing applies only to traffic that originates in the region where the VLAN attachment is located. You can use VLAN attachments to access services located in a different region than the VLAN attachment. In this case, you are charged standard cross-region rates for traffic between the region where the VLAN attachment is located and the region where the service is located.
+Cloud Interconnect data transfer out charges accrue to the project that owns the VLAN attachment. The project that owns the Cloud Interconnect connection is not billed for the data transfer. Specifically, costs for data transfer from a VLAN attachment in a Shared VPC service project, which travels through a Cloud Interconnect connection in a different host project, are attributed to the service project.
+For HA VPN over Cloud Interconnect deployments, you are charged for your Dedicated Interconnect connections, VLAN attachments, HA VPN tunnels, and regional external IP addresses, if an IP address is assigned to a VPN gateway but not used by a tunnel.
+In terms of HA VPN over Cloud Interconnect data transfer, you are charged only for Cloud Interconnect data transfer out. You are not charged for Cloud VPN data transfer.
+FData transfer from a VPC network through a Cloud Interconnect connection
+North America
+The following table shows the prices for the North America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	United States, Canada
+	United States, Canada
+	$0.02 / 1 gibibyte
+	Mexico
+	United States, Canada
+	$0.1107 / 1 gibibyte
+	Europe, Middle East, and Africa (EMEAR)
+﻿The following table shows the prices for the Europe, Middle East, and Africa (EMEAR) geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Europe
+	Europe
+	$0.02 / 1 gibibyte
+	Middle East
+	Europe
+	$0.10 / 1 gibibyte
+	Africa
+	Europe
+	$0.11 / 1 gibibyte
+	Middle East
+	Middle East
+	$0.09 / 1 gibibyte
+	Europe
+	Middle East
+	$0.10 / 1 gibibyte
+	Africa
+	Africa
+	$0.11 / 1 gibibyte
+	Asia
+﻿The following table shows the prices for the Asia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Asia*
+	Asia*
+	$0.042 / 1 gibibyte
+	Indonesia
+	Asia*
+	$0.0594 / 1 gibibyte
+	Indonesia
+	Indonesia
+	$0.0484 / 1 gibibyte
+	Asia*
+	Indonesia
+	$0.0594 / 1 gibibyte
+	Manila
+	Indonesia
+	$0.1306 / 1 gibibyte
+	India
+	India
+	$0.045 / 1 gibibyte
+	﻿* Includes all of Asia except China, India, Indonesia, and the Philippines.
+Australia
+The following table shows the prices for the Australia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price
+	Australia
+	Australia
+	$0.042 / 1 gibibyte
+	South America
+The following table shows the prices for the South America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price
+	South America
+	South America
+	$0.11 / 1 gibibyte
+	South America
+	United States
+	$0.1107 / 1 gibibyte
+	Inbound data transfer through a Cloud Interconnect connection
+Traffic type
+	Price
+	Data transfer in
+	Google does not charge for inbound data transfer. However, there might be a charge for resources that process the transferred data. For a list of these resources, see the VPC section of All networking pricing.
+Responses to requests count as outbound data transfer traffic and are charged.
+	Pricing example
+The following table shows an example usage pattern of Dedicated Interconnect connections for a single month.
+Resources
+	Usage
+	Estimated cost
+	Cloud Interconnect connection
+	capacity 30 Gbps (3 x 10-Gbps circuit)
+	3 x 10-Gbps circuit x 24 hrs @ $2.328 per hour x 30 days = $5,028.48
+	Redundant Cloud Interconnect connection
+	capacity 30 Gbps (3 x 10-Gbps circuit)
+	3 x 10-Gbps circuit x 24 hrs @ $2.328 per hour x 30 days = $5,028.48
+	VLAN attachment
+	6 (one per Cloud Interconnect connection circuit)
+	6 x 10-Gbps attachment x 24 hrs @ $0.10 per hour x 30 days = $432.00
+	Data transfer (leaving from a Google Cloud region in the United States over a Cloud Interconnect connection in the United States)
+	20 TiB
+	20,480 GiB x $0.02 = $409.60
+	Total cost
+
+
+	$10,898.56
+	Partner Interconnect
+Google charges you on an hourly basis for VLAN attachments, depending on their capacity. The hourly charges are billed to the project that owns the VLAN attachment. Your service provider might also charge you for services such as using their network, which isn't included in your Google Cloud bills. For information about their pricing, contact your service provider.
+Data transfer from your VPC networks though your attachments is discounted compared to general network pricing for Google Cloud. Outbound data transfer pricing depends on the number of gibibytes (GiB) transferred and the location of your Cloud Interconnect connection.
+This discounted pricing applies only to traffic that originates in the region where the VLAN attachment is located. You can use VLAN attachments to access services located in a different region than the VLAN attachment. In this case, you are charged standard cross-region rates for traffic between the region where the VLAN attachment is located and the region where the service is located.
+Cloud Interconnect data transfer out charges accrue to the project that owns the VLAN attachment. The project that owns the Cloud Interconnect connection is not billed for data transfer. Specifically, costs for data transfer traffic from a VLAN attachment in a Shared VPC service project, which travels through a Cloud Interconnect connection in a different host project, are attributed to the service project.
+For HA VPN over Cloud Interconnect deployments, you are charged for your VLAN attachments, HA VPN tunnels, and regional external IP addresses, if an address is assigned to a VPN gateway but not used by a tunnel.
+In terms of HA VPN over Cloud Interconnect data transfer, you are charged only for Cloud Interconnect outbound data transfer. You are not charged for Cloud VPN data transfer.
+For more information, see Cloud VPN pricing.
+Pricing tables
+Partner Interconnect pricing
+Hourly
+Monthly
+Partner VLAN attachment capacity
+	Price (USD)
+	50 Mbps
+	$0.05417 / 1 hour
+	100 Mbps
+	$0.0625 / 1 hour
+	200 Mbps
+	$0.08333 / 1 hour
+	300 Mbps
+	$0.1111 / 1 hour
+	400 Mbps
+	$0.1389 / 1 hour
+	500 Mbps
+	$0.1736 / 1 hour
+	1 Gbps
+	$0.2778 / 1 hour
+	2 Gbps
+	$0.5694 / 1 hour
+	5 Gbps
+	$1.25 / 1 hour
+	10 Gbps
+	$2.36 / 1 hour
+	20 Gbps
+	$3.61 / 1 hour
+	50 Gbps
+	$9.02 / 1 hour
+	Data transfer from a VPC network through a Cloud Interconnect connection
+North America
+The following table shows the prices for the North America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	United States, Canada
+	United States, Canada
+	$0.02 / 1 gibibyte
+	Mexico
+	United States, Canada
+	$0.1107 / 1 gibibyte
+	Europe, Middle East, and Africa (EMEAR)
+The following table shows the prices for the Europe, Middle East, and Africa (EMEAR) geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Europe
+	Europe
+	$0.02 / 1 gibibyte
+	Middle East
+	Europe
+	$0.10 / 1 gibibyte
+	Africa
+	Europe
+	$0.11 / 1 gibibyte
+	Middle East
+	Middle East
+	$0.09 / 1 gibibyte
+	Europe
+	Middle East
+	$0.10 / 1 gibibyte
+	Africa
+	Africa
+	$0.11 / 1 gibibyte
+	Asia
+The following table shows the prices for the Asia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Asia*
+	Asia*
+	$0.042 / 1 gibibyte
+	Indonesia
+	Asia*
+	$0.0594 / 1 gibibyte
+	Indonesia
+	Indonesia
+	$0.0484 / 1 gibibyte
+	Asia*
+	Indonesia
+	$0.0594 / 1 gibibyte
+	Manila
+	Indonesia
+	$0.1306 / 1 gibibyte
+	India
+	India
+	$0.045 / 1 gibibyte
+	* Includes all of Asia except China, India, Indonesia, and the Philippines.
+Australia
+The following table shows the prices for the Australia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Australia
+	Australia
+	$0.042 / 1 gibibyte
+	South America
+The following table shows the prices for the South America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	South America
+	South America
+	$0.11 / 1 gibibyte
+	South America
+	United States
+	$0.1107 / 1 gibibyte
+	Inbound data transfer through a Cloud Interconnect connection
+Traffic type
+	Price (USD)
+	Data transfer in
+	Google does not charge for inbound data transfer. However, there might be a charge for resources that process the transferred data. For a list of these resources, see the VPC section of All networking pricing.
+Responses to requests count as outbound data transfer traffic and are charged.
+	Pricing example
+The following table shows an example usage pattern of Partner Interconnect connections for a single month.
+Resources
+	Usage
+	Estimated cost
+	VLAN attachment
+	6 100-Mbps attachments
+	6 x $0.0625 x 720 hours = $270.00
+	Data transfer out (leaving from a Google Cloud region in the United States over a Cloud Interconnect connection in the United States)
+	20 TiB
+	20,480 GiB x $0.02 = $409.60
+	Total cost
+
+
+	$679.60
+	Cross-Cloud Interconnect
+Google charges you on an hourly basis for both Cross-Cloud Interconnect connections and VLAN attachments. The hourly charge for each resource, either Cross-Cloud Interconnect connection or VLAN attachment, is charged to the project that owns the resource.
+Data transfer from your Virtual Private Cloud (VPC) networks through your Cross-Cloud Interconnect connections is discounted compared to general network pricing for Google Cloud. Data transfer pricing depends on the number of gibibytes (GiB) transferred and the location of your Cross-Cloud Interconnect connection.
+This discounted pricing applies only to traffic that originates in the region where the VLAN attachment is located. You can use VLAN attachments to access services located in a different region than the VLAN attachment. In this case, you are charged standard cross-region rates for traffic between the region where the VLAN attachment is located and the region where the service is located.
+Cross-Cloud Interconnect data transfer out charges accrue to the project that owns the VLAN attachment. The project that owns the Cloud Interconnect connection is not billed for data transfer. Specifically, costs for data transfer from a VLAN attachment in a Shared VPC service project, which travels through a Cloud Interconnect connection in a different host project, are attributed to the service project.
+For HA VPN over Cloud Interconnect deployments, you are charged for your Cross-Cloud Interconnect connections, VLAN attachments, HA VPN tunnels, and regional external IP addresses, if an IP address is assigned to a VPN gateway but not used by a tunnel.
+In terms of HA VPN over Cloud Interconnect data transfer out, you are charged only for Cloud Interconnect data transfer. You are not charged for Cloud VPN data transfer.
+For more information, see Cloud VPN pricing.
+Pricing tables
+Cross-Cloud Interconnect pApplication awareness on Cross-Cloud Interconnect pricing
+Hourly
+Monthly
+Cloud Interconnect connection
+	Application awareness price
+	10-Gbps
+	$0.3492 / 1 hour
+	100-Gbps
+	$3.492 / 1 hour
+	Data transfer from a VPC network through a Cloud Interconnect connection
+North America
+The following table shows the prices for the North America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	United States, Canada
+	United States, Canada
+	$0.02 / 1 gibibyte
+	Mexico
+	United States, Canada
+	$0.1107 / 1 gibibyte
+	Europe, Middle East, and Africa (EMEAR)
+The following table shows the prices for the Europe, Middle East, and Africa (EMEAR) geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Europe
+	Europe
+	$0.02 / 1 gibibyte
+	Middle East
+	Europe
+	$0.10 / 1 gibibyte
+	Africa
+	Europe
+	$0.11 / 1 gibibyte
+	Middle East
+	Middle East
+	$0.09 / 1 gibibyte
+	Europe
+	Middle East
+	$0.10 / 1 gibibyte
+	Africa
+	Africa
+	$0.11 / 1 gibibyte
+	Asia
+The following table shows the prices for the Asia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Asia*
+	Asia*
+	$0.042 / 1 gibibyte
+	Indonesia
+	Asia*
+	$0.0594 / 1 gibibyte
+	Indonesia
+	Indonesia
+	$0.0484 / 1 gibibyte
+	Asia*
+	Indonesia
+	$0.0594 / 1 gibibyte
+	Manila
+	Indonesia
+	$0.1306 / 1 gibibyte
+	India
+	India
+	$0.045 / 1 gibibyte
+	* Includes all of Asia except China, India, Indonesia, and the Philippines.
+Australia
+The following table shows the prices for the Australia geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	Australia
+	Australia
+	$0.042 / 1 gibibyte
+	South America
+The following table shows the prices for the South America geographic area.
+Connection location
+	Region of VLAN attachment
+	Price (USD)
+	South America
+	South America
+	$0.11 / 1 gibibyte
+	South America
+	United States
+	$0.1107 / 1 gibibyte
+	Inbound data transfer through a Cloud Interconnect connection
+Traffic type
+	Price (USD)
+	Da transfer in
+	Google does not charge for inbound data transfer. However, there might be a charge for resources that process the transferred data. For a list of these resources, see the VPC section of All networking pricing.
+Responses to requests count as outbound data transfer traffic and are charged.
+	Pricing example
+The following table shows an example usage pattern of Cross-Cloud Interconnect connections for a single month.
+Resources
+	Usage
+	Estimated cost
+	Cross-Cloud Interconnect connection
+	capacity 10 Gbps (1 x 10-Gbps circuit)
+	1 x 10-Gbps circuit x 24 hrs @ $5.60 per hour x 30 days = $4,032
+	Redundant Cross-Cloud Interconnect connection
+	capacity 10 Gbps (1 x 10-Gbps circuit)
+	1 x 10-Gbps circuit x 24 hrs @ $5.60 per hour x 30 days = $4,032
+	VLAN attachment
+	2 (one per Cloud Interconnect connection circuit)
+	2 x 10-Gbps attachment x 24 hrs @ $0.10 per hour x 30 days = $144.00
+	Data transfer (leaving from a Google Cloud region in the United States over a Cloud Interconnect connection in the United States)
+	200 TiB
+	204,800 GiB x $0.02 = $4,096.00
+	Total cost
+
+
+	$12,304
+	Cross-Site Interconnect pricing
+Google charges you on an hourly basis for Cross-Site Interconnect connections. The hourly charge for those resources is charged to the project that owns the resource.
+Pricing tables
+Cross-Site Interconnect pricing
+Hourly
+Monthly
+Resource
+	Price (USD)
+	Cross-Site Interconnect connection: per 10-Gbps circuit
+	$2.328 / 1 hour
+	Cross-Site Interconnect connection: per 100-Gbps circuit
+	$23.28 / 1 hour
+	Note: Hourly wire charges apply on top of the Interconnect connection, and they depend on the source/destination locations of the wire and the wire size. To request wire pricing, contact your account team.
+Pricing scenarios
+This section describes different pricing scenarios for how Google Cloud calculates pricing for Cloud Interconnect outbound data transfer; that is, when a virtual machine (VM) instance or a non-VM Google Cloud product or service sends traffic to your on-premises location over a VLAN attachment located in the same or different geographical location:
+* A VM in the same region as a VLAN attachment, using either regional or global VPC dynamic routing
+* A VM in the same continent but different region than a VLAN attachment, using global VPC dynamic routing
+* A VM in a different continent than a VLAN attachment, using global VPC dynamic routing
+* A VM in a different continent than a VLAN attachment, using VPC Network Peering
+* A non-VM Google Cloud product or service in a different location than a VLAN attachment, using global VPC dynamic routing
+Note: You have to pay standard inter-region charges for traffic between the region of the VM and the region of the VLAN attachment, which is more if they are in different continents. This applies to non-VM traffic as well.
+For more information about costs for each scenario, including data transfer charges between regions within a continent and between continents, see General network pricing.
+A VM in the same region as a VLAN attachment, using either regional or global VPC dynamic routing
+Note: The dynamic routing mode that you use does not impact the pricing.
+In this scenario, there are two regions within North America, us-west1 and us-east1. These regions use VPC regional dynamic routing provided by Cloud Router. In this scenario, it doesn't matter which dynamic routing mode you use.
+
+VM in same continent, regional routing (click to enlarge). Cloud Interconnect data transfer charges for North America. No region-to-region data transfer charges.
+You order a Cloud Interconnect connection running from your on-premises location to San Jose (SJC) and create two VLAN attachments over that connection. One VLAN attachment goes to region us-east1, and the other VLAN attachment goes to region us-west1.
+If you send traffic from a VM in us-east1 or from a VM in us-west1 to your on-premises location over your Cloud Interconnect connection in SJC, you are charged the following rates:
+* Cloud Interconnect data transfer out charges for North America (because that is where the Cloud Interconnect connection is located).
+* You are not charged region-to-region data transfer charges because the VMs are using a VLAN attachment in the same region.
+Note: Unless you enable global dynamic routing for your VPC network by using Cloud Router, your regions without a VLAN attachment have no access to your Cloud Interconnect connection. This also means that you can't accidentally incur intercontinental data transfer charges if you have regions located on different continents.
+A VM in the same continent but different region than a VLAN attachment, using global VPC dynamic routing
+In this scenario, you have VMs in two regions located in North America, us-west1 and us-east1. You have enabled global dynamic routing for your VPC network by using Cloud Router. Global dynamic routing enables VLAN attachments in one region to be used by one or more VMs located in another region.
+
+VM in same continent, global dynamic routing (click to enlarge). Region-to-region data transfer charges from us-east1 to us-west1. Cloud Interconnect data transfer charges for North America from us-west1 to on-premises.
+You order a Cloud Interconnect connection running from your on-premises location to San Jose (SJC) and create one VLAN attachment over that connection to us-west1. You then send traffic from a VM in us-east1 to your on-premises location through the VLAN attachment located in us-west1. You are then charged the following rates:
+* Region-to-region data transfer charges for forwarding traffic from us-east1 to the VLAN attachment in us-west1. The VLAN attachment in us-west1 is considered the source of traffic.
+* Cloud Interconnect data transfer charges for North America for traffic from region us-west1 to your on-premises location.
+A VM in a different continent than a VLAN attachment, using global VPC dynamic routing
+This scenario is the same as the preceding example, except that one region, us-west1, is located in North America, and the other region, asia-east1, is located in Asia. Sending traffic between regions on different continents results in more expensive inter-region data transfer rates.
+
+VM in a different continent, global dynamic routing (click to enlarge). Intercontinental region-to-region data transfer charges for traffic forwarded from asia-east1 to us-west1. Cloud Interconnect data transfer charges for North America from us-west1 to on-premises.
+The only way to send traffic from asia-east1 over Cloud Interconnect in North America is by enabling VPC global dynamic routing. This makes the VLAN attachment in us-west1 available to VMs in all regions in your VPC network. You are then charged the following rates:
+* Intercontinental region-to-region data transfer charges for traffic forwarded from asia-east1 to us-west1.
+* Cloud Interconnect data transfer charges for North America for traffic from region us-west1 to your on-premises location.
+A VM in a different continent than a VLAN attachment, using VPC Network Peering
+This scenario is similar to the preceding example, except that there are two VPC networks connected through VPC Network Peering. Sending traffic between regions results in the same rates as the preceding example that uses global dynamic routing.
+
+VM in a different continent, VPC Network Peering (click to enlarge). Intercontinental region-to-region data transfer charges for traffic forwarded from us-east4 to asia-northeast1. Cloud Interconnect data transfer charges for Asia from asia-northeast1 to on-premises.
+You send traffic from us-east4 to your on-premises network over Cloud Interconnect in Asia by using VPC Network Peering. You are then charged the following rates:
+* Intercontinental region-to-region data transfer charges for traffic forwarded from us-east4 to asia-northeast1.
+* Cloud Interconnect data transfer charges for Asia for traffic from region asia-northeast1 to your on-premises location.
+A non-VM Google Cloud product or service in a different location than a VLAN attachment, using global VPC dynamic routing
+In addition to the preceding scenarios, Cloud Interconnect data transfer charges apply to traffic sent from a Google Cloud product or service that is not a VM to your on-premises location over a VLAN attachment. You pay the product's data transfer charges to reach the region of the VLAN attachment, and then pay the Cloud Interconnect data transfer out charges based on the continent where the Cloud Interconnect connection is located.
+Note: For information about data transfer charges for other Google Cloud products not described in this example, see the pricing page for that product.
+The following example describes charges for traffic transferring out from a Cloud Storage bucket in a different region in North America than the region where the VLAN attachment is located.
+
+Non-VM in two North American regions, global dynamic routing (click to enlarge). Cloud Storage data transfer charges for traffic forwarded from a Cloud Storage bucket in northamerica-northeast1 to us-west1. Cloud Interconnect data transfer charges for North America from us-west1 to on-premises.
+In this scenario, you have resources in two regions located in North America, us-west1 (Oregon) and northamerica-northeast1 (Montreal). You have enabled global dynamic routing for your VPC network by using Cloud Router.
+You order a Cloud Interconnect connection running from your on-premises location to San Jose (SJC) and create one VLAN attachment over that connection to us-west1. You then send traffic from a Cloud Storage bucket in northamerica-northeast1 to your on-premises location through the VLAN attachment located in us-west1. You are charged the following rates:
+* The Cloud Storage data transfer cost for forwarding traffic from a Cloud Storage bucket in northamerica-northeast1 to a VLAN attachment in us-west1.
+* Cloud Interconnect data transfer charges for North America for traffic from region us-west1 to your on-premises location (because that is where your Cloud Interconnect connection is located).
+If the Cloud Storage bucket is located in a different continent than the VLAN attachment, you pay Cloud Storage intercontinental data transfer charges to reach the VLAN attachment in us-west1.
+For a full list of pricing scenarios for Cloud Storage, see the Cloud Storage pricing page.
+Cloud Router pricing
+Cloud Router is provided free of charge. General networking costs apply to control plane (BGP) traffic. In most cases, these costs are negligible.
+For more information about networking costs, see General network pricing in the Virtual Private Cloud (VPC) documentation.
+Network Connectivity Center pricing
+This document describes pricing for Network Connectivity Center.
+Network Connectivity Center is a hub-and-spoke model for network connectivity management in Google Cloud. With this model, virtual private cloud networks and on-premises networks connect to a Network Connectivity Center hub by using spokes that have supported Google Cloud spoke resources attached to them.
+For more information about Network Connectivity Center, see the Network Connectivity Center overview.
+Current pricing
+The following sections describe the current pricing for Network Connectivity Center.
+Hubs and spokes
+The following table describes charges for hubs and spokes. Spoke hours refers to the number of hours within a month that a spoke is active.
+Spoke hour charges are waived for up to three VPN spokes and three Cloud Interconnect spokes.
+Note: Cloud Interconnect spokes are sometimes referred to as VLAN attachment spokes.
+Resource
+	Price (USD)
+	Hub
+	No charge
+	Spoke hours (Cloud Interconnect, Cloud VPN and Cloud Router appliance spokes)
+	$0.075 per hour
+	Spoke hours (VPC and producer VPC spokes)
+	$0.10 per hour
+	Advanced Data Networking
+Advanced Data Networking (ADN) refers to the data processing fee charged for all traffic that is sent from a spoke through a hub. Charges are attributed to the spoke project that originates the traffic.
+The ADN charge is $0.02 per Gibibyte (GiB) per month.
+This charge applies for traffic originating from VPC spokes. Traffic that is sent within a VPC network does not incur ADN. ADN charges for traffic originating from hybrid spokes are currently waived. Hybrid spokes are of type Cloud Interconnect, Cloud VPN or Router Appliance.
+Data transfer
+Site-to-site data transfer refers to any traffic sent from one hybrid endpoint (VPN, Interconnect VLAN attachment, or Router Appliance) to another hybrid endpoint in a different supported cloud region.
+These charges apply even if the hybrid endpoint happens to be connected to another network or project in Google Cloud and doesn't actually leave Google's network; for example, if a VPN tunnel connects to another VPC in Google cloud, traffic from that VPN to an Interconnect VLAN attachment is still considered site-to-site data transfer.
+We recommend connecting hybrid endpoints together using Network Connectivity Center (NCC), but note that these charges apply even if NCC isn't used. For example, if static routes are configured to send traffic from one hybrid endpoint to another hybrid endpoint then that traffic would still be billed as site-to-site data transfer.
+Data transfer charges are based on gibibytes (GiB) of traffic per month.
+Item
+	Price (USD)
+	Data transfer to worldwide destinations
+(excluding Australia)
+(USD)
+	0 gibibyte to 1,024 gibibyte
+$0.12 / 1 gibibyte, per 1 month / account
+1,024 gibibyte to 10,240 gibibyte
+$0.11 / 1 gibibyte, per 1 month / account
+10,240 gibibyte and above
+$0.08 / 1 gibibyte, per 1 month / account
+	Data transfer to Australia destinations
+(USD)
+	0 gibibyte to 1,024 gibibyte
+$0.19 / 1 gibibyte, per 1 month / account
+1,024 gibibyte to 10,240 gibibyte
+$0.18 / 1 gibibyte, per 1 month / account
+10,240 gibibyte and above
+$0.15 / 1 gibibyte, per 1 month / account
+	Pricing example
+Advanced Data Networking
+In this example, an enterprise has two Virtual Private Cloud (VPC) global networks, VPC-1 and VPC-2, which it connects via VPC spokes to their Network Connectivity Center hub. Each VPC is in its own project distinct from the hub project. Additionally, there is also a Cloud Interconnect (IC-1) spoke connected to the same hub for on-premise network access.
+Each month, VPC-1 sends 10 TiB of data to VPC-2, and VPC-2 sends 5 TiB of data to VPC-1. Each VPC-1 and VPC-2 also send an additional 1 TiB of data to the IC-1 spoke over the same period.
+The following table describes the charges for one 30-day month.
+Resources
+	Usage
+	Formula
+	Estimated monthly cost
+
+
+
+
+
+
+	$198
+
+
+
+
+
+
+	$204.80
++
+$102.40
++
+$20.48
++
+$20.48
+	Total cost
+	17 TiB of data
+
+
+	$546.16
+	Note that both the Spoke hour charges and Advanced Data Networking charges for VPC spokes accrue in their respective projects.
+Data transfer
+In this example, an enterprise connects two Router appliance spokes to their Network Connectivity Center hub. One spoke represents an office in Los Angeles (us-west2). Another represents an office in Mumbai (asia-south1).
+Every month, the US office transfers 5 TiB of data to the Asia office, and the Asia office transfers 5 TiB to the US office.
+The following table describes the charges for one 30-day month.
+Resources
+	Usage
+	Formula
+	Estimated monthly cost
+	Spoke hour charges
+	2 spokes
+	2 x 24 hours x 30 days at $0.075
+	$108.00
+	Data transfer charges
+	5 TiB of data transferred (Los Angeles -> Mumbai)
+5 TiB of data transferred (Mumbai -> Los Angeles)
+Total: 10 TiB between one unique site pair.
+
+
+
+
+	Advanced Data Networking
+	10 TiB of please delete all the necessary spacesdata
+	10 TiB (10 * 1,024 GiB = 10,240 GiB) at $0.02 per GiB
+	$204.80
+Currently waived
+	Total cost
+	And it's just like a document that I presented originally nothing looks new what did you find that was new
+
+
+
+
+	$1,234.40
+	Pricing for other Google Cloud resources
+The pricing on this page does not include charges for other Google Cloud resources and products that you might be using in conjunction with Network Connectivity Center. For example:
+* If you use Router appliance spokes, you pay for the underlying Compute Engine resources.
+* If you use VLAN attachment spokes, you pay for the underlying Cloud Interconnect resources.
+* If you use VPN spokes, you pay for the underlying Cloud VPN resources.
+Router appliance pricing
+Pricing for Router appliance is part of Network Connectivity Center pricing. For pricing, see Network Connectivity Center pricing.
+For more information about networking costs, see General network pricing in the Virtual Private Cloud documentation.
+CDN Interconnect pricing
+The special pricing for your traffic egressing from Google Cloud to a CDN provider is automatic. Google works with approved CDN partners in supported locations to allowlist provider IP addresses. This means that any data that you send to your allowlisted CDN provider from Google Cloud is charged at the reduced price. This reduced price applies only to IPv4 traffic. It does not apply to IPv6 traffic.
+Traffic between Google Cloud and pre-approved CDN Interconnect locations is billed as follows:
+* Ingress traffic is free for all regions.
+* Egress traffic rates apply only to data leaving Compute Engine or Cloud Storage. Egress charges for CDN Interconnect appear on the invoice as Compute Engine Data Transfer Out via Carrier Peering Network.
+* For inter-region CDN Interconnect traffic rates, see Internet egress rates.
+Intra-region pricing for CDN Interconnect applies only to intra-region egress traffic that is sent to Google-approved CDN Interconnect providers at specific locations that Google approves for those providers.
+Consult with your CDN provider to verify that they are an approved provider, and if so, which of their CDN locations are approved for this program. They can help you set up your deployment to use intra-region egress routes when using Google Cloud as the origin source.
