@@ -1,0 +1,27 @@
+name: Jules Agent Task Request
+description: Autonomous task execution via Gemini 3.1 Pro (Jules)
+title: "[JULES] "
+labels: ["jules"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤖 Summoning the AI Orchestrator
+        By adding the `jules` label to this issue, the Jules (Gemini 3.1 Pro) agent will automatically read this ticket, fetch the `AGENTS.md` and `GUCE_MASTER_BLUEPRINT_v5.md` guidelines, and execute the requested code changes directly on a new GitHub branch.
+  - type: textarea
+    id: task-description
+    attributes:
+      label: Task Description & Context
+      description: Explain exactly what component, fallback pipeline, or UI element needs to be updated. Remember to mention any specific endpoints (like Vertex, Google Flow, or Sheets).
+      placeholder: "e.g., Update the channel_2_google_sheets orchestrator to include a new column for tracking viewer retention..."
+    validations:
+      required: true
+  - type: checkboxes
+    id: environment-checklist
+    attributes:
+      label: Pre-Flight Safety Checks
+      description: The agent will use this to determine which testing suites to run (Playwright, Flake8).
+      options:
+        - label: This task modifies Frontend React UI (`frontend/`) and requires Playwright visual verification.
+        - label: This task modifies the Python Engine (`backend/`) and requires strict Flake8 linting.
+        - label: This task alters the 'Mini-Me' API Round-Robin strategy and requires updating `BROWSER_VAULT.md`.

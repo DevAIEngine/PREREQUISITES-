@@ -63,9 +63,10 @@ jobs:
           file: ${{ env.REVIEW_FILE }}
 
       - name: Disable current workflow
-        run: gh workflow disable "${{github.workflow}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: gh workflow disable "${WORKFLOW_NAME}"
 
   finish_exercise:
     name: Finish Exercise
