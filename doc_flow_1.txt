@@ -1,0 +1,22 @@
+﻿The "Anti-Gravity" UI Prompt (For Jules/Sandbox)
+Style: NASA-Grade Futurism meets High-End Museum.
+Layering: Elements should have "Z-axis depth." The background is a 1-minute slow-motion Google Pix animation. The control buttons "float" 50px above the video with soft drop-shadows.
+The "Weightless" Interaction: When a senior taps a button, it shouldn't just "click"—it should subtly expand and glow, as if it's reacting to their touch in a zero-G environment.
+Visuals: Use "Frosted Sapphire" glass panels for text. High contrast, ultra-legible white text (#FFFFFF) on semi-transparent dark backgrounds.
+🏥 The GUCE Sponsorship Pitch: "Living History for Healing"
+Use this to approach Children's Hospitals, the VA, and Museums.
+The Mission:
+GUCE (Google Universe Cinematic Engine) provides No-Cost, Zero-Hallucination documentary production for those who need their stories preserved most. Using the Ken Burns aesthetic and Google AI Labs Edge technology, we turn a lifetime of memories into a 30-minute cinematic legacy.
+Here's why GUCE is suitable for different institutions:
+Children’s Hospitals: Creating "Time Capsules" for families. A child’s story can be told in a "National Geographic" format.
+Veterans Affairs: Service records and oral histories can be turned into professional documentaries for the National Archives.
+Museums: "Interactive Living Exhibits" can be created where visitors can "talk" to the documentary through an interface.
+The Technology:
+VEO-Chaining: For Hollywood-quality motion.
+Google Pix Integration: 1-minute animated high-fidelity loops for immersive storytelling.
+Multilingual Voice Cloning: Stories told in the original voice, in any of the top 5 US languages.
+💡 The "Token-Saver" Workflow (The Pix-VEO Hybrid)
+Since you have 500 tokens, use this workflow:
+Free Motion: Use Google Pix to generate "Ambient Backgrounds" (the 1-minute loops). These cost 0 tokens.
+Premium Motion: Use your VEO tokens only for the specific, high-detail "Hero Moments" (like a clear shot of a veteran's face or a child's smile).
+The Result: A 30-minute film that looks like it cost 5,000 tokens, but only 50 were used.
