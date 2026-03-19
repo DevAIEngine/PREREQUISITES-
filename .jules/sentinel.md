@@ -1,0 +1,4 @@
+## 2024-05-24 - Overly Permissive Workflow Token
+**Vulnerability:** The workflow in `.github/workflows/4-merge-your-pull-request.yml` granted `contents: write` permissions unconditionally, which violates the principle of least privilege.
+**Learning:** Workflows checking out repositories and posting issue comments do not typically need `contents: write` unless they are modifying code or tags directly in the repo.
+**Prevention:** Always restrict default workflow permissions to minimal needs, such as `contents: read` to checkout code, and define additional specific permissions, such as `issues: write`, only when necessary.
