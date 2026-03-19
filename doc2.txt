@@ -1,0 +1,325 @@
+﻿# main.tf - Converged GUCE Guardian Infrastructure
+
+
+# --- Provider & Variables ---
+provider "google" {
+  project = var.project_id
+  region  = var.region
+}
+
+
+variable "project_id" {
+  type    = string
+  default = "gen-lang-client-0446134261"
+}
+
+
+variable "region" {
+  type    = string
+  default = "us-central1"
+}
+
+
+variable "github_repo" {
+  description = "The owner/repo for WIF authentication"
+  type        = string
+}
+
+
+# --- 1. Google Universe API Provisioning ---
+# Enables the full suite for "Vids Chaining" and "Social Engine" operations
+resource "google_project_service" "guce_apis" {
+  for_each = toset([
+    "iam.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "sts.googleapis.com",
+    "secretmanager.googleapis.com",
+    "run.googleapis.com",
+    "aiplatform.googleapis.com",   # Gemini & Veo [cite: 39, 40]
+    "vids.googleapis.com",         # Cinematic assembly
+    "keep.googleapis.com",         # Story sparks
+    "forms.googleapis.com",        # Community intake
+    "sheets.googleapis.com",       # Narration Library & Logs [cite: 42]
+    "drive.googleapis.com",        # Project Manifest storage [cite: 41]
+    "youtube.googleapis.com",      # Publishing & Analytics [cite: 44]
+    "slides.googleapis.com"        # Storyboarding
+  ])
+  project = var.project_id
+  service = each.key
+  disable_on_destroy = false
+}
+
+
+# --- 2. Workload Identity Federation (WIF) ---
+# Supports Manus browser operator and secure automated execution [cite: 11]
+resource "google_iam_workload_identity_pool" "guce_pool" {
+  workload_identity_pool_id = "guce-identity-pool"
+  display_name              = "GUCE Identity Pool"
+}
+
+
+resource "google_iam_workload_identity_pool_provider" "guce_oidc" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.guce_pool.workload_identity_pool_id
+  workload_identity_pool_provider_id = "guce-oidc-provider"
+  attribute_mapping = {
+    "google.subject"       = "assertion.sub"
+    "attribute.repository" = "assertion.repository"
+  }
+  oidc {
+    issuer_uri = "https://token.actions.githubusercontent.com"
+  }
+}
+
+
+# --- 3. 7-Layer Guardian Service Account ---
+# The primary identity for the Guardian Wrapper [cite: 30]
+resource "google_service_account" "guardian_sa" {
+  account_id   = "guce-guardian-wrapper"
+  display_name = "GUCE 7-Layer Guardian Wrapper SA"
+}
+
+
+# IAM Binding for WIF (Manus/GitHub Takeover)
+resource "google_service_account_iam_member" "wif_binding" {
+  service_account_id = google_service_account.guardian_sa.name
+  role               = "roles/iam.workloadIdentityUser"
+  member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.guce_pool.name}/attribute.repository/${var.github_repo}"
+}
+
+
+# --- 4. Secret Manager: Social Media & API Vault ---
+# Stores credentials for Meta, X, Discord, and Twitch
+resource "google_secret_manager_secret" "social_vault" {
+  for_each = toset(["META_API_KEY", "X_API_KEY", "DISCORD_WEBHOOK", "TWITCH_SECRET"])
+  secret_id = "guce-social-${lower(each.key)}"
+  replication { automatic = true }
+}
+
+
+# --- 5. Guardian Wrapper Execution (Cloud Run) ---
+# Implements pre-flight validation for YouTube and Social distribution [cite: 30, 50]
+resource "google_cloud_run_v2_service" "guardian_service" {
+  name     = "guardian-wrapper-v2"
+  location = var.region
+
+
+  template {
+    service_account = google_service_account.guardian_sa.email
+    containers {
+      image = "gcr.io/${var.project_id}/guardian-wrapper:latest"
+      env {
+        name  = "MANIFEST_PATH"
+        value = "GUCE/Projects/manifest.json" # Grounding state to Drive [cite: 82]
+      }
+      env {
+        name  = "GUARDIAN_MODE"
+        value = "LAYER_7_OPTIMIZED" # Replaces legacy 33-layer stack [cite: 78]
+      }
+      # Social Integration Flags
+      env {
+        name  = "ENABLE_SOCIAL_SYNC"
+        value = "true"
+      }
+    }
+  }
+}
+
+
+# --- 6. IAM Permissions for Epistemic Stability ---
+# SA needs access to Sheets (Logs) and Drive (Manifests) [cite: 15, 41, 42]
+resource "google_project_iam_member" "guardian_sheets_editor" {
+  project = var.project_id
+  role    = "roles/sheets.editor"
+  member  = "serviceAccount:${google_service_account.guardian_sa.email}"
+}
+
+
+resource "google_project_iam_member" "guardian_drive_editor" {
+  project = var.project_id
+  role    = "roles/drive.file"
+  member  = "serviceAccount:${google_service_account.guardian_sa.email}"
+}
+
+
+# --- Outputs ---
+output "wif_provider_name" {
+  value = google_iam_workload_identity_pool_provider.guce_oidc.name
+}
+
+
+output "guardian_sa_email" {
+  value = google_service_account.guardian_sa.email
+}
+
+
+
+
+
+
+
+
+
+
+Manus skills
+# manus_manifesto_v2.py
+# Compiled Strategic Deployment for GUCE Layer 7 Infrastructure
+
+
+class ManusCapabilityManifesto:
+    """
+    The 'Source Truth' for Manus AI Skills within the GUCE Ecosystem.
+    Anchors development, branding, and execution to deterministic triggers.
+    """
+    def __init__(self):
+        self.version = "2.1 (Capability Manifesto Update)"
+        self.guardian_layer = 7
+
+        # 1. CORE SKILL REPOSITORY & TRIGGER LOGIC
+        # These skills weaponize the Google Universe for specific business outcomes.
+        self.skill_repository = {
+            "Senior Developer": {
+                "trigger": "Implement Laravel/Livewire, Complex logic build",
+                "value": "Premium web architecture and database management."
+            },
+            "Reality Checker": {
+                "trigger": "Validate evidence, Proof of concept audit",
+                "value": "The critical governor preventing hallucinations or 'fantasy approvals'."
+            },
+            "Brand Guardian": {
+                "trigger": "Maintain brand voice, Consistency check",
+                "value": "Ensures all output aligns with the established creative legacy."
+            },
+            "lennypodcast-startup-playbook": {
+                "trigger": "Startup strategy, Scaling advice",
+                "value": "Infuses elite entrepreneurship wisdom into the GUCE roadmap."
+            },
+            "Autonomous Optimization Architect": {
+                "trigger": "Shadow-tests APIs for performance",
+                "value": "Monitors system health and enforces technical/financial constraints."
+            }
+        }
+
+
+    # 2. STRATEGIC UTILIZATION PIPELINES
+    # Automated workflows for complex multi-step objectives.
+
+    def trigger_improved_ui_pipeline(self):
+        """
+        Action: 'My UI needs to be improved.'
+        Chains UX heuristics and web typography into a top-tier visual experience.
+        """
+        pipeline = [
+            "ux-heuristics: Scans for usability gaps (WCAG AAA alignment)",
+            "web-typography: Sets visual hierarchy and accessible font-pairing",
+            "top-design: Executes the immersive web-first interface"
+        ]
+        return pipeline
+
+
+    def trigger_product_launch_engine(self):
+        """
+        Action: 'Move from Python script to market-ready tool.'
+        Positions the GUCE tool for B2B institutional pilots (CHLA/LADPHHS).
+        """
+        pipeline = [
+            "Senior Developer: Refines the backend for industrial power (Vertex AI)",
+            "obviously-awesome: Positions the unique value for the target segment",
+            "storybrand-messaging: Builds the narrative for the landing page"
+        ]
+        return pipeline
+
+
+# --- NOTEBOOK LM INTEGRATION LOGIC ---
+# This manifesto enables NotebookLM to answer strategic 'How-to' questions:
+# - 'How can Manus help us pivot our marketing using Brand Guardian?'
+# - 'Draft a project plan using the Senior Developer and AI Engineer skills.'
+
+
+
+
+
+
+Manus take over browser and Animate dj
+
+
+Sheets to vids
+#
+#
+
+
+import os
+
+
+def create_manus_skills():
+    """
+    Generates the SKILL.md files for Manus Agent to execute the Cloud Console
+    Browser Takeover and the A-Roll to Vids Orchestration pipeline.
+    """
+
+    hub_path = "Jules_Production_Hub"
+    os.makedirs(hub_path, exist_ok=True)
+
+
+    # 1. Manus Browser Takeover Skill
+    browser_takeover_content = """# gcp-browser-takeover
+
+
+## Metadata
+**Trigger Phrase:** "Take over browser to connect GCP APIs" or "Automate Cloud Console API setup"
+**Operational Context:** Uses the Manus Browser Operator to navigate the Google Cloud Console, establishing Workload Identity Federation (WIF) OIDC handshakes and binding the API backend to the front-end session without static token.json files.
+
+
+## Execution Steps
+1.  **Initialize Takeover:** Launch the browser operator and navigate to `console.cloud.google.com`.
+2.  **Target Project:** Select the active project environment (e.g., `gen-lang-client-0446134261`).
+3.  **API Verification:** Navigate to "APIs & Services" and ensure `vids.googleapis.com`, `sheets.googleapis.com`, and `aiplatform.googleapis.com` are enabled.
+4.  **WIF Binding:** * Navigate to IAM & Admin > Workload Identity Federation.
+    * Select `guce-identity-pool`.
+    * Verify the OIDC provider (`guce-oidc-provider`) maps `assertion.repository` correctly to the active agent session.
+5.  **Log to Epistemic Ledger:** Upon successful connection, write a confirmation timestamp to the Google Sheets Narration Library via the `sheets.editor` role.
+"""
+
+
+    # 2. A-Roll to Vids Assembly Skill (Veo 3.1 / Flow)
+    vids_assembly_content = f"""# aroll-to-vids-assembly
+
+
+## Metadata
+**Trigger Phrase:** "Run Ingredients to Video logic", "Assemble A-roll to Vids", or "Chain B-roll in Vids"
+**Operational Context:** Orchestrates the transition from raw A-roll and static images into a cinematic Google Vids assembly. Replaces legacy generation with Veo 3.1 / Flow endpoints.
+
+
+## Execution Steps
+1.  **Ingredient Discovery & Tagging:**
+    * Scan the `{hub_path}` directory in Google Drive for new A-roll video files and static reference photos.
+    * Pass the static photos to the Gemini 3.1 vision endpoint to automatically tag and extract contextual metadata (e.g., "vintage architecture", "neon lighting").
+2.  **Epistemic Stability Logging (Sheets API):**
+    * Initialize the Google Sheets API.
+    * Log the extracted Gemini tags, file IDs, and designated timeline positions into the Master Project Ledger.
+3.  **Flow Animation (Veo 3.1):**
+    * Construct the payload for the `veo-3.1-flow` endpoint.
+    * Pass the Gemini-tagged images from `{hub_path}` as "Ingredients".
+    * Execute the API call: `POST https://us-central1-aiplatform.googleapis.com/v1/projects/{{PROJECT_ID}}/locations/us-central1/publishers/google/models/veo-3.1-flow:predict`
+    * Save the resulting cinematic B-roll `.mp4` files back to the Drive hub.
+4.  **Vids Chaining Assembly:**
+    * Call the `vids.googleapis.com/v1/projects` API to initialize a new Cinematic Assembly.
+    * Insert the original A-roll as the primary timeline anchor.
+    * Dynamically intercut the newly generated Veo 3.1 B-roll clips based on the timestamps logged in the Sheets Ledger.
+5.  **Final Ledger Update:** Update the Google Sheet with the final Google Vids URL and mark the assembly as `SUCCESS`.
+"""
+
+
+    # Write skills to disk
+    with open(os.path.join(hub_path, "gcp-browser-takeover.md"), "w") as f1:
+        f1.write(browser_takeover_content)
+
+
+    with open(os.path.join(hub_path, "aroll-to-vids-assembly.md"), "w") as f2:
+        f2.write(vids_assembly_content)
+
+
+    print(f"Successfully generated SKILL.md files in /{hub_path}")
+
+
+if __name__ == "__main__":
+    create_manus_skills()
