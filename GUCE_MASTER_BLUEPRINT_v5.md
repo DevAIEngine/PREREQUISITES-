@@ -37,14 +37,15 @@ The backend logic operates via a stateful JSON Project Manifest orchestrating mu
 ### Branch A: "Zero-Cost Native Shorts" (Unlimited, Free 1-Minute Videos)
 To maximize the free-tier limits, we let the Google Workspace ecosystem do the heavy lifting natively before ever pinging an expensive API.
 1.  **The Pre-Gen Script:** A user writes or uploads a script into a Google Doc.
-2.  **Native Workspace Gen:** The Google Doc itself generates the 1,000 free Gemini placeholder images natively and saves them directly to Google Photos.
-3.  **Auto-Video Assembly:** Google Photos auto-generates high-quality 1-minute to 3-minute video montages natively from those saved placeholders—costing exactly $0.00.
-4.  **Audio Overlay:** The engine extracts the high-quality Google Cloud TTS audio in multiple languages and overlays it onto the Photos export to finalize the YouTube Short.
+2.  **"Help me write / Help me visualize":** We aggressively exploit Google Workspace's native, free Gemini integration. A Google Doc or Google Vids prompt ("Help me create a video about 1965 LA") can natively generate entire storyboards, stock footage, and static images *purely from descriptive text*, bypassing the paid Vertex API entirely.
+3.  **The Public Archive Enhancer:** While Google Vids can generate a video from scratch, we enhance its authenticity by feeding it historical B-roll pulled from our 100% free Public Library API `islands_ledger.json`.
+4.  **Google Flow Assembly:** If Google Vids isn't used, we hand off the bulk generation to Google Flow (The Filmmaker) via Project Mariner. Flow can bulk-generate up to 1,000 pristine clips per day off the Vertex API meter.
+5.  **Audio Overlay:** The engine extracts the high-quality Google Cloud TTS audio in multiple languages and overlays it onto the Workspace export to finalize the YouTube Short.
 
 ### Branch B: "Heavy AI Long-Form Chaining" (30-Minute Documentaries)
-Only when extending the content to 30 minutes does the pipeline trigger the heavy-compute APIs.
+Only when extending the content to 30 minutes does the pipeline trigger the heavy-compute APIs and advanced assembly logic.
 1.  **The Expansion Trigger:** The Google Form / Calendar schedule hands the Base Video off to Vertex AI / Antigravity / Flow.
-2.  **The VeoChainer:** Sequentially calls the Veo 3.1 API (looping 18x to 20x to reach maximum length). The output context of Scene `N` is passed as the input seed for Scene `N+1` to guarantee narrative continuity.
+2.  **The VeoChainer (Video Chaining & Extending):** The absolute core of long-form generation. The pipeline must flawlessly *chain, cut, and stitch* multiple generations together. It sequentially calls the Veo 3.1 API (or Google Vids for free chaining), looping 18x to 20x to reach maximum lengths of 1, 3, 5, up to 30 minutes. The output context (end-frame metadata) of Scene `N` must be passed as the input seed for Scene `N+1` to guarantee narrative continuity and seamless stitching.
 3.  **Assembly (FFmpeg):** Merges the raw A-roll, the Veo-generated B-roll, subtitles, and TTS tracks into the final documentary.
 4.  **Sovereign Mode Pre-Flight:** Before any database write or YouTube publish, the 7-Layer Guardian Wrapper evaluates the output.
 5.  **Publishing:** Distributes across four segmented channels (Master English, Multilingual, Audio Podcast, Institutional APIs).

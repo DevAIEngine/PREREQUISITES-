@@ -1,20 +1,20 @@
 # main.tf - GUCE Native Universe (Converged)
 
-variable "project_id" {
-  description = "The GCP project ID"
-  type        = string
-  default     = "guce-nextgen-prod-001"
-}
-
-variable "region" {
-  description = "The GCP region"
-  type        = string
-  default     = "us-west2"
-}
-
 provider "google" {
   project = var.project_id
   region  = var.region
+}
+
+# Variables required for the configuration
+variable "project_id" {
+  description = "The Google Cloud Project ID"
+  type        = string
+}
+
+variable "region" {
+  description = "The Google Cloud Region (Strictly co-located for ADN egress cost savings)"
+  type        = string
+  default     = "us-west2"
 }
 
 # --- 1. API Provisioning (The Keys) ---
@@ -35,8 +35,8 @@ resource "google_project_service" "guce_apis" {
     "slides.googleapis.com",       # Storyboarding
     "cloudscheduler.googleapis.com" # Automation Heartbeat
   ])
-  project            = var.project_id
-  service            = each.key
+  project = var.project_id
+  service = each.key
   disable_on_destroy = false
 }
 
@@ -76,7 +76,31 @@ resource "google_cloud_run_v2_service" "guce_engine" {
   }
 }
 
-# --- 4. Automation Heartbeat: Cloud Scheduler ---
+# --- 4. Converged WIF Attribute Mapping for Manus Takeover ---
+resource "google_iam_workload_identity_pool" "manus_pool" {
+  workload_identity_pool_id = "guce-identity-pool"
+  display_name              = "GUCE Identity Pool"
+  description               = "Identity pool for automated external agents."
+}
+
+resource "google_iam_workload_identity_pool_provider" "manus_bridge" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.manus_pool.workload_identity_pool_id
+  workload_identity_pool_provider_id = "manus-agent-provider"
+  display_name                       = "Manus OIDC Provider"
+
+  # This mapping allows the pool to distinguish between different
+  # execution environments (Manus vs. GitHub Actions)
+  attribute_mapping = {
+    "google.subject"       = "assertion.sub"
+    "attribute.actor"       = "assertion.actor"
+  }
+
+  oidc {
+    issuer_uri = "https://manus.space" # Replace with actual OIDC issuer
+  }
+}
+
+# --- 5. Automation Heartbeat: Cloud Scheduler ---
 resource "google_service_account" "scheduler_sa" {
   account_id   = "guce-scheduler-sa"
   display_name = "GUCE Automated Heartbeat SA"
