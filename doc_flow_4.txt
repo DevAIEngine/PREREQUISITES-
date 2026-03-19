@@ -1,0 +1,37 @@
+﻿PROTOCOL: COST-OPTIMIZED RESILIENCE]
+1. RESOURCE HIERARCHY (The "Free-First" Rule)
+Before spending a token on generation, execute the following lookup chain:
+Step A (Local): Check Chrome IndexedDB for cached assets.
+Step B (Public): Query API: LAPL_Digital_Collections for historical keyword matches.
+Step C (Generate): ONLY if A and B result in null, authorize 1 Token for VEO/Image generation.
+2. THE "STATIC NOISE" FALLBACK
+Trigger: If Video Resolution < 720p OR Token Limit Reached.
+Action: Apply Filter: Gaussian_Noise_Monochrome (Intensity: 12%).
+Rationale: Masks pixelation and emulates "1940s Newsreel" aesthetic.
+3. OFFLINE "PARALLEL" PROCESSING
+Directive: Use the user's local GPU (WebGPU) for all color grading and "Ken Burns" panning effects. Do NOT process simple 2D motion in the cloud.
+Network: If connection drops, enable Mode: Store_and_Forward. Queue all "Help Me" prompts in localStorage and execute in batch when connection (or VPN) is restored.
+🔧 The "Parallel L5" Code Snippet (WebGPU)
+This script forces the User's Browser to do the work, saving you thousands of compute credits.
+javascript
+// GUCE Edge-Compute Module
+// Offloads "Ken Burns" processing to Local Chrome GPU
+
+
+async function applyLocalKenBurns(imageBlob) {
+  if ('gpu' in navigator) {
+    // User has a modern GPU (Chrome L5 Standard)
+    console.log("OFFLOADING TO LOCAL GPU - SAVING CLOUD TOKENS");
+
+    const adapter = await navigator.gpu.requestAdapter();
+    const device = await adapter.requestDevice();
+
+    // [Insert WebGPU Shader Code for Pan/Zoom here]
+    // This renders the 8-second clip LOCALLY.
+
+    return renderedVideoBlob;
+  } else {
+    // Fallback to Cloud (Costs Tokens)
+    return sendToVEO(imageBlob);
+  }
+}

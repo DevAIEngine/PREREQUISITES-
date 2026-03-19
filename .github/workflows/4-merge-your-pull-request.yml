@@ -12,9 +12,8 @@ on:
       - closed
 
 permissions:
-  contents: write
-  actions: write
-  issues: write
+  # contents is intentionally restricted to read at the top-level to prevent unauthorized repository modifications
+  contents: read
 
 env:
   REVIEW_FILE: ".github/steps/x-review.md"
@@ -28,6 +27,10 @@ jobs:
     name: Post review content
     needs: [find_exercise]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+      issues: write
     if: |
       !github.event.repository.is_template
     env:
@@ -60,13 +63,23 @@ jobs:
           file: ${{ env.REVIEW_FILE }}
 
       - name: Disable current workflow
-        run: gh workflow disable "${{github.workflow}}"
+        run: |
+          # 🛡️ Sentinel: Prevent command injection by using env var for workflow name
+          gh workflow disable "$WORKFLOW_NAME"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: gh workflow disable "${WORKFLOW_NAME}"
 
   finish_exercise:
     name: Finish Exercise
     needs: [find_exercise, post_review_content]
+    permissions:
+      contents: write
+      issues: write
     uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.7.0
     with:
       issue-url: ${{ needs.find_exercise.outputs.issue-url }}

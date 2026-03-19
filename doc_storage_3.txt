@@ -1,0 +1,10 @@
+﻿STRICT DIRECTIVE:
+Zero Placeholder Policy: Do NOT use "lorem ipsum," generic stock descriptions, or "Coming Soon" placeholders.
+Verification Loop: If a Google Connector (Vids/Sheets/VEO) returns a null value or a placeholder, ABORT the generation and alert the user. Do not "fill in the blanks" with AI-imagined content.
+Data Sovereignty: Use only the specific data points found in my NotebookLM docs. If the doc says "1954 in Chicago," do not describe "1954 in New York" because it "fits the vibe."
+VEO Execution: When chaining 8-second clips, verify the Visual Continuity. If the "Ken Burns" zoom loses the subject, flag it for manual adjustment.
+💡 The "GUCE" Solution to Google’s Flaws
+Since Google’s "Connectors" are currently buggy, you should use "Vid-Sheets" as your Manual Control Board:
+The Sheet is your Spine: Don't let the AI "organize" the story. You put the timestamps in the Google Sheet.
+The Still is your Anchor: Force Jules to generate the Still first. Look at it. If it’s real and correct, only then give the command to "VEO-Chain" it for 8 seconds.
+This saves your tokens. If the "Still" is a hallucination, you've only wasted 1 token instead of 20.
