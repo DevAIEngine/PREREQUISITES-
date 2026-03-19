@@ -1,14 +1,15 @@
 # SKILL.md: GUCE Autonomous Agent Playbook
-**Version:** 4.0
+**Version:** 5.0
 **Target Engine:** Google Jules (Gemini 3.1 Pro Orchestration)
 
 ---
 
 ## 🟢 Level 1: Metadata (Trigger & Constraints)
 * **Goal:** Federal-Scale Legacy Preservation Engine (GUCE).
-* **Role:** Autonomous Execution Layer & Guardian Wrapper Orchestrator.
-* **Token Budget:** STRICT 500-tokens daily. Use Progressive Disclosure. Do not read Level 3 Python unless executing a task.
-* **Working Memory Rule (2-Action Rule):** After every 2 actions (e.g., API calls, heavy file edits), you MUST write your state to `task_plan.md`, `findings.md`, and `progress.md`. Read `task_plan.md` before deciding next steps.
+* **Role:** Autonomous Execution Layer (The "Brain").
+* **Token Budget (The 500-Token Cap):** You operate under a strict **500 API token daily budget**. 20 tokens are reserved for the "Director Session", and the rest for logic/routing. You are STRICTLY FORBIDDEN from orchestrating bulk B-roll video generation directly via Vertex API calls.
+* **The "Flow Handoff":** You only generate the "Master Keyframes" (text prompts). You hand off the actual 1,000-image bulk generation to Google Flow (via AI Studio/Project Mariner agents) using the unlimited Google AI Pro UI.
+* **Working Memory Rule (2-Action Rule):** After every 2 actions (e.g., API calls, heavy file edits), you MUST write your state to `task_plan.md`, `findings.md`, and `progress.md` in the repository root. Read `task_plan.md` before making any major architectural decisions to prevent context ephemerality.
 * **Legal Liability Threshold:** The Vulnerability Paradox. If confidence in an action (σ² Variance) drops or ambiguity arises, HALT and ESCALATE to HITL (Human-In-The-Loop). Do not guess.
 
 ---
@@ -51,9 +52,15 @@ To eliminate latency and international data transfer costs when the Scene Decomp
 *   **Action:** Pre-cache thematic B-roll, TTS voice models, and prompt libraries locally inside GitHub repositories, Hugging Face datasets, or localized Notebook LMs (dubbed "Notebook Islands").
 *   **Result:** The engine must ALWAYS pull assets locally from its co-located `us-west2` Notebook Islands. It is strictly forbidden from querying global CDNs (e.g., pulling a desert library from an Asian or Middle Eastern server) if the asset can be served from a local island, drastically reducing runtime and Cloud Egress costs.
 
-### Cost-Optimized Resilience: WebGPU "Parallel L5" Processing
-*   **Action:** For simple 2D motion (Ken Burns panning) and color grading, the engine MUST force the user's local Chrome browser to render the output via WebGPU (`navigator.gpu`).
-*   **Result:** By offloading processing directly onto the user's local hardware, GUCE bypasses expensive cloud rendering infrastructure. Only if WebGPU is unavailable will the system invoke the Vertex Veo API. Furthermore, the engine must execute the "Free-First" Resource Hierarchy (IndexedDB -> LAPL_Digital_Collections -> Generation) to conserve compute tokens.
+### Zero-Cost "Zero-Gen" Sovereign Assembly Pipeline
+Before spending a single generation token, the engine MUST attempt to retrieve assets from the Curator (NotebookLM).
+*   **Action:** Programmatically query public domain archives (Library of Congress), Hugging Face datasets, or PBS/History Channel "Fair Use" snippet libraries.
+*   **Result:** 80-90% of visual assets (textures, historical B-roll) are fetched locally or from free APIs, reserving the Veo API and Google Flow purely for "Face/Emotion" and "Anti-Gravity" Hero Shots.
+
+### Cost-Optimized Resilience: The PixiJS Fallback Engine
+To prevent crashing budget LifeLine cell phones while maintaining zero cloud compute cost:
+*   **Action:** Attempt hardware-accelerated rendering via `WebGPU` using `PixiJS`. If blocked or unavailable, PixiJS silently falls back to `WebGL` (via Brave/Chrome) or standard HTML5 `<canvas>`.
+*   **Result:** The senior user never sees a crash screen. Furthermore, implement local `Kalidokit` math for lip-syncing (Speech-to-Motion) calculated directly from microphone volume shapes to animate 2D avatars in real-time, eliminating cloud AI generation costs entirely.
 
 ---
 
