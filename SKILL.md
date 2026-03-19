@@ -51,6 +51,10 @@ To eliminate latency and international data transfer costs when the Scene Decomp
 *   **Action:** Pre-cache thematic B-roll, TTS voice models, and prompt libraries locally inside GitHub repositories, Hugging Face datasets, or localized Notebook LMs (dubbed "Notebook Islands").
 *   **Result:** The engine must ALWAYS pull assets locally from its co-located `us-west2` Notebook Islands. It is strictly forbidden from querying global CDNs (e.g., pulling a desert library from an Asian or Middle Eastern server) if the asset can be served from a local island, drastically reducing runtime and Cloud Egress costs.
 
+### Cost-Optimized Resilience: WebGPU "Parallel L5" Processing
+*   **Action:** For simple 2D motion (Ken Burns panning) and color grading, the engine MUST force the user's local Chrome browser to render the output via WebGPU (`navigator.gpu`).
+*   **Result:** By offloading processing directly onto the user's local hardware, GUCE bypasses expensive cloud rendering infrastructure. Only if WebGPU is unavailable will the system invoke the Vertex Veo API. Furthermore, the engine must execute the "Free-First" Resource Hierarchy (IndexedDB -> LAPL_Digital_Collections -> Generation) to conserve compute tokens.
+
 ---
 
 ## 🔴 Level 3: Resources (Execution Scripts)

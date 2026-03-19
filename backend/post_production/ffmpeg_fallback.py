@@ -18,13 +18,15 @@ class FFmpegFallback:
         Applies a cinematic zoom and pan effect to a static image.
         Uses ffmpeg-python wrapper.
         """
-        logger.info(f"Applying Ken Burns to {input_image_path} for {duration} seconds.")
+        logger.info(f"Applying Ken Burns and 'Static Noise' Fallback to {input_image_path} for {duration} seconds.")
+        # The "Static Noise" Fallback (1940s Newsreel Emulation for <720p or Token Limit)
         # Simplified mock for the skeleton architecture:
         # try:
         #     (
         #         ffmpeg
         #         .input(input_image_path, loop=1, t=duration)
         #         .filter('zoompan', z='min(zoom+0.0015,1.5)', d=duration*25, x='iw/2-(iw/zoom/2)', y='ih/2-(ih/zoom/2)')
+        #         .filter('noise', noise_seed=12, flags='u') # Gaussian Monochrome at 12% intensity
         #         .output(output_video_path, pix_fmt='yuv420p', vcodec='libx264')
         #         .overwrite_output()
         #         .run(capture_stdout=True, capture_stderr=True)

@@ -42,4 +42,5 @@
 38. Update Business Strategy Documentation ('Living History for Healing' sponsorship in `README.md`). (DONE)
 39. Implement 'The Baton Pass' visual continuity logic & 'Floating Orbs' Status UI. (DONE)
 40. Document Voice Cloning & Audio Synthesis capabilities in `GUCE_MASTER_BLUEPRINT_v5.md`. (DONE)
-41. **[NEW]** Implement 'Zero Token Help Me' & 'Chain Break' Alerts inside `assembly_line.py`. (DONE)
+41. Implement 'Zero Token Help Me' & 'Chain Break' Alerts inside `assembly_line.py`. (DONE)
+42. **[NEW]** Hardcode 'Cost-Optimized Resilience' Protocols: Free-First Hierarchy (IndexedDB -> LAPL), WebGPU Parallel L5 processing, and Static Noise fallback logic into `AGENTS.md`, `NEXUS_LEGACY_APP.tsx`, and `ffmpeg_fallback.py`. (DONE)

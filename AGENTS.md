@@ -30,7 +30,17 @@ Because you operate autonomously, you inherit strict Principal-Agent liability.
 *   **MANDATE:** Do not let the AI independently organize the story structure. The Administrator explicitly dictates timestamps inside Google Sheets.
 *   **ACTION:** Before chaining expensive 8-second clips in Vertex Veo, the Engine MUST generate a single "Still Image" first. It must halt and wait for the Administrator to visually approve the Still Image in the Google Sheet. Only upon manual approval may the engine execute the 20-token `VEO-Chain` command.
 
-## 4. Catastrophic Offline Protocols
+## 5. Cost-Optimized Resilience (The "Free-First" Resource Hierarchy)
+This is a MUST-PRACTICE PROTOCOL for all agents. Before you authorize the expenditure of a single cloud compute token on Vertex VEO or Imagen, you MUST execute the following lookup chain:
+1.  **Step A (Local):** Check Chrome `IndexedDB` or `localStorage` for pre-cached assets.
+2.  **Step B (Public APIs):** Query free, public historical databases (e.g., `LAPL_Digital_Collections`) for keyword matches.
+3.  **Step C (Generate):** ONLY if Steps A and B result in `null` are you permitted to authorize 1 Token for Cloud generation.
+
+## 6. Offline "Parallel L5" Processing (WebGPU Offloading)
+*   **DIRECTIVE:** You are strictly forbidden from processing simple 2D motion (e.g., Ken Burns panning) or color grading in the cloud.
+*   **ACTION:** You must write frontend JavaScript that explicitly requests the user's local hardware (`navigator.gpu.requestAdapter()`). Force the user's Chrome browser to render the 8-second clips locally. Only if WebGPU is unavailable may you fallback to sending the blob to Vertex Veo.
+
+## 7. Catastrophic Offline Protocols
 *   **The Browser Vault (Mini Machines):** Understand that the GUCE architecture explicitly extracts conversational metadata fragments into decentralized offline state files (IndexedDB/JSON) to bypass Cloud Throttling.
 *   **Grid-Down Resilience:** If the internet fails, you must default to executing the `ffmpeg_fallback.py` script locally on the Administrator's device (Chromebook, Termux, Colab), pulling from the pre-cached local "Notebook Islands" to construct a 1080p MP4 without pinging Vertex AI or global CDNs.
 

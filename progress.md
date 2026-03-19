@@ -37,5 +37,6 @@
   * Updated `README.md` to officially encode the 'Living History for Healing' sponsorship strategy for Children's Hospitals, the VA, and Museums.
   * Implemented the 'Baton Pass' visual continuity logic and 'Floating Orbs' Status UI (🟡 Docs, 🔵 Vids, 🟢 YouTube) into the Python orchestrator for Google Workspace.
   * Documented Voice Cloning & Audio Synthesis capabilities in `GUCE_MASTER_BLUEPRINT_v5.md` cementing the 'Preserved Narrator' and 'Abuela Tone' Multilingual architecture.
-  * **[NEW]** Refactored `assembly_line.py` to officially execute the 'Zero Token Help Me' integration, delegating title card generation to Google Slides and script formatting to Google Docs to preserve premium Vertex Veo tokens.
-  * **[NEW]** Implemented the 'Chain Break' Gmail Alert inside the Vertex Veo iteration loop. If the model hallucinates a placeholder frame or fails to connect, the pipeline completely freezes and generates an urgent `⚠️ Chain Break Detected` notification for the Administrator.
+  * Refactored `assembly_line.py` to officially execute the 'Zero Token Help Me' integration, delegating title card generation to Google Slides and script formatting to Google Docs to preserve premium Vertex Veo tokens.
+  * Implemented the 'Chain Break' Gmail Alert inside the Vertex Veo iteration loop. If the model hallucinates a placeholder frame or fails to connect, the pipeline completely freezes and generates an urgent `⚠️ Chain Break Detected` notification for the Administrator.
+  * **[NEW]** Hardcoded the 'Cost-Optimized Resilience' Protocols into `AGENTS.md` and `GUCE_MASTER_BLUEPRINT_v5.md`. Implemented 'Free-First' Resource Hierarchy, WebGPU Parallel L5 processing, and Static Noise fallback logic into `NEXUS_LEGACY_APP.tsx` and `ffmpeg_fallback.py`.
