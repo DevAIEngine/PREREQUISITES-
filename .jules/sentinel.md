@@ -1,0 +1,4 @@
+## 2026-03-19 - [Overly Permissive GITHUB_TOKEN Workflows]
+**Vulnerability:** Workflows grant global `contents: write` and `actions: write` permissions when only specific jobs require them.
+**Learning:** In GitHub Skills/Learning Lab course repositories, workflows often require `contents: write` to advance course progress (e.g., in `finish_exercise` jobs), or `actions: write` to enable/disable workflows. When hardening workflow permissions, apply restrictive permissions (e.g., `contents: read`) globally and delegate necessary `write` permissions only to the specific jobs that require them to mitigate risk of abuse or compromise.
+**Prevention:** Apply the principle of least privilege by setting global `permissions:` to `read-all` or minimum viable (e.g., `contents: read`) at the top of workflows, and then strictly define necessary `write` access at the individual `job` level only where required.
