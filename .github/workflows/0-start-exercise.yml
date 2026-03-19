@@ -18,7 +18,8 @@ jobs:
     if: |
       !github.event.repository.is_template
     name: Start Exercise
-    uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@v0.8.1
+    # Security: Pin to commit SHA instead of v0.8.1 to prevent unexpected changes from malicious tag updates.
+    uses: skills/exercise-toolkit/.github/workflows/start-exercise.yml@1b3556ba573dca34f6b2cc37532c645c6fe9f5d3
     with:
       exercise-title: "Introduction to GitHub"
       intro-message: "If you are new to GitHub, you might find your fellow developers use ___**issues**___  to organize their work and collaborate. We will do the same! That's another lesson, but today, we will introduce you to the basics."
