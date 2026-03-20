@@ -11,9 +11,8 @@ on:
       - "my-first-branch"
 
 permissions:
+  # contents is intentionally restricted to read at the top-level to prevent unauthorized repository modifications
   contents: read
-  actions: write
-  issues: write
 
 env:
   STEP_2_FILE: ".github/steps/2-commit-a-file.md"
@@ -27,6 +26,10 @@ jobs:
     name: Post next step content
     needs: [find_exercise]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+      issues: write
     env:
       ISSUE_REPOSITORY: ${{ github.repository }}
       ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
@@ -66,8 +69,10 @@ jobs:
           file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
 
       - name: Disable current workflow and enable next one
-        run: |
-          gh workflow disable "${{github.workflow}}"
-          gh workflow enable "Step 2"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+        run: |
+          # 🛡️ Sentinel: Prevent command injection by using env var for workflow name
+          gh workflow disable "$WORKFLOW_NAME"
+          gh workflow enable "Step 2"
