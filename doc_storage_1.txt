@@ -1,0 +1,91 @@
+﻿Cutting Corners
+
+
+
+
+March 06, 2026
+At a minimum, all regions will offer the following products at launch: Compute Engine, Google Kubernetes Engine, Cloud Storage, Persistent Disk, Cloud SQL, Virtual Private Cloud, Cloud VPN, Key Management Service, Cloud Identity and Secret Manager.
+
+
+
+
+
+
+Los Angeles
+(us-west2)
+
+
+
+
+Services listed in Google Cloud Platform Services with Data Residency can be configured to use a specific data location.
+1. Service is offered with a global location option in addition to the region and multi-region locations denoted.
+2. Service is offered with multi-region location options in addition to region locations denoted. Check multi-region tab for details.
+3. Service is offered with varying functionality by region.
+4. Service is the next generation of Datastore. Available in either Datastore mode or Native mode.
+5. Service is available in all locations. Jobs are created in the locations listed in the documentation.
+6. Dammam region access is described in this document.
+7. Security Command Center locations are available in the Preview launch stage.
+8. Resource locations for Cloud Spanner available here.
+9. Service is offered with a global location option in addition to the region locations noted.
+The Google Data Center Locations for SecOps Services (as described at https://cloud.google.com/terms/secops/services) are listed separately on the SecOps Services Locations page, at https://cloud.google.com/terms/secops/data-residency.
+The hosting locations for Looker (original) are listed separately at https://docs.cloud.google.com/looker/docs/looker-original-
+
+
+
+
+, HA VPN over Cloud Interconnect has the advantage of providing deployment tools by using the Google Cloud console, the Google Cloud CLI, and the Compute Engine API. You can also use internal IP addresses for your HA VPN gateways. The VLAN attachments that you create for HA VPN over Cloud Interconnect support connections to Private Service Connect endpoints. Finally, HA VPN over Cloud Interconnect has an SLA that is derived from its underlying components, Cloud VPN and Cloud Interconnect.
+
+
+
+
+create a self-managed (non-Google Cloud) VPN gateway in your Virtual Private Cloud (VPC) network and assign an internal IP address to each gateway. For example, you can run a strongSwan VPN on a Compute Engine instance. You then terminate IPsec tunnels to those VPN gateways by lsing Cloud Interconnect from an on-premises environment
+
+
+
+
+
+
+* mini Enterprise Standard
+data analytics
+* Looker Studio
+Developer Tools
+* Cloud Build
+* Cloud Source Repositories
+management tools
+* Cloud Billing API
+* Cloud Deployment Manager
+* Cloud Endpoints
+* Cloud Recommendations API
+* Cloud Shell
+* Resource Manager
+networking
+* Cloud Armor
+* Cloud CDN
+* Cloud DNS
+* Cloud Interconnect
+* Cloud Load Balancing
+* Cloud NAT
+* Cloud NGFW
+* Network Connectivity Center
+* Network Intelligence Center
+* Private Service Connect
+* Service Directory
+* Traffic Director
+* Virtual Private Cloud
+operations
+* Cloud Monitoring1
+* Cloud Profiler
+* Cloud Trace
+* Error Reporting
+security
+* Access Transparency
+* Certificate Manager
+* Cloud Data Loss Prevention
+* Identity and Access Management
+* Security Command Center
+1. Please review the linked documentation for regional scenarios.
+Pick your region
+The Google Cloud Region Picker tool helps you pick a Google Cloud region considering carbon footprint, price, and latency. Select your preferences.
+ region-picker
+
+For programmatic access to location data across clouds, consider using Cloud Location Finder (CLF), an API which provides up-to-date location data across Google Cloud, Amazon Web Services (AWS), Azure, and Oracle Cloud Infrastructure (OCI). You can easily find locations, get specific location details, find nearby locations, and filter these based on criteria such as cloud provider, location type, territory, or carbon footprint.
