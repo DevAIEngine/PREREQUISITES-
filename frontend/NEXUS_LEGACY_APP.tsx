@@ -112,30 +112,36 @@ export const NexusLegacyApp: React.FC = () => {
       <h1 style={{ fontSize: "56px", fontWeight: "900", marginBottom: "60px", textShadow: "0 4px 20px rgba(255,255,255,0.2)" }}>Select Your Studio</h1>
       <div style={{ display: "flex", gap: "40px" }}>
         {/* Nat Geo Studio Button */}
-        <div
+        <button
           onClick={() => handleSelectTheme("NAT_GEO")}
-          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s" }}
+          aria-label="Select Heritage Studio"
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
             <p style={{ fontSize: "20px", color: "#e2e8f0", marginTop: "10px" }}>Warm. Cinematic. Family History.</p>
           </div>
-        </div>
+        </button>
 
         {/* Aerospace Museum Studio Button */}
-        <div
+        <button
           onClick={() => handleSelectTheme("AEROSPACE")}
-          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s" }}
+          aria-label="Select Aerospace Studio"
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
             <p style={{ fontSize: "20px", color: "#e2e8f0", marginTop: "10px" }}>NASA-Grade Futurism. Veterans & Museums.</p>
           </div>
-        </div>
+        </button>
       </div>
     </div>
   );
@@ -278,7 +284,7 @@ export const NexusLegacyApp: React.FC = () => {
         margin: "0 auto"
       }}>
         {userAssets.map((asset, index) => (
-          <div key={asset.id} style={{
+          <button key={asset.id} aria-label={`Play ${asset.title}`} style={{
             backgroundColor: "rgba(26,26,26,0.6)",
             backdropFilter: "blur(12px)",
             borderRadius: "32px",
@@ -288,10 +294,16 @@ export const NexusLegacyApp: React.FC = () => {
             border: "1px solid rgba(255,255,255,0.1)",
             gridColumn: index === 0 ? "span 2" : "span 1", // First item spans 2 columns for the trendy Bento look
             boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-            transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+            transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            textAlign: "left",
+            display: "block",
+            width: "100%",
+            height: "100%"
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
           onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
+          onFocus={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
+          onBlur={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
           >
             <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
@@ -303,7 +315,7 @@ export const NexusLegacyApp: React.FC = () => {
             <div style={{ position: "absolute", top: "40px", right: "40px", zIndex: 1, backgroundColor: "rgba(255,215,0,0.8)", borderRadius: "50%", width: "80px", height: "80px", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <span style={{ fontSize: "36px", marginLeft: "10px" }}>▶</span>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
