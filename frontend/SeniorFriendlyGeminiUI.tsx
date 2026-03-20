@@ -1,6 +1,8 @@
 // SeniorFriendlyGeminiUI.tsx
 import React, { useState, useEffect, useRef } from "react";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+// Mock websocket to prevent Vite bundler from dying since 'websocket' module might not work directly in browser without shims.
+// We are only testing UI visualization.
+const W3CWebSocket = globalThis.WebSocket;
 
 // ============================================================
 // Types
