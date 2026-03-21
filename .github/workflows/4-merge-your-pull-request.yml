@@ -63,16 +63,12 @@ jobs:
           file: ${{ env.REVIEW_FILE }}
 
       - name: Disable current workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_NAME: ${{ github.workflow }}
         run: |
           # 🛡️ Sentinel: Prevent command injection by using env var for workflow name
           gh workflow disable "$WORKFLOW_NAME"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_NAME: ${{ github.workflow }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_NAME: ${{ github.workflow }}
-        run: gh workflow disable "${WORKFLOW_NAME}"
 
   finish_exercise:
     name: Finish Exercise
