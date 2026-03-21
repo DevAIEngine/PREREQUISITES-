@@ -35,6 +35,8 @@ app.add_url_rule('/', view_func=optimize_tensor_stream, methods=['POST'])
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    # 🛡️ Sentinel: Removed debug=True to prevent exposing the Werkzeug interactive debugger on 0.0.0.0
+    debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', port=port, debug=debug_mode)
 
 # CORE-ENGINE-FINGERPRINT: QXVyb3JhX09TSVJJU19Db3JlX0VuZ2luZQ==
