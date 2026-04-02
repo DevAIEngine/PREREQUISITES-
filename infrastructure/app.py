@@ -119,11 +119,28 @@ def veo_generate():
 @app.route('/veo-studio/generate-scenes', methods=['POST'])
 def veo_generate_scenes():
     data = request.json
+
+    # Sentinel: Input validation to prevent unhandled KeyError/TypeError
+    if not isinstance(data, dict):
+        return jsonify({"error": "Invalid request payload. Expected a JSON object."}), 400
+
+    scenes = data.get('scenes')
+    if not isinstance(scenes, list):
+        return jsonify({"error": "Invalid request payload. 'scenes' must be a list."}), 400
+
+    for scene in scenes:
+        if not isinstance(scene, dict):
+             return jsonify({"error": "Invalid request payload. Each scene must be a JSON object."}), 400
+        if 'duration' not in scene:
+             return jsonify({"error": "Invalid request payload. Each scene must contain a 'duration' field."}), 400
+        if not isinstance(scene['duration'], (int, float)):
+             return jsonify({"error": "Invalid request payload. 'duration' must be a number."}), 400
+
     return jsonify({
         "videoId": str(uuid.uuid4()),
         "videoUrl": f"/static/multi-scene.mp4",
-        "totalDuration": sum(s['duration'] for s in data.get('scenes', [])),
-        "sceneCount": len(data.get('scenes', [])),
+        "totalDuration": sum(s['duration'] for s in scenes),
+        "sceneCount": len(scenes),
         "status": "completed"
     })
 
