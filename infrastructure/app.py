@@ -119,11 +119,24 @@ def veo_generate():
 @app.route('/veo-studio/generate-scenes', methods=['POST'])
 def veo_generate_scenes():
     data = request.json
+    if not isinstance(data, dict):
+        return jsonify({"error": "Invalid JSON format"}), 400
+
+    scenes = data.get('scenes', [])
+    if not isinstance(scenes, list):
+        return jsonify({"error": "scenes must be a list"}), 400
+
+    for scene in scenes:
+        if not isinstance(scene, dict):
+            return jsonify({"error": "each scene must be an object"}), 400
+        if 'duration' not in scene or not isinstance(scene['duration'], (int, float)):
+            return jsonify({"error": "each scene must have a numeric duration"}), 400
+
     return jsonify({
         "videoId": str(uuid.uuid4()),
         "videoUrl": f"/static/multi-scene.mp4",
-        "totalDuration": sum(s['duration'] for s in data.get('scenes', [])),
-        "sceneCount": len(data.get('scenes', [])),
+        "totalDuration": sum(s['duration'] for s in scenes),
+        "sceneCount": len(scenes),
         "status": "completed"
     })
 
