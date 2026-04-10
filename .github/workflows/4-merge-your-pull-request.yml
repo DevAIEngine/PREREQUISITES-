@@ -21,7 +21,7 @@ env:
 jobs:
   find_exercise:
     name: Find Exercise Issue
-    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.5.0
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@a7add33cf376f62720d17f0ddbc5548a77fb549c
 
   post_review_content:
     name: Post review content
@@ -39,24 +39,24 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
 
       - name: Get response templates
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
           ref: v0.7.0
 
       - name: Create comment - step finished
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@7dbf18ef5fcf2ae56cf51ebca6b5cc225fb41e5a
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: exercise-toolkit/markdown-templates/step-feedback/lesson-review.md
 
       - name: Create comment - add review content
-        uses: GrantBirki/comment@v2.1.1
+        uses: GrantBirki/comment@7dbf18ef5fcf2ae56cf51ebca6b5cc225fb41e5a
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
@@ -76,7 +76,7 @@ jobs:
     permissions:
       contents: write
       issues: write
-    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.7.0
+    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@f7e5b28a894634a98b29a4b5802816df69e8c499
     with:
       issue-url: ${{ needs.find_exercise.outputs.issue-url }}
       exercise-title: "Introduction to GitHub"
