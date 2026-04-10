@@ -1,0 +1,3 @@
+## 2024-04-10 - [Accessibility] Handling decorative emojis in accessible elements
+**Learning:** When improving accessibility for buttons or elements with visible text and decorative emojis, do not override the visible text with `aria-label` as it violates WCAG 2.5.3 (Label in Name). Instead, wrap the emojis in `<span aria-hidden="true">` to hide them from screen readers while preserving the accessible name.
+**Action:** Always wrap decorative emojis within interactive or heading elements with `<span aria-hidden="true">` and avoid `aria-label` when the visible text alone serves as a complete accessible name.
