@@ -167,10 +167,10 @@ export const NexusLegacyApp: React.FC = () => {
         <p style={{ fontSize: "32px", color: themeStyles.textColor, marginBottom: "60px" }}>What story shall we tell today?</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
-          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}>🔮 Tell a Story (Voice Only)</button>
-          <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}>🍿 Watch My Life</button>
-          <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}>📡 Go Live (Family Stream)</button>
+          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}><span aria-hidden="true">🎙️</span> Tell a Story (Video Call)</button>
+          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}><span aria-hidden="true">🔮</span> Tell a Story (Voice Only)</button>
+          <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}><span aria-hidden="true">🍿</span> Watch My Life</button>
+          <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}><span aria-hidden="true">📡</span> Go Live (Family Stream)</button>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@ export const NexusLegacyApp: React.FC = () => {
         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
         onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
       >
-        🛑 End Session
+        <span aria-hidden="true">🛑</span> End Session
       </button>
     </div>
   );
@@ -220,7 +220,7 @@ export const NexusLegacyApp: React.FC = () => {
   const renderCreatorMode = () => (
     <div style={{ backgroundColor: "#0f172a", minHeight: "100vh", color: "white", padding: "40px", fontFamily: "sans-serif" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #334155", paddingBottom: "20px", marginBottom: "40px" }}>
-        <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#38bdf8" }}>⚡ Studio Edit: {userName}'s Legacy</h1>
+        <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#38bdf8" }}><span aria-hidden="true">⚡</span> Studio Edit: {userName}'s Legacy</h1>
         <button onClick={() => alert("Exporting to TikTok/Instagram Reels...")} style={{ backgroundColor: "#ec4899", padding: "10px 20px", borderRadius: "8px", fontWeight: "bold", border: "none", cursor: "pointer" }}>Share to Socials</button>
       </div>
 
@@ -349,7 +349,7 @@ export const NexusLegacyApp: React.FC = () => {
           padding: "10px 20px", fontSize: "16px", fontWeight: "bold", cursor: "pointer", backdropFilter: "blur(4px)"
         }}
       >
-        {isCreatorMode ? "Exit Creator Mode" : "⚡ Enter Creator Mode"}
+        {isCreatorMode ? "Exit Creator Mode" : <><span aria-hidden="true">⚡</span> Enter Creator Mode</>}
       </button>
 
       {/* View Router */}
@@ -359,7 +359,7 @@ export const NexusLegacyApp: React.FC = () => {
           {currentView === "DASHBOARD" && renderDashboard()}
           {currentView === "INTERVIEW" && <SeniorFriendlyGeminiUI userId="user_123" />}
           {currentView === "WATCH" && renderWatchGallery()}
-          {currentView === "LIVE" && <div style={{ color: "white", padding: "100px", fontSize: "48px", textAlign: "center" }}>📡 Connecting to Family Livestream...</div>}
+          {currentView === "LIVE" && <div style={{ color: "white", padding: "100px", fontSize: "48px", textAlign: "center" }}><span aria-hidden="true">📡</span> Connecting to Family Livestream...</div>}
           {currentView === "CREATOR_MODE" && renderCreatorMode()}
         </>
       )}
