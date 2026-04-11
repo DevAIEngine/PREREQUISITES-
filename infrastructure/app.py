@@ -4,8 +4,24 @@ from googleapiclient.discovery import build
 import os
 import uuid
 import datetime
+from functools import wraps
 
 app = Flask(__name__)
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        api_key = os.environ.get('GUCE_API_KEY')
+        if not api_key:
+            # If server hasn't configured an API key, we fail securely
+            return jsonify({'error': 'Server configuration error'}), 500
+
+        request_key = request.headers.get('X-API-Key')
+        if request_key != api_key:
+            return jsonify({'error': 'Unauthorized'}), 401
+
+        return f(*args, **kwargs)
+    return decorated_function
 
 # Vertex AI init (uses default ADC from Cloud Run SA)
 aiplatform.init(project=os.environ.get('GOOGLE_CLOUD_PROJECT'), location='us-west2') # Co-located to save Network Connectivity Center (ADN) egress costs
@@ -17,6 +33,7 @@ def get_sheets_service():
     return build('sheets', 'v4')
 
 @app.route('/api/publish', methods=['POST'])
+@require_api_key
 def publish():
     data = request.json or {}
     project_id = str(uuid.uuid4())
@@ -77,6 +94,7 @@ def publish():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
+@require_api_key
 def orchestration_publish():
     """
     Wires all modules sequentially:
