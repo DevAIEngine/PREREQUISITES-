@@ -1,15 +1,16 @@
 def jules_network_browser_render_revolution() -> str:
     """
-    JULES NETWORK V2: CHROME CANVAS + PUPPETEER = 30-MIN DOCS IN 8 MINUTES FLAT.
+    JULES NETWORK V2: HYBRID BROWSER-RENDER WORKFLOW
 
-    RADICAL SHIFT: Stop fighting FFmpeg CPU hell. Let CHROME do what it does best—
-    native 1440p broadcast graphics at 60fps with zero encoding overhead.
+    REALISTIC ARCHITECTURE: Use Chromium/Puppeteer for native 1440p broadcast graphics
+    and scene composition, then use a real video encoder (FFmpeg) for robust assembly, muxing,
+    and audio sync.
 
-    GENIUS OF BROWSER RENDERING:
-    • CSS zoompan/vignette/gradients = "wow factor" INSTANT (no FFmpeg filters)
-    • Web Speech API = unique TTS per chunk (no gTTS API calls)
-    • Canvas 2D/WebGL = hardware accelerated 2560x1440
-    • Puppeteer = screenshot 30fps → FFmpeg concat (1% CPU, 2s total)
+    GENIUS OF BROWSER RENDERING (WITH CAVEATS):
+    • CSS gradients & transforms = great for motion graphics (Note: use standard CSS, not unsupported filters)
+    • Web Speech API = useful for prototyping (Note: support and offline behavior is inconsistent)
+    • Canvas 2D/WebGL = hardware accelerated 2560x1440 scenes
+    • Puppeteer Page.screencast() or WebCodecs = stable frame capture (Better than requestAnimationFrame loops)
 
     FULL PRODUCTION PIPELINE (Copy → npm run jules):
 
@@ -31,7 +32,8 @@ def jules_network_browser_render_revolution() -> str:
                                font-family: 'Courier New'; font-size: 48px;
                                white-space: nowrap; animation: scroll 30s linear infinite; }
                 @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-                #canvas { filter: vignette(50%) contrast(1.2); }
+                /* Note: vignette is not a standard CSS filter, using alternative */
+                #canvas { filter: contrast(1.2) brightness(0.8); }
             </style>
         </head>
         <body>
@@ -129,24 +131,19 @@ def jules_network_browser_render_revolution() -> str:
     yt-dlp -f "best[height<=1080]" --recode-video mp4 "VIDEO_URL" -o "jules_library/"
     ```
 
-    PERFORMANCE BREAKTHROUGH:
-    ┌─────────────────────┬──────────┬──────────┐
-    │ Architecture        │ 30min    │ Cost     │
-    ├─────────────────────┼──────────┼──────────┤
-    │ FFmpeg Workers      │ 2+ hours │ $0.02    │
-    │ Your Sentinel Cloud │ 5-8 min  │ $0       │
-    │ BROWSER CANVAS V2   │ 8 min    │ $0       │
-    └─────────────────────┴──────────┴──────────┘
+    ARCHITECTURAL REALITY CHECK:
+    While browser rendering provides a fantastic authoring layer for HTML/CSS motion graphics,
+    it does NOT obliterate FFmpeg. FFmpeg remains critical for stable muxing, fallback encoding,
+    and final delivery.
 
-    BROWSER > CLOUD because:
-    • Hardware GL acceleration (no CPU encoding)
-    • Native CSS broadcast filters
-    • Single Node process vs 60 containers
-    • Your 50 APIs → CORS proxy if needed (`allorigins.win`)
+    For reliable production pipelines:
+    1. Use Chromium for the graphics layer and scene composition.
+    2. Use stable capture APIs (Page.screencast or WebCodecs), not toDataURL loops.
+    3. Rely on FFmpeg for the heavy lifting of final assembly and audio sync.
 
     24/7 TRIGGER: Node cron → Google Alerts RSS → `node render_all.js`
 
-    JULES.GOOGLE.COM LIVE IN 10 MINUTES. NO SERVERS. PURE BROWSER MAGIC.
+    JULES NETWORK V2: A reliable hybrid of Browser Graphics + FFmpeg Encoding.
     """
 
-    return "🚀 BROWSER REVOLUTION: 30min broadcast docs in 8min flat. Copy → npm run jules."
+    return "🚀 HYBRID REVOLUTION: Chromium for graphics + FFmpeg for assembly."
