@@ -167,10 +167,10 @@ export const NexusLegacyApp: React.FC = () => {
         <p style={{ fontSize: "32px", color: themeStyles.textColor, marginBottom: "60px" }}>What story shall we tell today?</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
-          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}>🔮 Tell a Story (Voice Only)</button>
-          <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}>🍿 Watch My Life</button>
-          <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}>📡 Go Live (Family Stream)</button>
+          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}><span aria-hidden="true">🎙️</span> Tell a Story (Video Call)</button>
+          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}><span aria-hidden="true">🔮</span> Tell a Story (Voice Only)</button>
+          <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}><span aria-hidden="true">🍿</span> Watch My Life</button>
+          <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}><span aria-hidden="true">📡</span> Go Live (Family Stream)</button>
         </div>
       </div>
     </div>
@@ -211,7 +211,7 @@ export const NexusLegacyApp: React.FC = () => {
         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
         onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
       >
-        🛑 End Session
+        <span aria-hidden="true">🛑</span> End Session
       </button>
     </div>
   );
