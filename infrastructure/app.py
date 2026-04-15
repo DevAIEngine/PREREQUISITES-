@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from google.cloud import aiplatform
 from googleapiclient.discovery import build
+from functools import wraps
+import hmac
 import os
 import uuid
 import datetime
@@ -16,7 +18,21 @@ def get_drive_service():
 def get_sheets_service():
     return build('sheets', 'v4')
 
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        api_key = os.environ.get('GUCE_API_KEY')
+        if not api_key:
+            return jsonify({'error': 'Internal server error: API key not configured'}), 500
+        provided_key = request.headers.get('X-API-Key')
+        if not provided_key or not hmac.compare_digest(provided_key, api_key):
+            return jsonify({'error': 'Unauthorized'}), 401
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/api/publish', methods=['POST'])
+@require_api_key
 def publish():
     data = request.json or {}
     project_id = str(uuid.uuid4())
