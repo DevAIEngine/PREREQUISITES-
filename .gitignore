@@ -42,3 +42,5 @@ __pycache__/
 *.py[cod]
 *.class
 .pytest_cache/
+test_tsx/node_modules
+test_tsx/
