@@ -1,25 +1,43 @@
-// SeniorFriendlyGeminiUI.tsx
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <style>
+            body { margin: 0; padding: 0; }
+            #root { width: 100vw; height: 100vh; }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel" data-presets="react">
+            const { useState, useEffect, useRef } = React;
+
+            // Mock WebSocket
+            window.w3cwebsocket = class {
+                constructor() { this.onopen = null; this.onmessage = null; this.close = () => {}; }
+            };
+
+            // SeniorFriendlyGeminiUI.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 // ============================================================
 // Types
 // ============================================================
-interface GeminiMessage {
-  timestamp: string;
-  role: "user" | "gemini";
-  content: string;
-  suggestedClips?: Array<{ title: string; url: string }>;
+>;
 }
 
 // ============================================================
 // Component: The "Cinematic Legacy" Engine (NEXUS-LEGACY)
 // ============================================================
-export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId }) => {
-  const [messages, setMessages] = useState<GeminiMessage[]>([]);
+const SeniorFriendlyGeminiUI: React.FC = ({ userId }) => {
+  const [messages, setMessages] = useState([]);
   const [isCalling, setIsCalling] = useState(false);
   const [language, setLanguage] = useState("English");
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef(null);
 
   // Translations & Cultural Voice Personas
   const translations = {
@@ -32,7 +50,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
   };
 
   // WebSocket for Gemini live conversation
-  const clientRef = useRef<W3CWebSocket | null>(null);
+  const clientRef = useRef(null);
 
   useEffect(() => {
     // Only connect WebSocket when the "Call" is answered
@@ -49,7 +67,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
     client.onopen = () => console.log(`[GeminiUI] Connected to live server. Mode: ${culturalTone}`);
     client.onmessage = (message) => {
       try {
-        const data: GeminiMessage = JSON.parse(message.data as string);
+        const data = JSON.parse(message.data );
         setMessages((prev) => [...prev, data]);
       } catch (err) {
         console.error(err);
@@ -195,3 +213,10 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
     </div>
   );
 };
+
+
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<SeniorFriendlyGeminiUI userId="test_user" />);
+        </script>
+    </body>
+    </html>
