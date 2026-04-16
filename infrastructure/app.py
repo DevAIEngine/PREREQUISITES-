@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from google.cloud import aiplatform
 from googleapiclient.discovery import build
 import os
+import hmac
+from functools import wraps
 import uuid
 import datetime
 
@@ -16,9 +18,25 @@ def get_drive_service():
 def get_sheets_service():
     return build('sheets', 'v4')
 
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        api_key = os.environ.get('GUCE_API_KEY')
+        if not api_key:
+            return jsonify({'error': 'Internal server error: API key not configured'}), 500
+        provided_key = request.headers.get('X-API-Key')
+        if not provided_key or not hmac.compare_digest(provided_key, api_key):
+            return jsonify({'error': 'Unauthorized: Invalid or missing X-API-Key'}), 401
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/api/publish', methods=['POST'])
+@require_api_key
 def publish():
-    data = request.json or {}
+    data = request.json
+    if not isinstance(data, dict):
+        data = {}
     project_id = str(uuid.uuid4())
     transcript = data.get('transcript', '')
 
@@ -77,12 +95,15 @@ def publish():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
+@require_api_key
 def orchestration_publish():
     """
     Wires all modules sequentially:
     Decompose -> Generate (Veo or Static Fallback Mode) -> Assemble -> Sovereign Pre-Flight -> Deposit -> YouTube
     """
-    data = request.json or {}
+    data = request.json
+    if not isinstance(data, dict):
+        data = {}
     project_id = str(uuid.uuid4())
     return jsonify({
         "status": "orchestration_pipeline_started",
