@@ -114,9 +114,10 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
           {/* Header & Multilingual Toggle */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px" }}>
               <h1 style={{ color: "#FFD700", fontSize: "48px", fontWeight: "bold", margin: 0 }}>
-                  <span style={{ fontSize: "56px" }}>🎥</span> AI Director
+                  <span style={{ fontSize: "56px" }} aria-hidden="true">🎥</span> AI Director
               </h1>
               <select
+                  aria-label="Select preferred language"
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
