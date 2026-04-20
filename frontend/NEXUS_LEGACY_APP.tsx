@@ -153,7 +153,7 @@ export const NexusLegacyApp: React.FC = () => {
       position: "relative", overflow: "hidden", fontFamily: themeStyles.fontFamily
     }}>
       {/* Cinematic Ken Burns Background */}
-      <img src={themeStyles.bgUrl}
+      <img src={themeStyles.bgUrl} alt="" aria-hidden="true"
            className="documentary-image"
            style={{ position: "absolute", zIndex: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />
