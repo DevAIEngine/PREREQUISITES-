@@ -19,13 +19,15 @@ fi
 echo "🚀 Connecting to Cloud Run Orchestrator (us-west2)..."
 # In production, this curl triggers the FastAPI OrchestrationAssemblyLine
 # POST /api/orchestration/publish
+PAYLOAD=$(jq -n \
+  --arg pid "$PROJECT_ID" \
+  --arg url "$SCRIPT_URL" \
+  '{project_id: $pid, script_url: $url, mode: "FULL_CASCADE"}')
+
 curl -X POST https://guce-engine-0446134261-uc.a.run.app/api/orchestration/publish \
   -H "Content-Type: application/json" \
-  -d '{
-    "project_id": "'$PROJECT_ID'",
-    "script_url": "'$SCRIPT_URL'",
-    "mode": "FULL_CASCADE"
-  }'
+  -H "X-API-Key: ${GUCE_API_KEY}" \
+  -d "$PAYLOAD"
 
 echo ""
 echo "✅ Episode assembly initiated! The AI Swarm is currently:"
