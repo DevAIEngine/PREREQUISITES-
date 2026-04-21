@@ -1,9 +1,28 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from google.cloud import aiplatform
 from googleapiclient.discovery import build
 import os
 import uuid
 import datetime
+import hmac
+import functools
+
+def require_api_key(f):
+    @functools.wraps(f)
+    def decorated_function(*args, **kwargs):
+        expected_api_key = os.environ.get('GUCE_API_KEY')
+        if not expected_api_key:
+            return jsonify({"error": "Internal Server Error: GUCE_API_KEY not configured"}), 500
+
+        api_key = request.headers.get('X-API-Key')
+        if not api_key:
+            return jsonify({"error": "Unauthorized"}), 401
+
+        if not hmac.compare_digest(api_key, expected_api_key):
+            return jsonify({"error": "Unauthorized"}), 401
+
+        return f(*args, **kwargs)
+    return decorated_function
 
 app = Flask(__name__)
 
@@ -17,6 +36,7 @@ def get_sheets_service():
     return build('sheets', 'v4')
 
 @app.route('/api/publish', methods=['POST'])
+@require_api_key
 def publish():
     data = request.json or {}
     project_id = str(uuid.uuid4())
@@ -77,6 +97,7 @@ def publish():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
+@require_api_key
 def orchestration_publish():
     """
     Wires all modules sequentially:

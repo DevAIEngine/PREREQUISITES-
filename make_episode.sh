@@ -21,6 +21,7 @@ echo "🚀 Connecting to Cloud Run Orchestrator (us-west2)..."
 # POST /api/orchestration/publish
 curl -X POST https://guce-engine-0446134261-uc.a.run.app/api/orchestration/publish \
   -H "Content-Type: application/json" \
+  -H "X-API-Key: $GUCE_API_KEY" \
   -d '{
     "project_id": "'$PROJECT_ID'",
     "script_url": "'$SCRIPT_URL'",
