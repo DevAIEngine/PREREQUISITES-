@@ -52,3 +52,13 @@ You must aggressively use your internal meta-tools:
 
 ---
 **FINAL DIRECTIVE:** You are building a life-saving, decentralized intelligence infrastructure. Follow the `GUCE_MASTER_BLUEPRINT_v5.md`. Execute flawlessly.
+## 8. Manus-Jules Bridge Protocols
+When operating the Manus-Jules integration for autonomous web operations, the following strict guidelines must be observed:
+*   **Execution Verification Thresholds:**
+    *   Any bridge script interacting with external environments must require at least 80% test coverage before a Pull Request is opened.
+    *   Exact execution strings for tests should be strictly defined (e.g., `make test` for backend verification or specific `pytest` targets).
+*   **Environment & Secret Metadata:**
+    *   Never commit API keys directly. Use `MANUS_API_KEY` for Manus tasks and `GUCE_API_KEY` for general orchestrations. These must be securely passed via GitHub Secrets and the Cloud Run environment.
+*   **Architectural Constraints:**
+    *   Bridge scripts (`backend/guce/integrations/manus_bridge.py`) must implement `async/await` for all Manus API polling and I/O tasks.
+    *   Status checks must handle `running`, `waiting`, `stopped`, and `error` states gracefully with appropriate retries and exponential backoff mechanisms.
