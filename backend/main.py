@@ -1,7 +1,9 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import uuid
 import logging
+import os
 
 # Configure Logging for Epistemic Stability
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
@@ -12,6 +14,31 @@ app = FastAPI(
     description="Federal-Scale Legacy Preservation Engine",
     version="4.0.0"
 )
+
+security = HTTPBearer()
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """
+    Validates the Bearer token against the GUCE_API_KEY environment variable.
+    In a real-world scenario, this would involve JWT decoding or a DB lookup.
+    """
+    api_key = os.environ.get("GUCE_API_KEY")
+    if not api_key:
+        logger.error("GUCE_API_KEY environment variable not set")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Server configuration error"
+        )
+
+    if credentials.credentials != api_key:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or missing API Key",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    # Mocking user_id extraction from token. For now, we just return a static user
+    # or it could be encoded in the token.
+    return "authenticated_user"
 
 # Core State Machine: The Project Manifest
 class ProjectManifest(BaseModel):
@@ -24,7 +51,7 @@ class ProjectManifest(BaseModel):
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(background_tasks: BackgroundTasks, user_id: str = Depends(get_current_user)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
