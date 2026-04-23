@@ -172,3 +172,18 @@ The jump from a single script to 12,544 "agents" is where JAX shines.
 ### 4. Repo-Gate vs. Repo-Asset
 * **Repo-Gate:** Keep this as a "Lightweight Dispatcher." It should only contain YAML configurations or small Python scripts that trigger the Colab/TPU environment.
 * **Repo-Asset (Git LFS):** Since you are handling 300K textures, ensure your `.gitattributes` is strictly defined for `.amber` or `.texture` extensions to prevent the 12,500 agents from timing out while pulling heavy files.
+
+### Phase 5: The Local Watchdog (Gemini Nano & CDP Integration)
+This phase introduces a "Local Watchdog" to ensure the Vector Swarm from Phase 3 has not introduced artifacts or "hallucinated" pixels during the tiling process.
+* **CDP Hook Integration:** Gemini Nano can monitor the Colab output buffer directly by attaching to the Chrome DevTools Protocol (CDP). This allows the model to "see" the raw render as it completes, without needing to save and reload files.
+* **Sub-Pixel Auditing:** Nano performs a localized comparison between the rendered tile and the "Forensic Blueprint" (the ground-truth reference).
+* **Zero-Token Re-rendering:** Because Nano runs on a local NPU, the verification happens entirely on-device. If a tile exceeds a 1% variance, an interrupt is sent to the terminal. The Jules Pipeline then forces a local re-calculation of just those problematic pixels, ensuring a perfect frame before finalization without incurring cloud API costs.
+
+### Phase 6: Broadcast (MOTS News Loop)
+This stage converts the processed "Molecular Snap" visuals into a 24/7 autonomous news stream using a Multilingual Open Translation System (MOTS).
+* **Structural Event Monitoring:** The pipeline's logic monitors thousands of APIs for significant data changes. When an event is triggered, a script is automatically generated and translated into 50+ languages.
+* **Local TTS via Fish Speech:** A lightweight model like Fish Speech or VoxCPM-0.5B is used to maintain the "Zero-Token" goal. At 0.5B parameters, these models are optimized for high-fidelity speech synthesis directly on an NPU.
+* **The Final Sync:**
+  * FFmpeg takes the finalized video frames from the YouTube Bitstream Vault.
+  * It overlays the locally generated multilingual audio tracks.
+  * The result is a fully synced, high-resolution news loop ready for global broadcast.
