@@ -1,12 +1,12 @@
 import sys
-from unittest.mock import MagicMock
-
-# Mock pydantic before importing SevenLayerGuardian
-mock_pydantic = MagicMock()
-sys.modules["pydantic"] = mock_pydantic
+from unittest.mock import patch, MagicMock
 
 import pytest
-from backend.guce.guardian import SevenLayerGuardian
+
+# We use a context manager to mock pydantic only during the import of the module under test.
+# This prevents global pollution of sys.modules.
+with patch.dict(sys.modules, {"pydantic": MagicMock()}):
+    from backend.guce.guardian import SevenLayerGuardian
 
 def test_calculate_sigma_squared_empty():
     guardian = SevenLayerGuardian()
