@@ -1,7 +1,10 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends, Security
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import uuid
 import logging
+import os
+import hmac
 
 # Configure Logging for Epistemic Stability
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
@@ -23,8 +26,23 @@ class ProjectManifest(BaseModel):
     language: str = "en"
     scenes: list = []
 
+security = HTTPBearer()
+
+def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
+    guce_api_key = os.environ.get("GUCE_API_KEY")
+    if not guce_api_key:
+        logger.error("GUCE_API_KEY environment variable is missing. Failing securely.")
+        raise HTTPException(status_code=500, detail="Internal Server Error: Missing Configuration")
+
+    # Use hmac.compare_digest to prevent timing attacks
+    if not hmac.compare_digest(credentials.credentials, guce_api_key):
+        logger.warning("Invalid API Key provided to secure endpoint.")
+        raise HTTPException(status_code=401, detail="Invalid API Key")
+
+    return credentials.credentials
+
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, token: str = Depends(get_current_user)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
