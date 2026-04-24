@@ -114,7 +114,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
           {/* Header & Multilingual Toggle */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "40px" }}>
               <h1 style={{ color: "#FFD700", fontSize: "48px", fontWeight: "bold", margin: 0 }}>
-                  <span style={{ fontSize: "56px" }}>🎥</span> AI Director
+                  <span style={{ fontSize: "56px" }} aria-hidden="true">🎥</span> AI Director
               </h1>
               <select
                   value={language}
@@ -150,11 +150,11 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
                           <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
-                              📞 {translations[language].btnCall}
+                              <span aria-hidden="true">📞</span> {translations[language].btnCall}
                           </button>
                       ) : (
                           <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
-                              ☎️ {translations[language].btnEnd}
+                              <span aria-hidden="true">☎️</span> {translations[language].btnEnd}
                           </button>
                       )}
                   </div>
