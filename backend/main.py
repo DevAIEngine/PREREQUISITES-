@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Security, status, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
+import hmac
 from pydantic import BaseModel
 import uuid
 import logging
@@ -13,6 +16,27 @@ app = FastAPI(
     version="4.0.0"
 )
 
+
+# Sentinel: Secure GUCE API Authentication
+security = HTTPBearer()
+
+def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
+    guce_api_key = os.environ.get("GUCE_API_KEY")
+    if not guce_api_key:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Server configuration error: GUCE_API_KEY not set"
+        )
+
+    # Use hmac.compare_digest for secure comparison to prevent timing attacks
+    if not hmac.compare_digest(credentials.credentials, guce_api_key):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return credentials.credentials
+
 # Core State Machine: The Project Manifest
 class ProjectManifest(BaseModel):
     project_id: str
@@ -24,7 +48,7 @@ class ProjectManifest(BaseModel):
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, current_user: str = Depends(get_current_user)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
