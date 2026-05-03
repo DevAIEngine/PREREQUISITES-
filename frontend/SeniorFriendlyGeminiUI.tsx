@@ -23,12 +23,12 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
 
   // Translations & Cultural Voice Personas
   const translations = {
-    "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator" },
-    "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela" },
-    "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder" },
-    "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial" },
-    "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle" },
-    "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller" }
+    "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator", ariaLang: "Select Language" },
+    "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela", ariaLang: "Seleccionar idioma" },
+    "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder", ariaLang: "选择语言" },
+    "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial", ariaLang: "Pumili ng Wika" },
+    "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle", ariaLang: "Chọn ngôn ngữ" },
+    "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller", ariaLang: "اختر اللغة" }
   };
 
   // WebSocket for Gemini live conversation
@@ -117,6 +117,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label={translations[language as keyof typeof translations]?.ariaLang || "Select Language"}
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
@@ -149,11 +150,19 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   {/* Massive Action Buttons */}
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
+                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}
+                              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                              onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}>
                               📞 {translations[language].btnCall}
                           </button>
                       ) : (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
+                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)", transition: "transform 0.2s" }}
+                              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                              onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}>
                               ☎️ {translations[language].btnEnd}
                           </button>
                       )}
