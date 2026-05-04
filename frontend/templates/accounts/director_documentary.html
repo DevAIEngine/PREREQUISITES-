@@ -17,7 +17,7 @@
     <div class="max-w-4xl mx-auto mt-10 p-6">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-blue-600">Director Jules: Documentary Production</h1>
-            <button onclick="document.body.classList.toggle('dark-mode')" class="text-sm font-semibold text-gray-500 hover:text-blue-500">Toggle Theme</button>
+            <button onclick="document.body.classList.toggle('dark-mode')" class="text-sm font-semibold text-gray-500 hover:text-blue-500 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500">Toggle Theme</button>
         </div>
 
         <div class="card">
@@ -26,15 +26,15 @@
 
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium mb-1">Breaking News Topic</label>
-                    <input type="text" id="topic" value="Aerospace Engineering History" class="w-full border rounded p-2 text-gray-900">
+                    <label for="topic" class="block text-sm font-medium mb-1">Breaking News Topic</label>
+                    <input type="text" id="topic" value="Aerospace Engineering History" class="w-full border rounded p-2 text-gray-900 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-1">Requested Fragments (Max 150)</label>
-                    <input type="number" id="fragments" value="150" class="w-full border rounded p-2 text-gray-900">
+                    <label for="fragments" class="block text-sm font-medium mb-1">Requested Fragments (Max 150)</label>
+                    <input type="number" id="fragments" value="150" class="w-full border rounded p-2 text-gray-900 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500">
                 </div>
 
-                <button onclick="testAssembly()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 w-full mt-4">Execute Assembly Metrics</button>
+                <button onclick="testAssembly()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 w-full mt-4 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500">Execute Assembly Metrics</button>
             </div>
 
             <div id="results" class="mt-6 hidden">
