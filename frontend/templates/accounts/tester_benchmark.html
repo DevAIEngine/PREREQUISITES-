@@ -29,12 +29,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">Concurrent Webhooks / Sec</label>
-                    <input type="range" min="1" max="1000" value="100" class="w-full" id="load_slider" oninput="document.getElementById('load_val').innerText = this.value">
+                    <label for="load_slider" class="block text-sm font-medium mb-1">Concurrent Webhooks / Sec</label>
+                    <input type="range" min="1" max="1000" value="100" class="w-full focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500" id="load_slider" oninput="document.getElementById('load_val').innerText = this.value">
                     <div class="text-right text-sm font-bold text-orange-500"><span id="load_val">100</span> Req/s</div>
                 </div>
 
-                <button onclick="launchStrike()" class="bg-orange-600 text-white px-6 py-4 rounded font-bold hover:bg-orange-700 w-full mt-6 text-lg tracking-wider">EXECUTE PAYLOAD STRIKE</button>
+                <button onclick="launchStrike()" class="bg-orange-600 text-white px-6 py-4 rounded font-bold hover:bg-orange-700 w-full mt-6 text-lg tracking-wider focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-blue-500">EXECUTE PAYLOAD STRIKE</button>
             </div>
 
             <div id="results" class="mt-6 hidden">
