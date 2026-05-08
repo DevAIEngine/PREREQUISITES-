@@ -1,0 +1,3 @@
+## 2024-05-08 - [Dynamic ARIA Labels for Multilingual UIs]
+**Learning:** When building multilingual interfaces (like SeniorFriendlyGeminiUI) with dynamic text, ARIA labels for language selectors and other generic elements shouldn't be hardcoded to English. Screen readers depend on localized `aria-label` attributes for accessibility.
+**Action:** Extend localization objects (e.g., `translations`) with ARIA-specific keys (like `ariaLanguageSelector`) and dynamically inject them via `aria-label={translations[language].ariaLanguageSelector}`. Ensure strict TypeScript types (e.g., `keyof typeof translations`) instead of casting to `any`.
