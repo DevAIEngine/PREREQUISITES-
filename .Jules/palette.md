@@ -1,0 +1,3 @@
+## 2024-05-09 - Accessible Forms in Native HTML Templates
+**Learning:** When dealing with native HTML templates styled with Tailwind CSS, it's critical to explicitly map `<label>` elements to their corresponding inputs using the `for` attribute and applying `focus-visible` utility classes (e.g., `focus-visible:ring-2`, `focus-visible:outline-none`) instead of relying on custom inline CSS styles for focus states. This ensures keyboard accessibility and screen reader support while maintaining consistent design system usage.
+**Action:** Always verify label-input mappings via `for` and `id` attributes and apply Tailwind's `focus-visible` utility classes to inputs and interactive elements in native HTML templates.
