@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import hmac
+import os
 from pydantic import BaseModel
 import uuid
 import logging
@@ -23,8 +26,23 @@ class ProjectManifest(BaseModel):
     language: str = "en"
     scenes: list = []
 
+
+
+security = HTTPBearer()
+
+def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    expected_token = os.environ.get("GUCE_API_KEY")
+    if not expected_token:
+        logger.error("GUCE_API_KEY is not configured")
+        raise HTTPException(status_code=500, detail="API key not configured")
+    if not hmac.compare_digest(credentials.credentials, expected_token):
+        logger.warning("Invalid API key provided")
+        raise HTTPException(status_code=401, detail="Invalid token")
+    return credentials.credentials
+
+
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, token: str = Depends(verify_api_key)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
