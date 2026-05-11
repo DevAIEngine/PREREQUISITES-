@@ -1,0 +1,3 @@
+## 2024-05-11 - Add explicit label associations and focus states to form inputs
+**Learning:** Native HTML templates utilizing utility classes like Tailwind (e.g., in `frontend/templates/`) often lack explicit label mappings and keyboard focus states out of the box, requiring manual `for` attribute assignment and `focus-visible` classes to ensure screen reader accessibility and clear keyboard navigation visibility.
+**Action:** When creating or modifying native HTML templates with Tailwind, explicitly map `<label>` tags to inputs using the `for` attribute and apply focus states via utility classes (e.g., `focus-visible:ring-2`) instead of injecting custom `<style>` blocks.
