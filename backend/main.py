@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
 from pydantic import BaseModel
 import uuid
 import logging
@@ -23,8 +25,19 @@ class ProjectManifest(BaseModel):
     language: str = "en"
     scenes: list = []
 
+
+# Sentinel 🛡️: Authentication security configuration
+security = HTTPBearer()
+
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    expected_token = os.environ.get("GUCE_API_KEY")
+    if not expected_token or credentials.credentials != expected_token:
+        # Sentinel 🛡️: Fail securely by generic message, returning 401
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    return credentials.credentials
+
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, token: str = Depends(verify_token)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
