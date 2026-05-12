@@ -1,4 +1,6 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
 from pydantic import BaseModel
 import uuid
 import logging
@@ -6,6 +8,13 @@ import logging
 # Configure Logging for Epistemic Stability
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
 logger = logging.getLogger("guce_orchestrator")
+
+security = HTTPBearer()
+
+def verify_api_key(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    if credentials.credentials != os.environ.get('GUCE_API_KEY', ''):
+        raise HTTPException(status_code=401, detail='Invalid API Key')
+    return credentials.credentials
 
 app = FastAPI(
     title="Google Universe Cinematic Engine (GUCE)",
@@ -24,7 +33,7 @@ class ProjectManifest(BaseModel):
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, api_key: str = Depends(verify_api_key)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
