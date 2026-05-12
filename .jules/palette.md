@@ -1,3 +1,3 @@
-## 2026-03-19 - [Fix Divs as Buttons Anti-pattern]
-**Learning:** The 'Bento Box' gallery and Studio Selectors used clickable divs. This broke keyboard navigation and screen readers for core interactive components.
-**Action:** Replaced interactive divs with semantic `<button>` tags, mapped existing `onMouseOver` visual hover states to `onFocus` for keyboard focus indicators, and added `aria-label`s for context.
+## 2024-05-12 - Ensure Proper Focus States for UI Select/Buttons
+**Learning:** Found `<select>` and `<button>` elements missing keyboard accessibility focus states. When applying Tailwind focus classes to elements with inline `boxShadow` styles, `focus-visible:ring` (which uses box-shadow) is overridden, leading to zero focus visibility if combined with `focus:outline-none`. Instead, use explicit `outline` utility classes (e.g., `focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4`). Added explicit ARIA labels mapped to dynamic translations for multi-language accessibility.
+**Action:** Always map dynamically rendered language text to ARIA labels and enforce `focus-visible` styling using `outline` utilities when inline box-shadows are present to ensure cross-device accessibility for the primary user demographic (Seniors).
