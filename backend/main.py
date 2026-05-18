@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
+import secrets
 from pydantic import BaseModel
 import uuid
 import logging
@@ -13,6 +16,8 @@ app = FastAPI(
     version="4.0.0"
 )
 
+security = HTTPBearer()
+
 # Core State Machine: The Project Manifest
 class ProjectManifest(BaseModel):
     project_id: str
@@ -24,11 +29,21 @@ class ProjectManifest(BaseModel):
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, credentials: HTTPAuthorizationCredentials = Depends(security)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
     """
+    # 🛡️ Sentinel: Enforce authentication to prevent denial of service or abuse of compute-intensive AI operations.
+    # 🛡️ Sentinel: Fail securely if the environment variable is not configured.
+    expected_api_key = os.environ.get("GUCE_API_KEY")
+    if not expected_api_key:
+        logger.error("GUCE_API_KEY environment variable is missing.")
+        raise HTTPException(status_code=500, detail="Internal Server Configuration Error")
+
+    # 🛡️ Sentinel: Use secrets.compare_digest to prevent timing attacks.
+    if not secrets.compare_digest(credentials.credentials, expected_api_key):
+        raise HTTPException(status_code=401, detail="Invalid API Key")
     project_id = f"guce_proj_{uuid.uuid4().hex[:8]}"
     logger.info(f"Initialized Capture Stream. User: {user_id}, Project: {project_id}")
 
