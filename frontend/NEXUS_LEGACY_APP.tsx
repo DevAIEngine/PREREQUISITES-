@@ -206,10 +206,13 @@ export const NexusLegacyApp: React.FC = () => {
       <p style={{ color: "#94a3b8", fontSize: "28px", fontStyle: "italic", marginBottom: "60px" }}>Tell me about your first car...</p>
 
       <button
+        aria-label="End voice session"
         onClick={() => setIsVoiceOnlyMode(false)}
         style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
         onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+        onFocus={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
+        onBlur={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
       >
         🛑 End Session
       </button>
@@ -221,7 +224,7 @@ export const NexusLegacyApp: React.FC = () => {
     <div style={{ backgroundColor: "#0f172a", minHeight: "100vh", color: "white", padding: "40px", fontFamily: "sans-serif" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #334155", paddingBottom: "20px", marginBottom: "40px" }}>
         <h1 style={{ fontSize: "32px", fontWeight: "bold", color: "#38bdf8" }}>⚡ Studio Edit: {userName}'s Legacy</h1>
-        <button onClick={() => alert("Exporting to TikTok/Instagram Reels...")} style={{ backgroundColor: "#ec4899", padding: "10px 20px", borderRadius: "8px", fontWeight: "bold", border: "none", cursor: "pointer" }}>Share to Socials</button>
+        <button aria-label="Share legacy to social media" onClick={() => alert("Exporting to TikTok/Instagram Reels...")} style={{ backgroundColor: "#ec4899", padding: "10px 20px", borderRadius: "8px", fontWeight: "bold", border: "none", cursor: "pointer" }}>Share to Socials</button>
       </div>
 
       <div style={{ display: "flex", gap: "40px" }}>
@@ -341,6 +344,7 @@ export const NexusLegacyApp: React.FC = () => {
 
       {/* Global Mode Toggle (Hidden for Seniors, Visible for Youth) */}
       <button
+        aria-label={isCreatorMode ? "Exit Creator Mode" : "Enter Creator Mode"}
         onClick={handleToggleMode}
         style={{
           position: "absolute", top: "20px", right: "20px", zIndex: 1000,
