@@ -1,0 +1,3 @@
+## 2023-10-27 - Accessibility enhancements to interactive elements
+**Learning:** Hardcoding English `aria-label` attributes on elements with dynamically localized text is bad UX. TypeScript strictly types React hook inputs using object keys, so type coercion (e.g. `e.target.value as keyof typeof translations`) is needed to avoid block-scoped variable compilation errors when extracting translation state out of the component.
+**Action:** Extend the translation object with ARIA-specific localized strings, and use the TypeScript `as` operator for event handling when strict typing state from an extracted configuration object.
