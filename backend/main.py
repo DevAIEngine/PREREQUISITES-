@@ -2,6 +2,11 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 import uuid
 import logging
+from fastapi import Depends, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
+import secrets
+
 
 # Configure Logging for Epistemic Stability
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s")
@@ -23,12 +28,21 @@ class ProjectManifest(BaseModel):
     language: str = "en"
     scenes: list = []
 
+security = HTTPBearer()
+
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks, token: HTTPAuthorizationCredentials = Depends(security)):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
     """
+    expected_api_key = os.environ.get("GUCE_API_KEY")
+    if not expected_api_key:
+        logger.error("GUCE_API_KEY environment variable is not set")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Server configuration error")
+    if not secrets.compare_digest(token.credentials, expected_api_key):
+        logger.warning(f"Failed authentication attempt for user {user_id}")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid API Key")
     project_id = f"guce_proj_{uuid.uuid4().hex[:8]}"
     logger.info(f"Initialized Capture Stream. User: {user_id}, Project: {project_id}")
 
