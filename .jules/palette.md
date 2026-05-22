@@ -1,3 +1,6 @@
 ## 2026-03-19 - [Fix Divs as Buttons Anti-pattern]
 **Learning:** The 'Bento Box' gallery and Studio Selectors used clickable divs. This broke keyboard navigation and screen readers for core interactive components.
 **Action:** Replaced interactive divs with semantic `<button>` tags, mapped existing `onMouseOver` visual hover states to `onFocus` for keyboard focus indicators, and added `aria-label`s for context.
+## 2026-05-22 - Enhanced Focus Visibility for End Session Button
+**Learning:** When interactive elements like the "End Session" button use custom inline styles for hover interactions (e.g., `onMouseOver` changing background colors), keyboard-only users will miss these visual cues entirely if the styles aren't mapped to `onFocus` and `onBlur` events. Without focus indicators, the accessibility of the UI degrades, as keyboard navigators cannot discern which element holds focus. Additionally, contrast changes on hover/focus must be matched appropriately (e.g. text color switching to white when the background becomes dark red).
+**Action:** When updating or designing interactive elements using inline React event handlers, always explicitly replicate `onMouseOver` and `onMouseOut` behaviors into `onFocus` and `onBlur` to ensure visual focus indicator parity for keyboard users.
