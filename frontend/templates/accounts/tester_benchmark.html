@@ -29,8 +29,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-1">Concurrent Webhooks / Sec</label>
-                    <input type="range" min="1" max="1000" value="100" class="w-full" id="load_slider" oninput="document.getElementById('load_val').innerText = this.value">
+                    <label for="load_slider" class="block text-sm font-medium mb-1">Concurrent Webhooks / Sec</label>
+                    <input type="range" min="1" max="1000" value="100" class="w-full focus:outline-none focus-visible:ring-2" id="load_slider" oninput="document.getElementById('load_val').innerText = this.value">
                     <div class="text-right text-sm font-bold text-orange-500"><span id="load_val">100</span> Req/s</div>
                 </div>
 
