@@ -15,21 +15,23 @@ interface GeminiMessage {
 // ============================================================
 // Component: The "Cinematic Legacy" Engine (NEXUS-LEGACY)
 // ============================================================
+// Translations & Cultural Voice Personas
+const translations = {
+  "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator", ariaLabelLanguage: "Select language" },
+  "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela", ariaLabelLanguage: "Seleccionar idioma" },
+  "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder", ariaLabelLanguage: "选择语言" },
+  "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial", ariaLabelLanguage: "Pumili ng wika" },
+  "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle", ariaLabelLanguage: "Chọn ngôn ngữ" },
+  "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller", ariaLabelLanguage: "اختر اللغة" }
+};
+
 export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId }) => {
   const [messages, setMessages] = useState<GeminiMessage[]>([]);
   const [isCalling, setIsCalling] = useState(false);
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState<keyof typeof translations>("English");
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Translations & Cultural Voice Personas
-  const translations = {
-    "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator" },
-    "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela" },
-    "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder" },
-    "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial" },
-    "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle" },
-    "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller" }
-  };
+
 
   // WebSocket for Gemini live conversation
   const clientRef = useRef<W3CWebSocket | null>(null);
@@ -117,8 +119,9 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label={translations[language].ariaLabelLanguage}
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
+                  onChange={(e) => setLanguage(e.target.value as keyof typeof translations)}
                   style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
               >
                   {Object.keys(translations).map(lang => (
