@@ -1,3 +1,6 @@
 ## 2026-03-19 - [Fix Divs as Buttons Anti-pattern]
 **Learning:** The 'Bento Box' gallery and Studio Selectors used clickable divs. This broke keyboard navigation and screen readers for core interactive components.
 **Action:** Replaced interactive divs with semantic `<button>` tags, mapped existing `onMouseOver` visual hover states to `onFocus` for keyboard focus indicators, and added `aria-label`s for context.
+## 2024-05-24 - Dynamic ARIA Localization & Live Regions
+**Learning:** Hardcoding English `aria-label` attributes on dynamically localized components causes accessibility issues for non-English screen reader users. Additionally, when using an object's inferred type for a React hook (e.g., `useState<keyof typeof translations>`), the object must be declared outside the component to prevent TypeScript "Block-scoped variable used before its declaration" errors. Also, dynamically populated content containers (like chat interfaces or AI voice output) need an `aria-live="polite"` attribute to ensure screen readers announce new text without stealing focus.
+**Action:** Extend the localization object (e.g., `translations[language]`) with ARIA-specific keys and use proper TypeScript typing (`keyof typeof translations`), casting event payloads when needed (`e.target.value as keyof typeof translations`). Always add `aria-live="polite"` to dynamic result blocks.
