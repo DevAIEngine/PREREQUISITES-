@@ -70,6 +70,7 @@ class AsynchronousHandoffWatchdog:
             logger.error(f"[ERROR] Payload {filepath} is not valid JSON. Ignoring.")
         except Exception as e:
             logger.error(f"[ERROR] Failed to process payload {filepath}: {str(e)}")
+            # Sanitized output would go here, but this is a background process
 
         finally:
             self._archive_payload(filepath)
