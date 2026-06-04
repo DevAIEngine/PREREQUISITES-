@@ -74,7 +74,9 @@ def publish():
             'scenesCount': len(scenes)
         })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        import logging
+        logging.error(f'Failed to publish project: {e}')
+        return jsonify({'error': 'An internal error occurred'}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
 def orchestration_publish():
