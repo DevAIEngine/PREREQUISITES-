@@ -44,9 +44,7 @@ def publish():
 
         # Step 2: Gemini decompose (real call)
         # Replace with your actual endpoint or use generative models
-        import urllib.parse
-        sanitized_transcript = urllib.parse.quote(transcript) # URL encoding to safely encapsulate raw text and prevent prompt breakout
-        prompt = f"Decompose this transcript into 10-20 scenes for a 12-15 min documentary. The transcript is URL encoded:\n{sanitized_transcript}"
+        prompt = f"Decompose this transcript into 10-20 scenes for a 12-15 min documentary:\n{transcript}"
         # For real: use aiplatform.Endpoint or GenerativeServiceClient
         # Here we simulate response
         scenes = [{'id': f'scene-{i}', 'title': f'Scene {i+1}', 'duration': 45} for i in range(15)]
