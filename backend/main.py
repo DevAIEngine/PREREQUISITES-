@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import uuid
 import logging
 
@@ -15,12 +15,12 @@ app = FastAPI(
 
 # Core State Machine: The Project Manifest
 class ProjectManifest(BaseModel):
-    project_id: str
-    user_id: str
+    project_id: str = Field(..., max_length=100, pattern=r'^[a-zA-Z0-9_-]+$')
+    user_id: str = Field(..., max_length=255) # Relaxed pattern to allow emails and auth0 IDs
     status: str = "INITIALIZED"
     target_duration: str = "LONG_FORM" # SHORTS (1min) or LONG_FORM (5-30min)
-    voice_profile_id: str | None = None
-    language: str = "en"
+    voice_profile_id: str | None = Field(default=None, max_length=50)
+    language: str = Field(default="en", max_length=10)
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
