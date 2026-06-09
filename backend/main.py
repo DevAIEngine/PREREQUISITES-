@@ -13,6 +13,16 @@ app = FastAPI(
     version="4.0.0"
 )
 
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    """Security enhancement: Add HTTP security headers to all responses"""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Content-Security-Policy"] = "default-src 'self'"
+    return response
+
 # Core State Machine: The Project Manifest
 class ProjectManifest(BaseModel):
     project_id: str
