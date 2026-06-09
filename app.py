@@ -20,6 +20,15 @@ except Exception as e:
 from src.core_engine.obfuscation.phantom_jax_lora import phantom_jax_bp
 app.register_blueprint(phantom_jax_bp)
 
+@app.after_request
+def add_security_headers(response):
+    """Security enhancement: Add HTTP security headers to all responses"""
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    return response
+
 @app.route('/', methods=['GET'])
 def process_request():
     return render_template('index.html')
