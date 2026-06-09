@@ -15,21 +15,23 @@ interface GeminiMessage {
 // ============================================================
 // Component: The "Cinematic Legacy" Engine (NEXUS-LEGACY)
 // ============================================================
+// Translations & Cultural Voice Personas
+const translations = {
+  "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator", ariaLangSelect: "Select Language" },
+  "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela", ariaLangSelect: "Seleccionar Idioma" },
+  "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder", ariaLangSelect: "选择语言" },
+  "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial", ariaLangSelect: "Pumili ng Wika" },
+  "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle", ariaLangSelect: "Chọn Ngôn Ngữ" },
+  "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller", ariaLangSelect: "اختر اللغة" }
+};
+
 export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId }) => {
   const [messages, setMessages] = useState<GeminiMessage[]>([]);
   const [isCalling, setIsCalling] = useState(false);
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState<keyof typeof translations>("English");
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Translations & Cultural Voice Personas
-  const translations = {
-    "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator" },
-    "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela" },
-    "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder" },
-    "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial" },
-    "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle" },
-    "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller" }
-  };
+
 
   // WebSocket for Gemini live conversation
   const clientRef = useRef<W3CWebSocket | null>(null);
@@ -117,9 +119,10 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label={translations[language].ariaLangSelect}
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
+                  onChange={(e) => setLanguage(e.target.value as keyof typeof translations)}
+                  className="focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#FFD700] focus:outline-none" style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
               >
                   {Object.keys(translations).map(lang => (
                       <option key={lang} value={lang}>{lang}</option>
@@ -149,11 +152,17 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   {/* Massive Action Buttons */}
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
+                          <button
+                              onClick={handleCallToggle}
+                              className="hover:scale-105 focus:scale-105 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#22c55e] focus:outline-none"
+                              style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
                               📞 {translations[language].btnCall}
                           </button>
                       ) : (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
+                          <button
+                              onClick={handleCallToggle}
+                              className="hover:scale-105 focus:scale-105 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#ef4444] focus:outline-none"
+                              style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)", transition: "transform 0.2s" }}>
                               ☎️ {translations[language].btnEnd}
                           </button>
                       )}
@@ -161,7 +170,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
               </div>
 
               {/* Subtitles & AI Voice Output (Massive Legible Text) */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
+              <div aria-live="polite" style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
                   {messages.map((msg, idx) => (
                       <div key={idx} style={{ marginBottom: "20px", fontSize: "32px", lineHeight: "1.4" }}>
                           <strong style={{ color: msg.role === "user" ? "#4fd1c5" : "#FFD700" }}> {/* Deep Teal User vs Gold AI */}
