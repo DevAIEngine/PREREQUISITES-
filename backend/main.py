@@ -1,4 +1,7 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import os
+import secrets
 from pydantic import BaseModel
 import uuid
 import logging
@@ -36,6 +39,21 @@ async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
 
     # In a real implementation, this would establish the WebSocket and trigger Gemini Live.
     return manifest
+
+
+
+security = HTTPBearer()
+
+@app.post("/api/v1/tensor-stream/optimize")
+async def optimize_tensor_stream(token: HTTPAuthorizationCredentials = Depends(security)):
+    expected_key = os.environ.get("TENSOR_STREAM_API_KEY")
+    if not expected_key:
+        raise HTTPException(status_code=500, detail="TENSOR_STREAM_API_KEY environment variable not configured")
+
+    if not secrets.compare_digest(token.credentials, expected_key):
+        raise HTTPException(status_code=401, detail="Invalid API key")
+
+    return {"optimization": "complete", "stream": "tensorized"}
 
 @app.get("/health")
 def health_check():
