@@ -74,7 +74,9 @@ def publish():
             'scenesCount': len(scenes)
         })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        # 🛡️ Sentinel: Sanitize error response to prevent information leakage
+        app.logger.error(f"Publish error: {str(e)}")
+        return jsonify({'error': 'An internal server error occurred'}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
 def orchestration_publish():
