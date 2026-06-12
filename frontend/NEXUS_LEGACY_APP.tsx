@@ -210,6 +210,8 @@ export const NexusLegacyApp: React.FC = () => {
         style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
         onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+        onFocus={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
+        onBlur={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
       >
         🛑 End Session
       </button>
