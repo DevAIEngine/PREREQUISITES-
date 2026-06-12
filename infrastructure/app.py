@@ -4,6 +4,7 @@ from googleapiclient.discovery import build
 import os
 import uuid
 import datetime
+import logging
 
 app = Flask(__name__)
 
@@ -74,7 +75,8 @@ def publish():
             'scenesCount': len(scenes)
         })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        logging.error(f'Publish error: {str(e)}')
+        return jsonify({'error': 'An internal error occurred'}), 500
 
 @app.route('/api/orchestration/publish', methods=['POST'])
 def orchestration_publish():
