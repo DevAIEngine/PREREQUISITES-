@@ -117,6 +117,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label="Select language"
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
@@ -149,11 +150,21 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   {/* Massive Action Buttons */}
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
+                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}
+                              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                              onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+                          >
                               📞 {translations[language].btnCall}
                           </button>
                       ) : (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
+                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)", transition: "transform 0.2s" }}
+                              onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+                              onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                              onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+                          >
                               ☎️ {translations[language].btnEnd}
                           </button>
                       )}
@@ -161,7 +172,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
               </div>
 
               {/* Subtitles & AI Voice Output (Massive Legible Text) */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
+              <div aria-live="polite" style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
                   {messages.map((msg, idx) => (
                       <div key={idx} style={{ marginBottom: "20px", fontSize: "32px", lineHeight: "1.4" }}>
                           <strong style={{ color: msg.role === "user" ? "#4fd1c5" : "#FFD700" }}> {/* Deep Teal User vs Gold AI */}
