@@ -117,6 +117,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label="Select Voice Language"
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
@@ -161,7 +162,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
               </div>
 
               {/* Subtitles & AI Voice Output (Massive Legible Text) */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
+              <div aria-live="polite" style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
                   {messages.map((msg, idx) => (
                       <div key={idx} style={{ marginBottom: "20px", fontSize: "32px", lineHeight: "1.4" }}>
                           <strong style={{ color: msg.role === "user" ? "#4fd1c5" : "#FFD700" }}> {/* Deep Teal User vs Gold AI */}
