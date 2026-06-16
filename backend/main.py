@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
 from pydantic import BaseModel
 import uuid
 import logging
@@ -24,7 +24,7 @@ class ProjectManifest(BaseModel):
     scenes: list = []
 
 @app.post("/api/v1/capture/stream", response_model=ProjectManifest)
-async def start_capture_stream(user_id: str, background_tasks: BackgroundTasks):
+async def start_capture_stream(background_tasks: BackgroundTasks, user_id: str = Query(..., min_length=1, max_length=255, description="The unique identifier for the user")):
     """
     Entrypoint for the Cell Phone First UI.
     Initializes a live WebSocket/Stream connection for A-Roll and Gemini Live Scene Decomposition.
