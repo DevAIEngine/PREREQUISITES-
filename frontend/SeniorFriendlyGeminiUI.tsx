@@ -1,4 +1,3 @@
-// SeniorFriendlyGeminiUI.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -12,24 +11,24 @@ interface GeminiMessage {
   suggestedClips?: Array<{ title: string; url: string }>;
 }
 
+// Translations & Cultural Voice Personas
+const translations = {
+  "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator" },
+  "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela" },
+  "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder" },
+  "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial" },
+  "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle" },
+  "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller" }
+};
+
 // ============================================================
 // Component: The "Cinematic Legacy" Engine (NEXUS-LEGACY)
 // ============================================================
 export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId }) => {
   const [messages, setMessages] = useState<GeminiMessage[]>([]);
   const [isCalling, setIsCalling] = useState(false);
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState<keyof typeof translations>("English");
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Translations & Cultural Voice Personas
-  const translations = {
-    "English": { greeting: "Tell me about your first car.", btnCall: "ANSWER CALL", btnEnd: "END SESSION", tone: "Respectful narrator" },
-    "Español": { greeting: "Cuéntame sobre tu primer auto.", btnCall: "CONTESTAR", btnEnd: "TERMINAR", tone: "Warm, friendly abuela" },
-    "中文": { greeting: "告诉我你的第一辆车。", btnCall: "接听", btnEnd: "结束", tone: "Wise elder" },
-    "Tagalog": { greeting: "Sabihin mo sa akin ang tungkol sa iyong unang kotse.", btnCall: "SAGUTIN", btnEnd: "BABAAN", tone: "Warm and familial" },
-    "Tiếng Việt": { greeting: "Kể cho tôi nghe về chiếc xe đầu tiên của bạn.", btnCall: "TRẢ LỜI", btnEnd: "KẾT THÚC", tone: "Respectful and gentle" },
-    "العربية": { greeting: "أخبرني عن سيارتك الأولى.", btnCall: "إجابة", btnEnd: "إنهاء", tone: "Storyteller" }
-  };
 
   // WebSocket for Gemini live conversation
   const clientRef = useRef<W3CWebSocket | null>(null);
@@ -117,9 +116,12 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   <span style={{ fontSize: "56px" }}>🎥</span> AI Director
               </h1>
               <select
+                  aria-label="Select Language"
                   value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                  style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer" }}
+                  onChange={(e) => setLanguage(e.target.value as keyof typeof translations)}
+                  style={{ fontSize: "24px", padding: "10px", backgroundColor: "#005f73", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer", outline: "none" }}
+                  onFocus={(e) => e.currentTarget.style.boxShadow = "0 0 0 4px rgba(255, 215, 0, 0.8)"}
+                  onBlur={(e) => e.currentTarget.style.boxShadow = "none"}
               >
                   {Object.keys(translations).map(lang => (
                       <option key={lang} value={lang}>{lang}</option>
@@ -149,11 +151,17 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   {/* Massive Action Buttons */}
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
+                          <button onClick={handleCallToggle} aria-label={translations[language].btnCall} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "all 0.2s", outline: "none" }}
+                          onFocus={(e) => e.currentTarget.style.boxShadow = "0 0 0 4px #FFD700"}
+                          onBlur={(e) => e.currentTarget.style.boxShadow = "0 0 30px rgba(34, 197, 94, 0.6)"}
+                          >
                               📞 {translations[language].btnCall}
                           </button>
                       ) : (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
+                          <button onClick={handleCallToggle} aria-label={translations[language].btnEnd} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)", transition: "all 0.2s", outline: "none" }}
+                          onFocus={(e) => e.currentTarget.style.boxShadow = "0 0 0 4px #FFD700"}
+                          onBlur={(e) => e.currentTarget.style.boxShadow = "0 0 30px rgba(239, 68, 68, 0.6)"}
+                          >
                               ☎️ {translations[language].btnEnd}
                           </button>
                       )}
