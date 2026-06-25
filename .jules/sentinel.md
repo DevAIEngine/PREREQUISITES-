@@ -1,4 +1,4 @@
-## 2026-03-18 - Unpinned GitHub Action Dependency
- **Vulnerability:** Unpinned GitHub Action Dependency
- **Learning:** Using mutable tags (like @v0.7.0) for GitHub Actions allows a potential attacker to compromise the repository if the tag is modified or overwritten.
- **Prevention:** Always pin GitHub Actions to an immutable commit SHA to guarantee the specific code version executed and prevent supply chain attacks.
+## 2025-02-14 - [Fix Information Leakage in API Response]
+**Vulnerability:** The `/api/publish` endpoint in `infrastructure/app.py` was returning raw exception strings (`str(e)`) to the client via a 500 JSON response, potentially exposing sensitive internal details (e.g., Google Drive/Sheets API keys, file paths, or backend structure).
+**Learning:** Never return raw exception traces or error messages directly to the client. This is a common Information Exposure vulnerability that can aid attackers in reconnaissance.
+**Prevention:** Always log the full exception details on the server side (e.g., `app.logger.error`) and return a standardized, sanitized error message (e.g., `'An internal server error occurred.'`) to the client.
