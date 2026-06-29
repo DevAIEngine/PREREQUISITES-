@@ -116,10 +116,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("NAT_GEO")}
           aria-label="Select Heritage Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
@@ -132,10 +129,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("AEROSPACE")}
           aria-label="Select Aerospace Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
@@ -336,6 +330,7 @@ export const NexusLegacyApp: React.FC = () => {
           .documentary-image {
             animation: kenburns-effect 12s ease-in-out infinite alternate;
           }
+          .studio-btn:hover, .studio-btn:focus-visible { transform: scale(1.05) !important; }
         `}
       </style>
 
