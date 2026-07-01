@@ -284,7 +284,7 @@ export const NexusLegacyApp: React.FC = () => {
         margin: "0 auto"
       }}>
         {userAssets.map((asset, index) => (
-          <button key={asset.id} aria-label={`Play ${asset.title}`} style={{
+          <button key={asset.id} aria-label={`Play ${asset.title}`} className="bento-card" style={{
             backgroundColor: "rgba(26,26,26,0.6)",
             backdropFilter: "blur(12px)",
             borderRadius: "32px",
@@ -299,12 +299,7 @@ export const NexusLegacyApp: React.FC = () => {
             display: "block",
             width: "100%",
             height: "100%"
-          }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
-          >
+          }}>
             <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
               <h2 style={{ fontSize: index === 0 ? "48px" : "32px", margin: "0 0 10px 0", fontWeight: "bold", textShadow: "0 2px 10px rgba(0,0,0,1)" }}>{asset.title}</h2>
@@ -335,6 +330,12 @@ export const NexusLegacyApp: React.FC = () => {
           }
           .documentary-image {
             animation: kenburns-effect 12s ease-in-out infinite alternate;
+          }
+          .bento-card:hover, .bento-card:focus-visible {
+            transform: scale(1.02) translateY(-10px);
+          }
+          .bento-card {
+            transform: scale(1) translateY(0);
           }
         `}
       </style>
