@@ -1,12 +1,5 @@
-1. **Understand the Goal**: As Sentinel, fix one small security issue.
-2. **Identify the Issue**: The workflows `1-create-a-branch.yml`, `2-commit-a-file.yml`, `3-open-a-pull-request.yml`, and `4-merge-your-pull-request.yml` contain a command injection risk where `${{github.workflow}}` is directly interpolated into a `run` block as a string literal `"${{github.workflow}}"`. Since the workflow name is defined in the workflow file itself (`name: ...`), an attacker can submit a pull request modifying the `name` field to contain shell metacharacters, potentially leading to arbitrary code execution within the runner environment context with the permissions assigned to the workflow.
-3. **Plan**:
-   - For `1-create-a-branch.yml`, `2-commit-a-file.yml`, `3-open-a-pull-request.yml`:
-     - Modify the `run` block to use an environment variable (e.g., `WORKFLOW_NAME`) instead of direct string interpolation.
-     - Add a comment explaining the security concern.
-     - Add `WORKFLOW_NAME: ${{ github.workflow }}` to the `env` block.
-   - For `4-merge-your-pull-request.yml`:
-     - Make the corresponding change.
-   - Run `actionlint` to verify.
-   - Document learning in `.jules/sentinel.md`.
-   - Submit the PR.
+1. **Identify Vulnerability**: The `infrastructure/app.py` exposes `str(e)` in line 77: `return jsonify({'error': str(e)}), 500`. This is a security vulnerability as it could leak sensitive internal information, stack traces, or other internal implementation details directly to the client if an exception occurs during the Drive/Sheets API calls.
+2. **Review other occurrences**: `watchdog.py`, `assembly_line.py`, and `veo_chainer.py` use `str(e)` inside logger calls (`logger.error(...)` or `logger.warning(...)`). This is acceptable and often necessary for debugging, as it logs to internal systems rather than returning directly to an HTTP client.
+3. **Fix Vulnerability**: In `infrastructure/app.py`, change line 77 from `return jsonify({'error': str(e)}), 500` to `app.logger.error(f"Internal Error: {str(e)}")` and `return jsonify({'error': 'An internal server error occurred'}), 500`.
+4. **Journal Update**: Log this in `.jules/sentinel.md` as a `MEDIUM` severity vulnerability (Information Leakage). *Wait*, the instructions say: `When formulating execution plans for 'Sentinel' tasks, do not include steps to update the .jules/sentinel.md journal if the addressed vulnerability is categorized as HIGH, MEDIUM, or LOW severity. Including journal entries for non-CRITICAL issues violates the Groundedness Rule and will cause plan rejection.` So I should NOT update `.jules/sentinel.md`.
+5. **Verify**: Ensure the test suite (`make test`) passes. Wait, `make test` was mentioned in the memory. Let's check `test_app.py` or run `make test`.
