@@ -116,10 +116,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("NAT_GEO")}
           aria-label="Select Heritage Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
@@ -132,10 +129,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("AEROSPACE")}
           aria-label="Select Aerospace Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
@@ -182,8 +176,29 @@ export const NexusLegacyApp: React.FC = () => {
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh",
       backgroundColor: "#0f172a", // Dimmed, deep-charcoal background
     }}>
+
       <style>
         {`
+          /* Interactive button styles to replace inline JS events */
+          .studio-btn {
+            transition: transform 0.3s;
+          }
+          .studio-btn:hover, .studio-btn:focus-visible {
+            transform: scale(1.05) !important;
+          }
+          .end-session-btn {
+            transition: all 0.2s;
+          }
+          .end-session-btn:hover, .end-session-btn:focus-visible {
+            background-color: #ef4444 !important;
+          }
+          .gallery-btn {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .gallery-btn:hover, .gallery-btn:focus-visible {
+            transform: scale(1.02) translateY(-10px) !important;
+          }
+
           @keyframes pulseGlow {
             0% { box-shadow: 0 0 40px #FFD700, 0 0 80px #FFD700; transform: scale(1); }
             50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFD700; transform: scale(1.05); }
@@ -208,8 +223,7 @@ export const NexusLegacyApp: React.FC = () => {
       <button
         onClick={() => setIsVoiceOnlyMode(false)}
         style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+        className="end-session-btn"
       >
         🛑 End Session
       </button>
@@ -300,10 +314,7 @@ export const NexusLegacyApp: React.FC = () => {
             width: "100%",
             height: "100%"
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
+          className="gallery-btn"
           >
             <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
@@ -326,8 +337,29 @@ export const NexusLegacyApp: React.FC = () => {
   // ============================================================
   return (
     <div style={{ position: "relative" }}>
+
       <style>
         {`
+          /* Interactive button styles to replace inline JS events */
+          .studio-btn {
+            transition: transform 0.3s;
+          }
+          .studio-btn:hover, .studio-btn:focus-visible {
+            transform: scale(1.05) !important;
+          }
+          .end-session-btn {
+            transition: all 0.2s;
+          }
+          .end-session-btn:hover, .end-session-btn:focus-visible {
+            background-color: #ef4444 !important;
+          }
+          .gallery-btn {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .gallery-btn:hover, .gallery-btn:focus-visible {
+            transform: scale(1.02) translateY(-10px) !important;
+          }
+
           /* World-Class Ken Burns Animation for Documentaries */
           @keyframes kenburns-effect {
             0% { transform: scale(1.0) translate(0, 0); }
