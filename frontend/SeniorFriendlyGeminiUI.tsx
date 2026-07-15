@@ -161,7 +161,7 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
               </div>
 
               {/* Subtitles & AI Voice Output (Massive Legible Text) */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
+              <div aria-live="polite" style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "100px" }}>
                   {messages.map((msg, idx) => (
                       <div key={idx} style={{ marginBottom: "20px", fontSize: "32px", lineHeight: "1.4" }}>
                           <strong style={{ color: msg.role === "user" ? "#4fd1c5" : "#FFD700" }}> {/* Deep Teal User vs Gold AI */}
