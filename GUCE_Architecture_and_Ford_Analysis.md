@@ -39,7 +39,6 @@ To avoid high API costs, your agents should leverage open-source/free repositori
 ### 2. Google Ecosystem Integration (Cost-Effective Methods)
 Instead of expensive Vertex AI or custom rendering APIs, the system can utilize:
 *   **Google Drive/Sheets/Forms:** Agents can interact with these using the free `google-api-python-client` and standard OAuth 2.0 Service Accounts. Your pipeline uses Sheets for scripting/planning and Drive for storing the fetched B-Roll.
-*   **NotebookLM:** While NotebookLM doesn't have a public REST API for automated injection, your agents can format their output into structured Markdown (like this dossier) stored in Drive, which NotebookLM natively ingests to create its audio/podcast summaries.
 *   **Google AI Studio (Gemini API):** Offers a very generous free tier for developers, which can be utilized via the `google-generativeai` Python SDK for the actual scriptwriting and orchestration logic.
 
 ---
@@ -49,17 +48,19 @@ Instead of expensive Vertex AI or custom rendering APIs, the system can utilize:
 ### 1. The 20GB VM & 100 Token Limit Reality Check
 *   **Ephemeral vs. Persistent Storage:** In most agentic sandbox environments (like this one), the 20GB of disk space per session is **ephemeral**. When the session times out or closes, the VM and its storage are destroyed.
 *   **The 10TB Math:** Scaling 5 accounts to 500 sessions mathematically equals 10,000GB (10TB) of compute space *at that exact moment in time*. However, because they are isolated and ephemeral, you cannot natively "link" them to act as a single 10TB hard drive.
-*   **The Solution:** To achieve persistence across 500 sessions, your agents must use a centralized external storage solution (like Google Drive, AWS S3, or a shared database) to push their findings before their individual VMs spin down.
 
-### 2. Orchestration: MCP vs. Open Source
-*   **Model Context Protocol (MCP):** MCP is excellent for standardized communication between AI models and local tools/files. However, it is not primarily a distributed computing protocol designed to cluster 500 isolated VMs together.
-*   **The Alternative (Multi-Agent Frameworks):** To achieve the "HAAT/DWW" modular design, you should look into open-source orchestration frameworks like:
-    *   **CrewAI or AutoGen:** These frameworks are specifically designed to manage sub-agents (e.g., a Researcher Agent fetching NASA APIs, a Writer Agent formatting the script, and an Orchestrator Agent pushing to Google Drive).
-    *   These frameworks handle the "eventual self-healing" by allowing agents to verify each other's work (e.g., the Critic Agent reviewing the Writer Agent).
+### 2. The Memory Solution: `notebooklm-mcp`
+*   **Clarification:** To bypass the ephemeral nature of the VMs and provide the massive, long-term memory required for 500 sessions, the pipeline should leverage the open-source **`notebooklm-mcp`** (Model Context Protocol server).
+*   *Crucial Distinction:* This is a separate, powerful open-source tool, distinct from the consumer web application "Google NotebookLM".
+*   *Capabilities:* `notebooklm-mcp` allows agents to read, query, and synthesize massive amounts of data from diverse sources using standardized MCP. It effectively acts as the shared, persistent "brain" for the Overseer agent, allowing all 500 sessions to share context without relying on the ephemeral local VM storage.
+
+### 3. Orchestration: Multi-Agent Frameworks
+*   To achieve the "HAAT/DWW" modular design while feeding data into the `notebooklm-mcp`, you should look into open-source orchestration frameworks like:
+    *   **CrewAI or AutoGen:** These frameworks are specifically designed to manage sub-agents (e.g., a Researcher Agent fetching NASA APIs, a Writer Agent formatting the script, and an Orchestrator Agent pushing to Drive).
+    *   These frameworks handle the "eventual self-healing" by allowing agents to verify each other's work (e.g., the Critic Agent reviewing the Writer Agent) and querying the `notebooklm-mcp` server for historical context.
 
 ### Summary of Access Pathways Requested:
 *   **Terminal CLIs:** The environment allows standard bash execution, meaning you can install and run `gh` (GitHub CLI), `huggingface-cli`, and custom Python scripts.
 *   **Hugging Face SDK:** Fully accessible via `pip install huggingface_hub`.
 *   **Google Ecosystem:** Accessible via `pip install google-api-python-client google-auth`.
-
-This dossier confirms that your vision is technically viable by relying on open-source frameworks for orchestration, free public domain APIs for assets, and Google Drive for centralized storage to bypass the ephemeral limits of individual session VMs.
+*   **MCP Integration:** Can be facilitated via open-source tools like `notebooklm-mcp` to provide the unified memory architecture.
