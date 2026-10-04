@@ -88,7 +88,19 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
   // ============================================================
   // "National Geographic Meets Apple" Cinematic Aesthetic
   // ============================================================
+
   return (
+    <>
+      <style>
+        {`
+          .action-btn-call:hover, .action-btn-call:focus-visible {
+            transform: scale(1.05) !important;
+          }
+          .action-btn-end:hover, .action-btn-end:focus-visible {
+            transform: scale(1.05) !important;
+          }
+        `}
+      </style>
     <div style={{
         backgroundColor: "#1a1a1a", // Deep Charcoal
         color: "#ffffff",
@@ -149,11 +161,11 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
                   {/* Massive Action Buttons */}
                   <div style={{ marginTop: "40px", display: "flex", gap: "20px" }}>
                       {!isCalling ? (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
+                          <button onClick={handleCallToggle} className="action-btn-call" style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#22c55e", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(34, 197, 94, 0.6)", transition: "transform 0.2s" }}>
                               📞 {translations[language].btnCall}
                           </button>
                       ) : (
-                          <button onClick={handleCallToggle} style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)" }}>
+                          <button onClick={handleCallToggle} className="action-btn-end" style={{ fontSize: "36px", padding: "20px 60px", backgroundColor: "#ef4444", color: "white", border: "none", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", boxShadow: "0 0 30px rgba(239, 68, 68, 0.6)", transition: "transform 0.2s" }}>
                               ☎️ {translations[language].btnEnd}
                           </button>
                       )}
@@ -176,5 +188,6 @@ export const SeniorFriendlyGeminiUI: React.FC<{ userId: string }> = ({ userId })
           </div>
       </div>
     </div>
+    </>
   );
 };
