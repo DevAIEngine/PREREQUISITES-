@@ -1,12 +1,15 @@
-1. **Understand the Goal**: As Sentinel, fix one small security issue.
-2. **Identify the Issue**: The workflows `1-create-a-branch.yml`, `2-commit-a-file.yml`, `3-open-a-pull-request.yml`, and `4-merge-your-pull-request.yml` contain a command injection risk where `${{github.workflow}}` is directly interpolated into a `run` block as a string literal `"${{github.workflow}}"`. Since the workflow name is defined in the workflow file itself (`name: ...`), an attacker can submit a pull request modifying the `name` field to contain shell metacharacters, potentially leading to arbitrary code execution within the runner environment context with the permissions assigned to the workflow.
-3. **Plan**:
-   - For `1-create-a-branch.yml`, `2-commit-a-file.yml`, `3-open-a-pull-request.yml`:
-     - Modify the `run` block to use an environment variable (e.g., `WORKFLOW_NAME`) instead of direct string interpolation.
-     - Add a comment explaining the security concern.
-     - Add `WORKFLOW_NAME: ${{ github.workflow }}` to the `env` block.
-   - For `4-merge-your-pull-request.yml`:
-     - Make the corresponding change.
-   - Run `actionlint` to verify.
-   - Document learning in `.jules/sentinel.md`.
-   - Submit the PR.
+1. **Migrate visual interaction states to CSS**
+   - Replace inline JS event handlers (`onMouseOver`, `onMouseOut`, `onFocus`, `onBlur`) on interactive elements (Studio Selectors, Bento Box buttons, End Session button) with semantic CSS pseudo-classes (`:hover`, `:focus-visible`). This avoids state conflicts where `onMouseOut` reverts styling while the element is still focused.
+   - Inject the corresponding CSS rules using `!important` to reliably override the base inline `style={}` attributes.
+2. **Verify modification**
+   - Run `grep` to verify the CSS injection and the removal of the inline event handlers.
+3. **Frontend verification**
+   - Since a React component was modified, run Playwright verification to ensure it renders without syntax errors.
+   - Install `playwright` locally using `pnpm`.
+   - Create `verify.html` and `verify.js`.
+   - Run verification and check the result.
+   - Clean up ad-hoc artifacts (Playwright, temporary scripts).
+4. **Complete pre-commit steps**
+   - Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
+5. **Submit the PR**
+   - Use the submit tool with a descriptive commit message explaining the UX improvement.
