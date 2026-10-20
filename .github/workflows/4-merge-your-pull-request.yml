@@ -21,7 +21,7 @@ env:
 jobs:
   find_exercise:
     name: Find Exercise Issue
-    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@v0.5.0
+    uses: skills/exercise-toolkit/.github/workflows/find-exercise-issue.yml@a7add33cf376f62720d17f0ddbc5548a77fb549c
 
   post_review_content:
     name: Post review content
@@ -76,7 +76,7 @@ jobs:
     permissions:
       contents: write
       issues: write
-    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@v0.7.0
+    uses: skills/exercise-toolkit/.github/workflows/finish-exercise.yml@f7e5b28a894634a98b29a4b5802816df69e8c499
     with:
       issue-url: ${{ needs.find_exercise.outputs.issue-url }}
       exercise-title: "Introduction to GitHub"
