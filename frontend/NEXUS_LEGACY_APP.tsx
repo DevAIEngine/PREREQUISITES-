@@ -184,6 +184,12 @@ export const NexusLegacyApp: React.FC = () => {
     }}>
       <style>
         {`
+          .end-session-btn:hover, .end-session-btn:focus-visible {
+            background-color: #ef4444 !important;
+            color: white !important;
+            outline: 2px solid white !important;
+            outline-offset: 2px;
+          }
           @keyframes pulseGlow {
             0% { box-shadow: 0 0 40px #FFD700, 0 0 80px #FFD700; transform: scale(1); }
             50% { box-shadow: 0 0 80px #FFD700, 0 0 120px #FFD700; transform: scale(1.05); }
@@ -207,9 +213,8 @@ export const NexusLegacyApp: React.FC = () => {
 
       <button
         onClick={() => setIsVoiceOnlyMode(false)}
+        className="end-session-btn"
         style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
       >
         🛑 End Session
       </button>
