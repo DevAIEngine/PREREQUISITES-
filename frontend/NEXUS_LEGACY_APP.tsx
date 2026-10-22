@@ -115,11 +115,7 @@ export const NexusLegacyApp: React.FC = () => {
         <button
           onClick={() => handleSelectTheme("NAT_GEO")}
           aria-label="Select Heritage Studio"
-          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }} className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
@@ -131,11 +127,7 @@ export const NexusLegacyApp: React.FC = () => {
         <button
           onClick={() => handleSelectTheme("AEROSPACE")}
           aria-label="Select Aerospace Studio"
-          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }} className="studio-btn"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
@@ -167,10 +159,10 @@ export const NexusLegacyApp: React.FC = () => {
         <p style={{ fontSize: "32px", color: themeStyles.textColor, marginBottom: "60px" }}>What story shall we tell today?</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-          <button onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
-          <button onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}>🔮 Tell a Story (Voice Only)</button>
-          <button onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}>🍿 Watch My Life</button>
-          <button onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}>📡 Go Live (Family Stream)</button>
+          <button className="massive-action-btn" onClick={() => setCurrentView("INTERVIEW")} style={massiveButtonStyle("#22c55e")}>🎙️ Tell a Story (Video Call)</button>
+          <button className="massive-action-btn" onClick={() => setIsVoiceOnlyMode(true)} style={massiveButtonStyle("#8b5cf6")}>🔮 Tell a Story (Voice Only)</button>
+          <button className="massive-action-btn" onClick={() => setCurrentView("WATCH")} style={massiveButtonStyle("#3b82f6")}>🍿 Watch My Life</button>
+          <button className="massive-action-btn" onClick={() => setCurrentView("LIVE")} style={massiveButtonStyle("#ef4444")}>📡 Go Live (Family Stream)</button>
         </div>
       </div>
     </div>
@@ -207,9 +199,7 @@ export const NexusLegacyApp: React.FC = () => {
 
       <button
         onClick={() => setIsVoiceOnlyMode(false)}
-        style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+        style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }} className="end-session-btn"
       >
         🛑 End Session
       </button>
@@ -299,11 +289,7 @@ export const NexusLegacyApp: React.FC = () => {
             display: "block",
             width: "100%",
             height: "100%"
-          }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
+          }} className="bento-card-btn"
           >
             <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
@@ -335,6 +321,20 @@ export const NexusLegacyApp: React.FC = () => {
           }
           .documentary-image {
             animation: kenburns-effect 12s ease-in-out infinite alternate;
+          }
+
+          /* UX Fix: Migrate interaction states to CSS to resolve hover/focus conflicts */
+          .studio-btn:hover, .studio-btn:focus-visible {
+            transform: scale(1.05) !important;
+          }
+          .end-session-btn:hover, .end-session-btn:focus-visible {
+            background-color: #ef4444 !important;
+          }
+          .bento-card-btn:hover, .bento-card-btn:focus-visible {
+            transform: scale(1.02) translateY(-10px) !important;
+          }
+          .massive-action-btn:hover, .massive-action-btn:focus-visible {
+            transform: scale(1.02) !important;
           }
         `}
       </style>
