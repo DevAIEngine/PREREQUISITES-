@@ -40,7 +40,7 @@ gcloud run deploy guce-engine \
   --image gcr.io/$PROJECT/guce-engine \
   --region us-west2 \
   --service-account $SA \
-  --allow-unauthenticated \
+  --no-allow-unauthenticated \
   --set-env-vars GOOGLE_CLOUD_PROJECT=$PROJECT
 
 echo "Deployment Complete!"
