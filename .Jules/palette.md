@@ -1,0 +1,3 @@
+## 2026-10-29 - Replaced Inline JS Event Handlers with CSS Pseudo-classes
+**Learning:** Found several React components using inline JS event handlers (`onMouseOver`, `onFocus`, etc.) for visual states. This causes issues because styles applied dynamically in JS can conflict, and CSS pseudo-classes (`:hover`, `:focus-visible`) are much better suited for these interactions. Specifically, focus styles help with keyboard accessibility and using `!important` ensures they override existing inline `style` objects.
+**Action:** Always favor CSS `:hover` and `:focus-visible` over JS inline event handlers to ensure styling logic remains maintainable and accessible to keyboard users. Use classNames connected to these pseudo-classes instead of mutating `.style` dynamically.
