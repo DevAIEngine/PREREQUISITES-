@@ -1,0 +1,3 @@
+## 2026-10-30 - [Inline Hover Events Conflict with Keyboard Focus]
+**Learning:** Inline JavaScript event handlers like `onMouseOver` and `onMouseOut` for visual interaction states conflict with keyboard accessibility, as they don't properly handle `focus-visible` states without extensive extra code, and `onMouseOut` can inappropriately revert styles while an element is still focused via keyboard.
+**Action:** Replace inline JS interaction handlers with CSS pseudo-classes (`:hover`, `:focus-visible`). When these must override inline `style={}` declarations, use `!important` in the CSS class rules to ensure the accessible states take precedence.
