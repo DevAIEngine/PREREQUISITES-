@@ -1,0 +1,3 @@
+## 2024-10-31 - Migrating visual interaction states from inline JS event handlers to CSS pseudo-classes
+**Learning:** Avoid using inline JavaScript event handlers (like `onMouseOver`, `onMouseOut`, `onFocus`, and `onBlur`) for visual interaction states in React components, as they can cause state conflicts and make code messy. It is better to use CSS pseudo-classes (`:hover`, `:focus-visible`) to ensure accessibility and consistent behavior.
+**Action:** When injecting CSS into existing JSX `<style>` tags that use template literals and heavily rely on inline `style={}` attributes, use `!important` in the injected CSS rules to successfully override the base inline styles without requiring a complete component restyling.
