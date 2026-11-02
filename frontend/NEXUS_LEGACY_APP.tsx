@@ -116,10 +116,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("NAT_GEO")}
           aria-label="Select Heritage Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-button"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#FFD700", margin: 0 }}>Heritage Studio</h2>
@@ -132,10 +129,7 @@ export const NexusLegacyApp: React.FC = () => {
           onClick={() => handleSelectTheme("AEROSPACE")}
           aria-label="Select Aerospace Studio"
           style={{ width: "400px", height: "500px", backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop')", backgroundSize: "cover", borderRadius: "32px", cursor: "pointer", position: "relative", overflow: "hidden", transition: "transform 0.3s", border: "none", textAlign: "left" }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1)"}
+          className="studio-button"
         >
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)" }}>
             <h2 style={{ fontSize: "36px", color: "#38bdf8", margin: 0 }}>Aerospace Studio</h2>
@@ -208,8 +202,7 @@ export const NexusLegacyApp: React.FC = () => {
       <button
         onClick={() => setIsVoiceOnlyMode(false)}
         style={{ fontSize: "32px", padding: "20px 60px", backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444", border: "2px solid #ef4444", borderRadius: "100px", fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
-        onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#ef4444"}
-        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)"}
+        className="end-session-button"
       >
         🛑 End Session
       </button>
@@ -300,10 +293,7 @@ export const NexusLegacyApp: React.FC = () => {
             width: "100%",
             height: "100%"
           }}
-          onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onMouseOut={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
-          onFocus={(e) => e.currentTarget.style.transform = "scale(1.02) translateY(-10px)"}
-          onBlur={(e) => e.currentTarget.style.transform = "scale(1) translateY(0)"}
+          className="bento-button"
           >
             <img src={asset.thumbnail} alt={asset.title} className="documentary-image" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", zIndex: 0, opacity: 0.6 }} />
             <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "40px", background: "linear-gradient(to top, rgba(0,0,0,0.9), transparent)", zIndex: 1 }}>
@@ -335,6 +325,30 @@ export const NexusLegacyApp: React.FC = () => {
           }
           .documentary-image {
             animation: kenburns-effect 12s ease-in-out infinite alternate;
+          }
+          .studio-button { transition: transform 0.3s, outline 0.2s; }
+          .studio-button:hover, .studio-button:focus-visible {
+            transform: scale(1.05);
+          }
+          .studio-button:focus-visible {
+            outline: 4px solid #FFD700;
+            outline-offset: 4px;
+          }
+          .bento-button { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), outline 0.2s; }
+          .bento-button:hover, .bento-button:focus-visible {
+            transform: scale(1.02) translateY(-10px);
+          }
+          .bento-button:focus-visible {
+            outline: 4px solid #FFD700;
+            outline-offset: 8px;
+          }
+          .end-session-button { transition: all 0.2s, outline 0.2s; }
+          .end-session-button:hover, .end-session-button:focus-visible {
+            background-color: #ef4444 !important;
+          }
+          .end-session-button:focus-visible {
+            outline: 4px solid #ef4444;
+            outline-offset: 4px;
           }
         `}
       </style>
