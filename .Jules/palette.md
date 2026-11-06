@@ -1,0 +1,3 @@
+## 2024-03-20 - [Refactor inline styles to CSS pseudo-classes for interactive states]
+**Learning:** React inline event handlers (`onMouseOver`, `onFocus`) can cause state conflicts when mixing mouse and keyboard navigation (e.g., `onMouseOut` overriding `onFocus` styles when an element maintains focus). Using CSS pseudo-classes (`:hover`, `:focus-visible`) handles this gracefully and ensures better accessibility for keyboard users.
+**Action:** Replace inline JS interaction state handlers with semantic CSS classes and pseudo-classes. When overriding existing inline styles in React via injected CSS, `!important` must be used to ensure the pseudo-class styles take precedence over the statically applied inline styles.
